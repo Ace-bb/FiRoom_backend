@@ -1,11 +1,10 @@
 .container{
-    background-color: red;
+    background-color: rgb(241, 241, 236);
     width: 100%;
     height: 1300rpx;
     padding: 6rpx;
     .image_on{
         display: flex;
-        background-color: green;
         width: 100%;
         height: 80%;
         padding: 24rpx;
@@ -14,6 +13,7 @@
             display: flex;
             width: 80%;
             height: 100%;
+            box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.6);
             margin-left: 24rpx;
             margin-right: 24rpx;
         }
@@ -40,15 +40,40 @@
                 width: 200rpx;
                 font-size: 36rpx;
                 height: 80rpx;
-                background-color: aqua;
+                background-color: rgb(232, 240, 240);
+                box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
                 border-radius: 24rpx;
             }
             #camera_image{
-                background-color: cadetblue;
+                background-color: rgb(145, 233, 236);
+                box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
                 width: 160rpx;
                 height: 160rpx;
                 border-radius: 500rpx;
             }
+        }
+    }
+    .right_area{
+        position: fixed;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        width: 100rpx;
+        height: 480rpx;
+        background-color: rgb(245, 242, 238);
+        margin-top: 64rpx;
+        margin-right: 24rpx;
+        white-space: nowrap;
+        border-radius: 24rpx;
+        box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
+        .scroll-view-item{
+            width: 100rpx;
+            height: 100rpx;
+        }
+        .c_cloth{
+            width: 100%;
+            height: 100rpx;
         }
     }
 }

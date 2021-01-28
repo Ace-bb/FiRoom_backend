@@ -12,4 +12,18 @@
     </view>
   </view>
 
+  <view class="right_area">
+    <scroll-view class="checked_clothes" scroll-y >
+      <view id="green" class="scroll-view-item">
+        <image class="c_cloth" src="../../assets/images/cloth_1.png" mode="aspectFill"/></view>
+      <view id="red"  class="scroll-view-item">
+        <image class="c_cloth" src="../../assets/images/cloth_2.png" mode="aspectFill"/></view>
+      <view id="yellow" class="scroll-view-item">
+        <image class="c_cloth" src="../../assets/images/cloth_3.png" mode="aspectFill"/></view>
+      <view id="blue" class="scroll-view-item">
+        <image class="c_cloth" src="../../assets/images/cloth_4.png" mode="aspectFill"/></view>
+      <view id="blue" class="scroll-view-item">
+        <image class="c_cloth" src="../../assets/images/cloth_5.png" mode="aspectFill"/></view>
+    </scroll-view>
+  </view>
 </view>
