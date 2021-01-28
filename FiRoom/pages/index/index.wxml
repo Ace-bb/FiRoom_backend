@@ -1,13 +1,15 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+  <view class="image_on">
+    <image id="image-on" src="../../assets/images/model_1.png" mode="aspectFill" />
+    
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="bottom_area">
+    <view class="but_left">
+      <view class="but_choose_user">上传照片</view>
+      <image id="camera_image" src="../../assets/icons/camera.png" ></image>
+      <view class="but_choose_user">选择衣服</view>
+    </view>
   </view>
+
 </view>
