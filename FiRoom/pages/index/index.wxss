@@ -27,6 +27,9 @@
   flex-wrap: wrap;
   bottom: 0;
   width: 100%;
+  background-color: #faf8f8;
+  margin-left: 48rpx;
+  margin-right: 48rpx;
 }
 .container .bottom_area .but_left {
   display: flex;
