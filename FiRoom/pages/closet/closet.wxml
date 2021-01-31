@@ -6,4 +6,12 @@
   <block wx:for="{{books}}" wx:for-item="book">
     <template is="bookTemplate" data="{{...book}}"></template>
   </block>
+  <view class="add_bottom">
+    <view class="add_but" >加入试穿</view>
+  </view>
 </view>
+
+https://s3.ax1x.com/2021/01/31/yAfMf1.jpg
+https://s3.ax1x.com/2021/01/31/yAfKYR.jpg
+https://s3.ax1x.com/2021/01/31/yAfuk9.jpg
+https://s3.ax1x.com/2021/01/31/yAfmTJ.jpg

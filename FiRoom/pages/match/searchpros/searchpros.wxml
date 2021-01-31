@@ -1,8 +1,11 @@
 
 <!-- bindscrolltoupper="refresh" -->
+<!--
 <loading hidden="{{hidden}}" bindchange="loadingChange">
   搜索中...
 </loading>
+
+-->
 
 <!--searchpros.wxml-->
 <view class="index">
@@ -20,12 +23,12 @@
       <view class="search-btn" bindtap="searchStyle">搜索</view>
 
       <!--搜索图标-->
-      <image class="search-icon" src="{{weixinCtx}}s_search.png"></image>
+      <image class="search-icon" src="../../../assets/icons/search.png"></image>
 
       <!--图片上传-->
       <view class="index-camera">
         <button class="camera-file" bindtap="chooseImageTap"></button>
-        <image class="camera-icon" src="{{weixinCtx}}s_camera.png"></image>
+        <image class="camera-icon" src="../../../assets/icons/camera.png"></image>
       </view>
     </view>
   </view>

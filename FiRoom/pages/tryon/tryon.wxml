@@ -7,7 +7,10 @@
   <view class="bottom_area">
     <view class="but_left">
       <view class="but_choose_user">上传照片</view>
-      <image id="camera_image" src="../../assets/icons/camera.png" ></image>
+      <view class="index-camera">
+        <button class="camera-file" bindtap="chooseImageTap"></button>
+        <image class="camera-icon" src="../../assets/icons/camera.png"></image>
+      </view>
       <view class="but_choose_user">选择衣服</view>
     </view>
   </view>

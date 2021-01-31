@@ -1,5 +1,27 @@
 @import "book/book-template.wxss";
-
 page {
-  background-color: #ededed;
+    background-color: #ededed;
+}
+
+.add_bottom {
+    position: fixed;
+    bottom: 0;
+    height: 84rpx;
+    width: 100%;
+    background-color: rgb(243, 239, 232);
+    box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
+}
+
+.add_bottom .add_but {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6rpx;
+    width: 32%;
+    font-size: 36rpx;
+    height: 100%;
+    margin-left: 68%;
+    background-color: #e8f0f0;
+    box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
+    border-radius: 24rpx;
 }
