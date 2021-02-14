@@ -14,24 +14,65 @@ Page({
         weixinCtx: util.weixinCtx,
         chaImgSrc: '',
         isShow: false,
-        styleName: '',
+        styleName: '', // -
         imageUrl: '',
-        productSorts: [{
-            back_image: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-            count: 1
-        }, {
-            back_image: "https://s3.ax1x.com/2021/01/31/yAfMf1.jpg",
-            count: 2
-        }, {
-            back_image: "https://s3.ax1x.com/2021/01/31/yAfKYR.jpg",
-            count: 3
-        }, {
-            back_image: "https://s3.ax1x.com/2021/01/31/yAfuk9.jpg",
-            count: 4
-        }, {
-            back_image: "https://s3.ax1x.com/2021/01/31/yAfmTJ.jpg",
-            count: 5
-        }]
+        indicatorDots: true,
+        autoplay: true,
+        interval: 3000,
+        duration: 1000,
+        loadingHidden: false, // loading
+        userInfo: {},
+        swiperCurrent: 0,
+        selectCurrent: 0,
+        categories: [],
+        activeCategoryId: 0,
+        goods: [],
+        scrollTop: "0",
+        loadingMoreHidden: true,
+
+        hasNoCoupons: true,
+        coupons: []
+    },
+
+    tabClick: function(e) {
+        this.setData({
+            activeCategoryId: e.currentTarget.id
+        });
+        this.getGoodsList(this.data.activeCategoryId);
+    },
+    //事件处理函数
+    swiperchange: function(e) {
+        //console.log(e.detail.current)
+        this.setData({
+            swiperCurrent: e.detail.current
+        })
+    },
+    toDetailsTap: function(e) {
+        wx.navigateTo({
+            url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
+        })
+    },
+    tapBanner: function(e) {
+        if (e.currentTarget.dataset.id != 0) {
+            wx.navigateTo({
+                url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
+            })
+        }
+    },
+    bindTypeTap: function(e) {
+        this.setData({
+            selectCurrent: e.index
+        })
+    },
+    scroll: function(e) {
+        //  console.log(e) ;
+        var that = this,
+            scrollTop = that.data.scrollTop;
+        that.setData({
+                scrollTop: e.detail.scrollTop
+            })
+            // console.log('e.detail.scrollTop:'+e.detail.scrollTop) ;
+            // console.log('scrollTop:'+scrollTop)
     },
     onLoad: function() {
         var that = this;
@@ -40,6 +81,10 @@ Page({
             success: function(e) {
                 console.log(e)
             }
+        })
+
+        wx.setNavigationBarTitle({
+            title: wx.getStorageSync('mallName')
         })
 
         util.requestSupply("getSupplierProduct", "",
@@ -51,19 +96,58 @@ Page({
             function(res) {
                 console.log(res);
             });
+
+        wx.request({
+            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/banner/list',
+            data: {
+                key: 'mallName'
+            },
+            success: function(res) {
+                if (res.data.code == 404) {
+                    wx.showModal({
+                        title: '提示',
+                        content: '请在后台添加 banner 轮播图片',
+                        showCancel: false
+                    })
+                } else {
+                    that.setData({
+                        banners: res.data.data
+                    });
+                }
+            }
+        })
+        wx.request({
+            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/category/all',
+            success: function(res) {
+                var categories = [{ id: 0, name: "全部" }];
+                if (res.data.code == 0) {
+                    for (var i = 0; i < res.data.data.length; i++) {
+                        categories.push(res.data.data[i]);
+                    }
+                }
+                that.setData({
+                    categories: categories,
+                    activeCategoryId: 0
+                });
+                that.getGoodsList(0);
+            }
+        })
+
+        that.getCoupons();
+        that.getNotice();
     },
-    onShow: function() {
+    onShow: function() { // -
         //调用API从本地缓存中获取数据
         this.setData({
             history: wx.getStorageSync('searchStyle') || []
         })
     },
-    styleName: function(e) {
+    styleName: function(e) { // -
         this.setData({
             styleName: e.detail.value
         })
     },
-    searchStyle: function(e) {
+    searchStyle: function(e) { // -
         var that = this
         var style = that.data.styleName,
             image = that.data.imageUrl,
@@ -80,7 +164,7 @@ Page({
         }
 
     },
-    chooseImageTap: function() {
+    chooseImageTap: function() { // -
         var that = this;
         wx.showActionSheet({
             itemList: ['从相册中选择', '拍照'],
@@ -96,7 +180,7 @@ Page({
             }
         })
     },
-    chooseWxImage: function(type) {
+    chooseWxImage: function(type) { // -
         var that = this;
         wx.chooseImage({
             count: 1,
@@ -123,31 +207,149 @@ Page({
             }
         })
     },
-    deleteImage: function() {
+    deleteImage: function() { // -
         this.setData({
             isShow: false,
             imageUrl: '',
             chaImgSrc: ''
         })
     },
-    //删除搜索记录
-    removeHistory: function() {
+    getGoodsList: function(categoryId) {
+        if (categoryId == 0) {
+            categoryId = "";
+        }
+        console.log(categoryId)
         var that = this;
-        wx.showModal({
-            content: '删除历史记录?',
+        wx.request({
+            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/list',
+            data: {
+                categoryId: categoryId
+            },
             success: function(res) {
-                if (res.confirm) {
-                    wx.removeStorage({
-                        key: 'searchStyle',
-                        success: function(res) {
-                            that.setData({
-                                history: []
-                            })
-                        }
+                that.setData({
+                    goods: [],
+                    loadingMoreHidden: true
+                });
+                var goods = [];
+                if (res.data.code != 0 || res.data.data.length == 0) {
+                    that.setData({
+                        loadingMoreHidden: false,
+                    });
+                    return;
+                }
+                for (var i = 0; i < res.data.data.length; i++) {
+                    goods.push(res.data.data[i]);
+                }
+                that.setData({
+                    goods: goods,
+                });
+            }
+        })
+        wx.request({
+            url: 'http://127.0.0.1:8087/match/orders/',
+            success: function(res) {
+                console.log(res);
+            }
+        })
+    },
+    getCoupons: function() {
+        var that = this;
+        wx.request({
+            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/coupons',
+            data: {
+                type: ''
+            },
+            success: function(res) {
+                if (res.data.code == 0) {
+                    that.setData({
+                        hasNoCoupons: false,
+                        coupons: res.data.data
+                    });
+                }
+            }
+        })
+    },
+    gitCoupon: function(e) {
+        var that = this;
+        wx.request({
+            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/discounts/fetch',
+            data: {
+                id: e.currentTarget.dataset.id,
+                token: app.globalData.token
+            },
+            success: function(res) {
+                if (res.data.code == 20001 || res.data.code == 20002) {
+                    wx.showModal({
+                        title: '错误',
+                        content: '来晚了',
+                        showCancel: false
+                    })
+                    return;
+                }
+                if (res.data.code == 20003) {
+                    wx.showModal({
+                        title: '错误',
+                        content: '你领过了，别贪心哦~',
+                        showCancel: false
+                    })
+                    return;
+                }
+                if (res.data.code == 30001) {
+                    wx.showModal({
+                        title: '错误',
+                        content: '您的积分不足',
+                        showCancel: false
+                    })
+                    return;
+                }
+                if (res.data.code == 20004) {
+                    wx.showModal({
+                        title: '错误',
+                        content: '已过期~',
+                        showCancel: false
+                    })
+                    return;
+                }
+                if (res.data.code == 0) {
+                    wx.showToast({
+                        title: '领取成功，赶紧去下单吧~',
+                        icon: 'success',
+                        duration: 2000
+                    })
+                } else {
+                    wx.showModal({
+                        title: '错误',
+                        content: res.data.msg,
+                        showCancel: false
                     })
                 }
             }
         })
-
+    },
+    onShareAppMessage: function() {
+        return {
+            title: wx.getStorageSync('mallName') + '——' + app.globalData.shareProfile,
+            path: '/pages/index/index',
+            success: function(res) {
+                // 转发成功
+            },
+            fail: function(res) {
+                // 转发失败
+            }
+        }
+    },
+    getNotice: function() {
+        var that = this;
+        wx.request({
+            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/notice/list',
+            data: { pageSize: 5 },
+            success: function(res) {
+                if (res.data.code == 0) {
+                    that.setData({
+                        noticeList: res.data.data
+                    });
+                }
+            }
+        })
     }
 })

@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+# 导入match 的 listorders 函数
+from match.views import listorders
+# 导入一个include函数
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # 凡是 url 以 sales/  开头的，
+    # 都根据 sales.urls 里面的 子路由表进行路由
+    path('match/', include('match.urls')),
 ]
