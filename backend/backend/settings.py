@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'fluent_comments',
     'threadedcomments',
     'django_comments',
-    'django.contrib.sites'
+    'django.contrib.sites',
+    'rest_framework'
 ]
 
 COMMENTS_APP = 'fluent_comments'

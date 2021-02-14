@@ -5,7 +5,7 @@
     <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
         <block wx:for="{{imgUrls}}" wx:key="0">
             <swiper-item>
-                <image src="{{ctx}}{{item}}" class="slide-image" width="355" height="150"/>
+                <image src="{{ctx}}{{item}}" class="slide-image" width="355" height="150" mode="aspectFit"/>
             </swiper-item>
         </block>
     </swiper>
@@ -15,7 +15,7 @@
     <view class="prodetail-title">
       <text class="protitle11">{{style}}</text>
       <view class="prodetail-title2">
-        <text class="protitle21">采购价</text>
+        <text class="protitle21">定价</text>
         <text class="protitle22">{{price}}</text>
       </view>
     </view>
@@ -84,7 +84,7 @@
 
     <!--采购咨询 -->
     <view class="cont">
-      <contact-button class="cont-icon" type="default-light" size="27" session-from="weapp"></contact-button>
-      <text class="cont-text" >采购咨询</text>
+      <image class="cont-icon" type="default-light" size="27" session-from="weapp" src="../../../../assets/images/Add-Basket.png"></image>
+      <text class="cont-text" >加入试穿</text>
     </view>
 </view>

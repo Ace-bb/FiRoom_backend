@@ -11,7 +11,7 @@
         <button class="camera-file" bindtap="chooseImageTap"></button>
         <image class="camera-icon" src="../../assets/icons/camera.png"></image>
       </view>
-      <view class="but_choose_user">选择衣服</view>
+      <view class="but_choose_user">输入链接</view>
     </view>
   </view>
 

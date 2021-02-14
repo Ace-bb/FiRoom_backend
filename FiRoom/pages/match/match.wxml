@@ -34,7 +34,7 @@
 
 <!--潮流服装-->
 <view class="index-history">
-  <text class="history-text">搭配推荐</text>
+  <text class="history-text">达人方案</text>
   <view class="history-con">
     <navigator class="classify" wx:for="{{productSorts}}" url="searchpros/searchpros?id={{item.id}}&style={{item.name}}">
       <image src="{{weixinCtx}}{{item.back_image}}"></image>
