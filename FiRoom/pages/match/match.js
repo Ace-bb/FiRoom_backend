@@ -59,11 +59,6 @@ Page({
             })
         }
     },
-    bindTypeTap: function(e) {
-        this.setData({
-            selectCurrent: e.index
-        })
-    },
     scroll: function(e) {
         //  console.log(e) ;
         var that = this,
@@ -87,22 +82,13 @@ Page({
             title: wx.getStorageSync('mallName')
         })
 
-        util.requestSupply("getSupplierProduct", "",
-            function(res) {
-                that.setData({
-                    productSorts: res.results
-                });
-            },
-            function(res) {
-                console.log(res);
-            });
-
         wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/banner/list',
+            url: 'http://127.0.0.1:8087/match/recommend/swiper',
             data: {
                 key: 'mallName'
             },
             success: function(res) {
+                console.log(res.data)
                 if (res.data.code == 404) {
                     wx.showModal({
                         title: '提示',
@@ -117,8 +103,9 @@ Page({
             }
         })
         wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/category/all',
+            url: 'http://127.0.0.1:8087/match/recommend/category',
             success: function(res) {
+                console.log(res);
                 var categories = [{ id: 0, name: "全部" }];
                 if (res.data.code == 0) {
                     for (var i = 0; i < res.data.data.length; i++) {
@@ -135,12 +122,6 @@ Page({
 
         that.getCoupons();
         that.getNotice();
-    },
-    onShow: function() { // -
-        //调用API从本地缓存中获取数据
-        this.setData({
-            history: wx.getStorageSync('searchStyle') || []
-        })
     },
     styleName: function(e) { // -
         this.setData({
@@ -245,12 +226,6 @@ Page({
                 });
             }
         })
-        wx.request({
-            url: 'http://127.0.0.1:8087/match/orders/',
-            success: function(res) {
-                console.log(res);
-            }
-        })
     },
     getCoupons: function() {
         var that = this;
@@ -341,9 +316,10 @@ Page({
     getNotice: function() {
         var that = this;
         wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/notice/list',
+            url: 'http://127.0.0.1:8087/match/recommend/notice',
             data: { pageSize: 5 },
             success: function(res) {
+                console.log(res.data)
                 if (res.data.code == 0) {
                     that.setData({
                         noticeList: res.data.data

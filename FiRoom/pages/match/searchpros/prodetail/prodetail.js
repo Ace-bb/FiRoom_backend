@@ -39,45 +39,46 @@ Page({
         var styleId = option.styleId
 
         console.log(styleId)
-        util.requestSupply("getStyleDetail", "?styleId=" + styleId,
-            function(res) {
-                var result = res.result;
-                //转换html代码
-                WxParse.wxParse('show_details', 'html', result.show_details, that, 5)
-                WxParse.wxParse('attentions', 'html', result.attentions, that, 5)
+            /*
+            util.requestSupply("getStyleDetail", "?styleId=" + styleId,
+                function(res) {
+                    var result = res.result;
+                    //转换html代码
+                    WxParse.wxParse('show_details', 'html', result.show_details, that, 5)
+                    WxParse.wxParse('attentions', 'html', result.attentions, that, 5)
 
-                var seconds = result.seconds,
-                    secondNames = '';
-                for (var s = 0; s < seconds.length; s++) {
-                    secondNames += seconds[s].name + '  '
-                }
-                console.log(result);
-                that.setData({
-                    styleId: styleId,
-                    style: result.style,
-                    imgUrls: result.thumb.split(","),
-                    price: result.price_of_foreign,
-                    // fabric: result.fabric,
-                    fabric: "纯棉",
-                    // secondNames: secondNames,
-                    secondNames: "修身款",
-                    // colors: result.seconds[0].colors,
-                    colors: [{
-                        value: null,
-                        color_name: 蓝色
-                    }],
-                    store: result.store,
-                    province: result.province,
-                    city: result.city,
-                    phone: result.contact,
-                    qq: result.qq,
-                    showDetails: result.show_details,
-                    attentions: result.attentions
-                });
-            },
-            function(res) {
-                console.log(res);
-            });
+                    var seconds = result.seconds,
+                        secondNames = '';
+                    for (var s = 0; s < seconds.length; s++) {
+                        secondNames += seconds[s].name + '  '
+                    }
+                    console.log(result);
+                    that.setData({
+                        styleId: styleId,
+                        style: result.style,
+                        imgUrls: result.thumb.split(","),
+                        price: result.price_of_foreign,
+                        // fabric: result.fabric,
+                        fabric: "纯棉",
+                        // secondNames: secondNames,
+                        secondNames: "修身款",
+                        // colors: result.seconds[0].colors,
+                        colors: [{
+                            value: null,
+                            color_name: 蓝色
+                        }],
+                        store: result.store,
+                        province: result.province,
+                        city: result.city,
+                        phone: result.contact,
+                        qq: result.qq,
+                        showDetails: result.show_details,
+                        attentions: result.attentions
+                    });
+                },
+                function(res) {
+                    console.log(res);
+                }); */
     },
     changeIndicatorDots: function(e) {
         this.setData({

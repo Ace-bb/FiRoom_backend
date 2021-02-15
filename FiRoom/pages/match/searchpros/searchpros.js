@@ -116,7 +116,6 @@ Page({
         hasMore: true,
         styleName: '',
         imageUrl: '',
-
         method: 'searchStyle',
         productId: null,
         hidden: true,
@@ -142,6 +141,29 @@ Page({
             thumb: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
             style: "T恤",
             store: 0
+        }],
+        open : false,
+        mark: 0,
+        newmark: 0,
+        istoright:true,
+        categoryList:[{
+            categoryId:1,
+            categoryName:"搭配达人"
+        },{
+            categoryId:2,
+            categoryName:"穿搭大师"
+        },{
+            categoryId:3,
+            categoryName:"日系穿搭"
+        },{
+            categoryId:4,
+            categoryName:"欧美范儿"
+        },{
+            categoryId:5,
+            categoryName:"潮流复古"
+        },{
+            categoryId:6,
+            categoryName:"休闲时尚"
         }]
     },
 
@@ -334,6 +356,57 @@ Page({
             imageUrl: '',
             chaImgSrc: ''
         })
+    },
+    tap_ch: function(e){
+      if(this.data.open){
+        this.setData({
+          open : false
+        });
+      }else{
+        this.setData({
+          open : true
+        });
+      }
+    },
+    tap_start:function(e){
+      // touchstart事件
+      this.data.mark = this.data.newmark = e.touches[0].pageX;
+    },
+    tap_drag: function(e){
+      // touchmove事件
+   
+      /*
+       * 手指从左向右移动
+       * @newmark是指移动的最新点的x轴坐标 ， @mark是指原点x轴坐标
+       */
+      this.data.newmark = e.touches[0].pageX;
+      if(this.data.mark < this.data.newmark){
+        this.istoright = true;
+      }
+      /*
+       * 手指从右向左移动
+       * @newmark是指移动的最新点的x轴坐标 ， @mark是指原点x轴坐标
+       */
+      if(this.data.mark > this.data.newmark){
+        this.istoright = false;
+        
+      }
+      this.data.mark = this.data.newmark;
+  
+    },
+    tap_end: function(e){
+      // touchend事件
+      this.data.mark = 0;
+      this.data.newmark = 0;
+      if(this.istoright){
+        this.setData({
+          open : true
+        });
+      }else{
+        this.setData({
+          open : false
+        });
+      }
     }
 
 })
