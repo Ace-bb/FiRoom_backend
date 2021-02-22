@@ -18,13 +18,13 @@ Page({
             unreceived: 0
         },
         orderCell: [{
-            icon: 'images/like.png',
-            text: '我的收藏',
+            icon: 'images/record.png',
+            text: '我的发布',
             url: '../orders/orders?t=unpaid',
             class: 'order-cell-icon-small'
         }, {
-            icon: 'images/record.png',
-            text: '试衣记录',
+            icon: 'images/like.png',
+            text: '我的收藏',
             url: '../orders/orders?t=undelivered',
             class: 'order-cell-icon-small',
         }, {

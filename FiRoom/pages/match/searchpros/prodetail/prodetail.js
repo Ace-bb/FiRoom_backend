@@ -117,5 +117,8 @@ Page({
             detailsShow: false,
             attentionsShow: true
         })
+    },
+    tobuy: function() {
+
     }
 })

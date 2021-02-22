@@ -1,12 +1,24 @@
-<import src="book/book-template.wxml"/>
 <view class="classname">
-  <!--<loading hidden="{{hidden}}">
-        加载中...
-    </loading>-->
-  <block wx:for="{{books}}" wx:for-item="book">
-    <template is="bookTemplate" data="{{...book}}"></template>
-  </block>
   <view class="add_bottom">
     <view class="add_but" >加入试穿</view>
+  </view>
+</view>
+<view class="container">
+  <view class="calc-view-wrap">
+    <view class="item-box" wx:for="{{valueList}}">
+      <view class="title">{{item.title}}</view>
+      <text class="value">{{item.value}}</text>
+    </view>
+  </view>
+  <view class="closet-show-wrap">
+    <view class="cloth-show-box" wx:for="{{books}}">
+      <checkbox class="check-cloth" ></checkbox>
+      <image class="cloth-img" src="{{item.coverImg}}"/>
+      <view class="cloth-message-box">
+        <text class="cloth-title">{{item.title}}</text>
+        <text class="tag-mes">{{item.average}}</text>
+        <text class="cloth-price">价格:￥{{item.bookId}}</text>
+      </view>
+    </view>
   </view>
 </view>

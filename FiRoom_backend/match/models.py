@@ -1,8 +1,12 @@
 # Create your models here.
 from django.db import models
+
+
 # python manage.py makemigrations match
 # python manage.py migrate
 
+
+# 轮播图下的目录，搭配方案 最受好评 免费方案 推荐
 class Category(models.Model):
     # 目录编号
     id = models.IntegerField(primary_key=True)
@@ -22,8 +26,7 @@ class Category(models.Model):
     userId = models.IntegerField()
 
 
-#
-#
+# 轮播图 主要展示的是穿搭达人的图片、设计方案
 class Swiper(models.Model):
     # ID
     id = models.IntegerField(primary_key=True)
@@ -53,6 +56,7 @@ class Swiper(models.Model):
     im = models.FilePathField
 
 
+# 公告 通知
 class Notice(models.Model):
     # 编号
     id = models.IntegerField(primary_key=True)
@@ -66,6 +70,7 @@ class Notice(models.Model):
     userId = models.IntegerField()
 
 
+# 穿搭方案
 class BluePrint(models.Model):
     # 所属目录编号ID
     categoryId = models.IntegerField()
@@ -74,9 +79,9 @@ class BluePrint(models.Model):
     # 修改时间
     dataUpdate = models.DateTimeField(auto_now=True)
     # fxType
-    fxType = models.IntegerField()
+    fxType = models.IntegerField(default=0)
     # 得分
-    gotScore = models.IntegerField()
+    gotScore = models.IntegerField(default=5.0)
     # ID
     id = models.IntegerField(primary_key=True)
     # 方案名称
@@ -84,13 +89,13 @@ class BluePrint(models.Model):
     # 最低价格
     minPrice = models.FloatField()
     # 最低得分
-    minScore = models.FloatField()
+    minScore = models.FloatField(default=1.0)
     # 图片链接
     pic = models.CharField(max_length=1048)
     # 商品状态
-    recommendStatusStr = models.CharField(max_length=128)
+    recommendStatusStr = models.CharField(max_length=128, default='sale')
     # 达人ID
-    expertId = models.IntegerField()
-    statusStr = models.CharField(max_length=64)
-    type = models.IntegerField()
-    userId= models.IntegerField()
+    expertId = models.IntegerField(default=101)
+    statusStr = models.CharField(max_length=64, default='热卖中')
+    type = models.IntegerField(default=0)
+    userId = models.IntegerField(default=0)

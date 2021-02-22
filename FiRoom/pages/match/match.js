@@ -199,14 +199,15 @@ Page({
         if (categoryId == 0) {
             categoryId = "";
         }
-        console.log(categoryId)
+        console.log('categoryId')
         var that = this;
         wx.request({
-            url: 'https://api.it120.cc/' + app.globalData.subDomain + '/shop/goods/list',
+            url: 'http://127.0.0.1:8087/match/recommend/blueprint',
             data: {
                 categoryId: categoryId
             },
             success: function(res) {
+                console.log(res.data);
                 that.setData({
                     goods: [],
                     loadingMoreHidden: true
@@ -326,6 +327,11 @@ Page({
                     });
                 }
             }
+        })
+    },
+    navigateToPost:function(){
+        wx.navigateTo({
+          url: 'pages/post/post',
         })
     }
 })

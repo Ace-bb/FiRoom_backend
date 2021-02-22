@@ -69,13 +69,17 @@
         </scroll-view>
     </view>
     <view class="goods-container">
-        <view class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+        <navigator class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}" url="searchpros/prodetail/prodetail?styleId={{item.id}}">
            <view class="img-box">
-              <image src="{{item.pic}}_m" class="image" mode="aspectFill" lazy-load="true"/>
+              <image src="{{item.pic}}" class="image" mode="aspectFill" lazy-load="true"/>
            </view>
            <view class="goods-title">{{item.name}}</view>
            <view class="goods-price">¥ {{item.minPrice}}</view>
-        </view>
+        </navigator>
     </view>
+    <navigator url="../post/post">
+      <image src="http://127.0.0.1:8087/static/icons/add.png" class="add-container" bindtap=""/>
+    </navigator>
+    
     <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
 </view>

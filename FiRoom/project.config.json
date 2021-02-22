@@ -63,6 +63,18 @@
         {
           "name": "pages/match/match",
           "pathName": "pages/match/match",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/post/post",
+          "pathName": "pages/post/post",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/closet/closet",
+          "pathName": "pages/closet/closet",
           "scene": null
         }
       ]

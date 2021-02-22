@@ -21,7 +21,8 @@ var GetList = function(that) {
     }
     util.requestSupply(method, params,
         function(res) {
-            var reqList = res.pageResults.list;
+            console.log('res:',res);
+            var reqList = res.data;
             if (reqList != null && reqList.length > 0) {
                 that.setData({
                     list: reqList,
@@ -30,28 +31,8 @@ var GetList = function(that) {
                 page = 2;
             } else {
                 that.setData({
-                    list: [{
-                        id: 0,
-                        thumb: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-                        style: "T恤",
-                        store: 0
-                    }, {
-                        id: 0,
-                        thumb: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-                        style: "T恤",
-                        store: 0
-                    }, {
-                        id: 0,
-                        thumb: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-                        style: "T恤",
-                        store: 0
-                    }, {
-                        id: 0,
-                        thumb: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-                        style: "T恤",
-                        store: 0
-                    }],
-                    //scrollTop: 0,
+                    list: res.data,
+                    scrollTop: 0,
                     emptyShow: false
                 });
             }
@@ -121,27 +102,7 @@ Page({
         hidden: true,
         scrollTop: 0,
         scrollHeight: 0,
-        list: [{
-            id: 0,
-            thumb: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-            style: "T恤",
-            store: 0
-        }, {
-            id: 0,
-            thumb: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-            style: "T恤",
-            store: 0
-        }, {
-            id: 0,
-            thumb: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-            style: "T恤",
-            store: 0
-        }, {
-            id: 0,
-            thumb: "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-            style: "T恤",
-            store: 0
-        }],
+        list: [],
         open : false,
         mark: 0,
         newmark: 0,

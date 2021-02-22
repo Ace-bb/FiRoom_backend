@@ -1,0 +1,175 @@
+Page {
+    padding: 24rpx;
+}
+
+.submit-wrap {
+    display: inline;
+}
+
+.post-title-wrap {
+    height: 45px;
+    width: 100%;
+    min-height: 0px;
+    border-top: 10px solid rgb(245, 245, 245);
+}
+
+.post-title {
+    height: 25px;
+    line-height: 25px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    font: 13.3333px Arial;
+    padding: 10px 6px 0px 6px;
+}
+
+.post-mainbody-wrap {
+    height: 150px;
+    border-width: 1px;
+    border-style: none;
+    border-top-style: solid;
+}
+
+.post-mainbody {
+    height: 150px;
+    padding: 6px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    font: 13.3333px Arial;
+}
+
+
+/*图片上传区域*/
+
+.post-image-wrap {
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: content-box;
+}
+
+.image-upload {
+    width: 32%;
+    height: 300rpx;
+    overflow: hidden;
+    margin-bottom: 24rpx;
+    padding: 6rpx;
+}
+
+.image-upload .img {
+    width: 100%;
+    height: 100%;
+}
+
+.post-image-wrap .image-upload-but {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 32%;
+    height: 300rpx;
+    margin-bottom: 24rpx;
+}
+
+.image-upload-but image {
+    width: 40%;
+    height: 30%;
+}
+
+
+/* 单间衣服名称栏样式*/
+
+.simgle-cloth-textarea-wrap {
+    height: 240rpx;
+    padding: 12rpx;
+}
+
+.cloth-name-title {}
+
+.cloth-names {}
+
+
+/* 单间服装图片上传区域*/
+
+.simgle-cloth-show {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* 输入销售价格区域*/
+
+.sale-price-wrap {
+    display: flex;
+    flex-direction: row;
+}
+
+.input-price {}
+
+.input-area {
+    width: 120rpx;
+    margin-left: 24rpx;
+}
+
+
+/* 提交栏样式*/
+
+.post-submit-container {
+    height: 45px;
+    min-height: 0px;
+}
+
+.post-position-wrap {
+    height: 16px;
+    width: 90px;
+    min-height: 0px;
+    margin-left: 20px;
+    margin-top: 7px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    display: inline-block;
+    margin-bottom: auto;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    position: relative;
+    border-width: 0px;
+    border-style: none;
+    background-color: rgb(247, 247, 247);
+    border-radius: 20px;
+}
+
+.post-position-text {
+    position: absolute;
+    left: 4px;
+    margin-top: auto;
+    margin-bottom: 0px;
+    display: inline-block;
+    height: 16px;
+    font-size: 12px;
+    text-align: center;
+    text-indent: 0px;
+    line-height: 16px;
+    z-index: 0;
+    width: 100px;
+}
+
+.post-position-icon {
+    height: 16px;
+    width: 16px;
+    margin-left: 10px;
+}
+
+.post-submit {
+    display: inline-block;
+    height: 30px;
+    min-height: 0px;
+    width: 60px;
+    margin-top: 7px;
+    position: absolute;
+    right: 20px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    background-size: initial;
+}

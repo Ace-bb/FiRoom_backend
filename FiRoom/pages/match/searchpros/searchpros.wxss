@@ -140,7 +140,7 @@ page,.page {
 .procon-imgmes{
     float:left;
     width:350rpx;
-    height: 453rpx;
+    height: 555rpx;
     background-color:#fff;
     margin-right:10rpx;
     margin-bottom: 10rpx;
@@ -153,7 +153,7 @@ page,.page {
 .imgmes-img{
     display:block;
     width:350rpx;
-    height: 350rpx;
+    height: 450rpx;
 }
 
 .imgmes-mes1{

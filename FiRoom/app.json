@@ -7,7 +7,9 @@
         "pages/mine/mine",
         "pages/category/category",
         "pages/test/test",
-        "pages/closet/closet"
+        "pages/closet/closet",
+        "pages/contact/contact",
+        "pages/post/post"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -27,6 +29,11 @@
             "text": "搭配",
             "iconPath": "assets/icons/match.png",
             "selectedIconPath": "assets/icons/match_s.png"
+        },{
+            "pagePath": "pages/contact/contact",
+            "text": "消息",
+            "iconPath": "assets/icons/message.png",
+            "selectedIconPath": "assets/icons/message_s.png"
         },{
             "pagePath": "pages/closet/closet",
             "text": "衣柜",

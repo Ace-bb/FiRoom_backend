@@ -17,7 +17,25 @@ Page({
             coverImg: "https://s3.ax1x.com/2021/01/31/yAfKYR.jpg",
             bookId: 1,
             stars: utils.starsArray(8)
-        }]
+        }],
+        valueList:[
+            {
+                title:'总数量',
+                value:3
+            },
+            {
+                title:'市场总价值',
+                value:'￥3665'
+            },
+            {
+                title:'成本',
+                value:'￥3665'
+            },
+            {
+                title:'总利润',
+                value:'+￥3665'
+            }
+        ]
     },
 
 

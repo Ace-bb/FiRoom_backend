@@ -273,3 +273,23 @@ swiper-item image {
   color: #fff;
   display: inline-block;
 }
+
+.add-container{
+  width: 108rpx;
+  height: 108rpx;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  border-radius: 500rpx;
+  margin-right: 12rpx;
+  margin-bottom: 12rpx;
+  box-shadow: 4rpx 4rpx 4rpx 4rpx rgba(32, 31, 31, 0.4);
+}
+
+.add-image{
+  width: 72%;
+  height: 72%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+}

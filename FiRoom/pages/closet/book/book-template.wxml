@@ -1,9 +1,0 @@
-<import src="../star/star-template.wxml"/>
-<template name="bookTemplate">
-  <view class="book-container">
-    <image class="book-img" src="{{coverImg}}" mode="aspectFill"></image>
-    <label class="book-title">
-      <checkbox value="{{title}}" />{{title}}
-    </label>
-  </view>
-</template>

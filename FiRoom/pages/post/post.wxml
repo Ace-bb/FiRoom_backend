@@ -1,0 +1,53 @@
+<view>
+    <view class="post-title-wrap" >
+        <textarea class="c-fullwidth post-title"  name="textarea1" placeholder="标题，可以不填..." type="textarea"/>
+    </view>
+    <view class="post-mainbody-wrap" >
+        <textarea class="c-fullwidth post-mainbody"  name="textarea1" placeholder="这一刻的想法..." type="textarea"/>
+    </view>
+    <!--搭配效果图-->
+    <view class="post-image-wrap">
+        <view class="image-upload" wx:for="{{imageUpload}}" >
+            <image src="{{item.picUrl}}" class="img"></image>
+        </view>
+        <view class="image-upload-but">
+            <image src="{{upImage}}" class="img-photo"></image>
+            <text class="text-photon">图片/视频</text>
+        </view>
+    </view>
+    <!--搭配的服装的名称-->
+    <view class="simgle-cloth-textarea-wrap">
+        <view class="cloth-name-title">输入每一件衣服的名称</view>
+        <textarea class="cloth-names"></textarea>
+    </view>
+    <!--单间服装-->
+    <view class="simgle-cloth-show">
+        <view class="simgle-cloth-show-text-wrap">
+            <text class="cloth-show-text">单件展示</text>
+        </view>
+        <view class="post-image-wrap">
+            <view class="image-upload" wx:for="{{simgleCloth_list}}">
+                <image class="img" src="{{item.picUrl}}"></image>
+            </view>
+            <view class="image-upload-but">
+                <image src="{{upImage}}" class="img-photo"></image>
+            <text class="text-photon">图片/视频</text>
+        </view>
+        </view>
+        
+    </view>
+    <!--设置价格-->
+    <view class="sale-price-wrap">
+        <text class="input-price">输入销售价格</text>
+        <input class="input-area" type="number"/>
+    </view>
+    <!--提交栏-->
+    <view class="post-submit-container" >
+        <view class="post-position-wrap" >
+            <image class="post-position-icon"  mode="scaleToFill" src="http://127.0.0.1:8087/static/icons/tag.png" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://qty83k.creatby.com/materials/origin/0024e9b38e605192d94951ce3dffe8ae_origin.png); "/>
+            <text class="post-position-text" >添加标签</text>
+        </view>
+        <button class="post-submit"  hover-class="button-hover" size="default" type="default" style="color:#fff;background-color:rgba(23,181,238,1)">发布</button>
+    </view>
+</view>
+ 

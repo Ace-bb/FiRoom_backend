@@ -74,6 +74,6 @@
             收藏
         </view>
         <view class="join-shop-cart" bindtap="toAddShopCar">加入衣柜</view>
-        <view class="now-buy" bindtap="tobuy">联系达人</view>
+        <navigator class="now-buy" url="../../../contact/message/message">联系达人</navigator>
    </view>
 </view>
