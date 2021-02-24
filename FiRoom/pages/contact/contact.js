@@ -11,16 +11,12 @@ Page({
                 },
                 {
                     img:"http://127.0.0.1:8087/static/images/image/friends.png",
-                    name:"群聊(websocket的Demo)",
+                    name:"圈子",
                     url:"../ws/ws"
                 },
                 {
                     img:"http://127.0.0.1:8087/static/images/image/label.png",
                     name:"标签"
-                },
-                {
-                    img:"http://127.0.0.1:8087/static/images/image/friends_2.png",
-                    name:"公众号"
                 }
             ]
           },
