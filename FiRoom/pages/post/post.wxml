@@ -1,11 +1,4 @@
-<view>
-    <view class="post-title-wrap" >
-        <textarea class="c-fullwidth post-title"  name="textarea1" placeholder="标题，可以不填..." type="textarea"/>
-    </view>
-    <view class="post-mainbody-wrap" >
-        <textarea class="c-fullwidth post-mainbody"  name="textarea1" placeholder="这一刻的想法..." type="textarea"/>
-    </view>
-    <!--搭配效果图-->
+<view class="container">
     <view class="post-image-wrap">
         <view class="image-upload" wx:for="{{imageUpload}}" >
             <image src="{{item.picUrl}}" class="img"></image>
@@ -13,39 +6,57 @@
         <view class="image-upload-but">
             <image src="{{upImage}}" class="img-photo"></image>
             <text class="text-photon">图片/视频</text>
+            <image class="add-img" src="http://127.0.0.1:8087/static/icons/add.png" />
         </view>
     </view>
-    <!--搭配的服装的名称-->
-    <view class="simgle-cloth-textarea-wrap">
-        <view class="cloth-name-title">输入每一件衣服的名称</view>
-        <textarea class="cloth-names"></textarea>
+    <view class="post-title-wrap" >
+        <textarea class="c-fullwidth post-title"  name="textarea1" placeholder="填写标题会有更多人喜欢哦~" type="textarea"/>
     </view>
+    <view class="post-mainbody-wrap" >
+        <textarea class="c-fullwidth post-mainbody"  name="textarea1" placeholder="添加正文" type="textarea"/>
+    </view>
+    <!--搭配效果图-->
+    
     <!--单间服装-->
-    <view class="simgle-cloth-show">
-        <view class="simgle-cloth-show-text-wrap">
-            <text class="cloth-show-text">单件展示</text>
-        </view>
+    <view class="simgle-cloth-wrap">
+        <image class="simgle-cloth" src="http://127.0.0.1:8087/static/icons/cloth.png" />
+        <view class="cloth-name-title">单间衣服</view>
         <view class="post-image-wrap">
-            <view class="image-upload" wx:for="{{simgleCloth_list}}">
+            <view class="cloth-image" wx:for="{{simgleCloth_list}}">
                 <image class="img" src="{{item.picUrl}}"></image>
             </view>
-            <view class="image-upload-but">
-                <image src="{{upImage}}" class="img-photo"></image>
-            <text class="text-photon">图片/视频</text>
         </view>
+        <image class="jiantou" src="http://127.0.0.1:8087/static/icons/jiantou.png" />
+    </view>
+
+    <!-- 衣服标签 -->
+    <view class="simgle-cloth-wrap">
+        <image class="simgle-cloth" src="http://127.0.0.1:8087/static/icons/tag.png" />
+        <view class="cloth-name-title">衣服标签</view>
+        <view class="post-image-wrap">
+            <view class="cloth-image" wx:for="{{tags}}">
+                <text class="tag" >{{item.name}}</text>
+            </view>
         </view>
-        
+        <image class="jiantou" src="http://127.0.0.1:8087/static/icons/jiantou.png" />
     </view>
     <!--设置价格-->
-    <view class="sale-price-wrap">
-        <text class="input-price">输入销售价格</text>
-        <input class="input-area" type="number"/>
+    <view class="simgle-cloth-wrap">
+        <image class="simgle-cloth" src="http://127.0.0.1:8087/static/icons/price.png" />
+        <view class="cloth-name-title">设置价格</view>
+        <view class="post-image-wrap">
+            <view class="cloth-image" >
+                <image class="plus-price" src="http://127.0.0.1:8087/static/icons/plus.png"/>
+                <text class="price" >0</text>
+                <image class="add-price" src="http://127.0.0.1:8087/static/icons/addd.png"/>
+            </view>
+        </view>
     </view>
     <!--提交栏-->
     <view class="post-submit-container" >
         <view class="post-position-wrap" >
-            <image class="post-position-icon"  mode="scaleToFill" src="http://127.0.0.1:8087/static/icons/tag.png" style="background-size: 100% 100%; background-position: 0% 0%; background-repeat: no-repeat; background-image: url(http://qty83k.creatby.com/materials/origin/0024e9b38e605192d94951ce3dffe8ae_origin.png); "/>
-            <text class="post-position-text" >添加标签</text>
+            <image class="draft-img"  src="http://127.0.0.1:8087/static/icons/draft.png"/>
+            <text class="draft-text">草稿箱</text>
         </view>
         <button class="post-submit"  hover-class="button-hover" size="default" type="default" style="color:#fff;background-color:rgba(23,181,238,1)">发布</button>
     </view>

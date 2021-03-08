@@ -1,0 +1,73 @@
+<view class="container">
+    <view class="top-master-message-wrap">
+        <view class="head-name-wrap">
+            <image class="head-imag" src="http://127.0.0.1:8087/static/images/image/ben.png"/>
+            <view class="name-wrap">
+                <text class="master-name">镜香</text>
+                <text class="master-id">FiRoomId:420016320</text>
+                <view class="master-tags">
+                    <image class="gender" wx:if="{{male}}" src="" />
+                    <image class="gender"  wx:else src="" />
+                    <view class="degree">达人</view>
+                </view>
+            </view>
+        </view>
+        <view class="master-massage">搭配搭配搭配搭配搭配搭配搭配搭配搭配</view>
+        <view class="like-wrap">
+            <view class="left-wrap">
+                <view class="box">
+                    <view class="number">16</view>
+                    <view class="title">关注</view>
+                </view>
+                <view class="box">
+                    <view class="number">1.1万</view>
+                    <view class="title">粉丝</view>
+                </view>
+                <view class="box">
+                    <view class="number">4.3万</view>
+                    <view class="title">获赞与收藏</view>
+                </view>
+            </view>
+            <view class="right-wrap">
+                <view class="follow-but">关注</view>
+                <image class="chat-but" src="" /> 
+            </view>
+        </view>
+    </view>
+    <view class="mainbody-wrap">
+        <view class="top-title-wrap">
+            <view class="note tit">方案</view>
+            <view class="unswer tit">问答</view>
+        </view>
+        <view class="mainbody">
+            <navigator class="navi-blueprint" url="">
+                <image class="cover" />
+                <view class="title">搭配搭配搭配搭配搭配</view>
+                <view class="writer">
+                    <view class="left">
+                        <image class="writer-head" src="" />
+                        <view class="witer-name">静香</view>
+                    </view>
+                    <view class="right">
+                        <image class="like-icon" src="" />
+                        <view class="number">3491</view>
+                    </view>
+                </view>
+            </navigator>
+            <navigator class="navi-blueprint" url="">
+                <image class="cover" />
+                <view class="title">搭配搭配搭配搭配搭配</view>
+                <view class="writer">
+                    <view class="left">
+                        <image class="writer-head" src="" />
+                        <view class="witer-name">静香</view>
+                    </view>
+                    <view class="right">
+                        <image class="like-icon" src="" />
+                        <view class="number">3491</view>
+                    </view>
+                </view>
+            </navigator>
+        </view>
+    </view>
+</view>

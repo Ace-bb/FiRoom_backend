@@ -31,10 +31,25 @@ Page({
         loadingMoreHidden: true,
 
         hasNoCoupons: true,
-        coupons: []
+        coupons: [],
+        matchOrAsk: false,
+        questions: [{
+            headImage: 'http://127.0.0.1:8087/static/icons/mine_s.png',
+            writerName: '李白',
+            matchImages: [{
+                matchImg: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/recomand1.jpg'
+            }, {
+                matchImg: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/recomand2.jpg'
+            }, {
+                matchImg: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/hansome1.jpg'
+            }, {
+                matchImg: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/cute1.jpg'
+            }]
+        }]
     },
 
     tabClick: function(e) {
+        console.log(e.currentTarget.id);
         this.setData({
             activeCategoryId: e.currentTarget.id
         });
@@ -56,6 +71,18 @@ Page({
         if (e.currentTarget.dataset.id != 0) {
             wx.navigateTo({
                 url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
+            })
+        }
+    },
+    naviPost: function(e) {
+        console.log(this.data.activeCategoryId)
+        if (this.data.activeCategoryId == 0 || this.data.activeCategoryId == 1) {
+            wx.navigateTo({
+                url: '../post/post'
+            })
+        } else {
+            wx.navigateTo({
+                url: '../post/postQuestion/postQuestion'
             })
         }
     },
@@ -329,9 +356,9 @@ Page({
             }
         })
     },
-    navigateToPost:function(){
+    navigateToPost: function() {
         wx.navigateTo({
-          url: 'pages/post/post',
+            url: 'pages/post/post',
         })
     }
 })

@@ -1,114 +1,85 @@
-page {
-    background-color: #ededed;
-    padding: 3%;
-}
-
-.add_bottom {
-    position: fixed;
-    bottom: 0;
-    height: 84rpx;
-    width: 100%;
-    background-color: rgb(243, 239, 232);
-    box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
-}
-
-.add_bottom .add_but {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 6rpx;
-    width: 32%;
-    font-size: 36rpx;
-    height: 100%;
-    margin-left: 68%;
-    background-color: #e8f0f0;
-    box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
-    border-radius: 24rpx;
-}
-
 .container {
-    width: 94%;
-    display: flex;
-    flex-direction: column;
-    padding: 24rpx;
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
-
-.calc-view-wrap {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    height: 100rpx;
-    padding: 24rpx;
-    background-color: rgb(199, 214, 243);
-    box-shadow: 4rpx 4rpx 4rpx 4rpx rgba(58, 56, 56, 0.4);
+.container .left-category-wrap {
+  flex-grow: 1;
+  height: 100%;
+  box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(32, 31, 31, 0.4);
 }
-
-.item-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    width: 25%;
+.container .right-container {
+  flex-grow: 3;
+  height: 100%;
 }
-
-.title {
-    font-size: 32rpx;
+.container .right-container .main-container {
+  width: 94%;
+  display: flex;
+  flex-direction: column;
+  padding: 24rpx;
 }
-
-.value {
-    font-size: 32rpx;
+.container .right-container .main-container .calc-view-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100rpx;
+  padding: 24rpx;
+  background-color: #c7d6f3;
+  box-shadow: 4rpx 4rpx 4rpx 4rpx rgba(58, 56, 56, 0.4);
 }
-
-
-/* 衣柜衣服列表 */
-
-.closet-show-wrap {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 16rpx;
+.container .right-container .main-container .calc-view-wrap .item-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 25%;
 }
-
-.cloth-show-box {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 200rpx;
-    padding: 6rpx;
-    align-items: center;
-    margin-bottom: 12rpx;
+.container .right-container .main-container .calc-view-wrap .item-box .title {
+  font-size: 32rpx;
 }
-
-.check-cloth {
-    width: 84rpx;
-    height: 84rpx;
+.container .right-container .main-container .calc-view-wrap .item-box .value {
+  font-size: 32rpx;
 }
-
-.cloth-img {
-    width: 180rpx;
-    height: 96%;
+.container .right-container .main-container .closet-show-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 16rpx;
 }
-
-.cloth-message-box {
-    display: flex;
-    flex-direction: column;
-    padding-top: 16rpx;
-    padding-bottom: 16rpx;
-    justify-content: space-between;
+.container .right-container .main-container .closet-show-wrap .cloth-show-box {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 200rpx;
+  padding: 6rpx;
+  align-items: center;
+  margin-bottom: 12rpx;
 }
-
-.cloth-title {
-    font-size: 32rpx;
-    font-style: initial;
+.container .right-container .main-container .closet-show-wrap .cloth-show-box .check-cloth {
+  width: 84rpx;
+  height: 84rpx;
 }
-
-.tag-mes {
-    font-weight: bold;
+.container .right-container .main-container .closet-show-wrap .cloth-show-box .cloth-img {
+  width: 180rpx;
+  height: 96%;
 }
-
-.cloth-price {
-    font-size: 32rpx;
+.container .right-container .main-container .closet-show-wrap .cloth-show-box .cloth-message-box {
+  display: flex;
+  flex-direction: column;
+  padding-top: 16rpx;
+  padding-bottom: 16rpx;
+  justify-content: space-between;
+}
+.container .right-container .main-container .closet-show-wrap .cloth-show-box .cloth-message-box .cloth-title {
+  font-size: 32rpx;
+  font-style: initial;
+}
+.container .right-container .main-container .closet-show-wrap .cloth-show-box .cloth-message-box .tag-mes {
+  font-weight: bold;
+}
+.container .right-container .main-container .closet-show-wrap .cloth-show-box .cloth-message-box .cloth-price {
+  font-size: 32rpx;
 }

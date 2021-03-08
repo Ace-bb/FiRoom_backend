@@ -1,0 +1,59 @@
+{
+  "setting": {},
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "搭配",
+          "pathName": "pages/match/match",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "发布",
+          "pathName": "pages/post/post",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/closet/closet",
+          "pathName": "pages/closet/closet",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "pages/test/test",
+          "pathName": "pages/test/test",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "发布问答",
+          "pathName": "pages/post/postQuestion/postQuestion",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "问答详情",
+          "pathName": "pages/match/questionDetail/questionDetail",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "达人详情界面",
+          "pathName": "pages/match/master/master",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

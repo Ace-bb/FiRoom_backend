@@ -1,0 +1,91 @@
+.container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    .left-category-wrap{
+        flex-grow: 1;
+        height: 100%;
+        box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(32, 31, 31, 0.4);
+        
+    }
+    .right-container{
+        flex-grow: 3;
+        height: 100%;
+        .main-container {
+            width: 94%;
+            display: flex;
+            flex-direction: column;
+            padding: 24rpx;
+            .calc-view-wrap {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                height: 100rpx;
+                padding: 24rpx;
+                background-color: rgb(199, 214, 243);
+                box-shadow: 4rpx 4rpx 4rpx 4rpx rgba(58, 56, 56, 0.4);
+                .item-box {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    height: 100%;
+                    width: 25%;
+                    .title {
+                        font-size: 32rpx;
+                    }
+                    
+                    .value {
+                        font-size: 32rpx;
+                    }
+                }
+            }
+            .closet-show-wrap {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                margin-top: 16rpx;
+                .cloth-show-box {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                    height: 200rpx;
+                    padding: 6rpx;
+                    align-items: center;
+                    margin-bottom: 12rpx;
+                    .check-cloth {
+                        width: 84rpx;
+                        height: 84rpx;
+                    }
+                    
+                    .cloth-img {
+                        width: 180rpx;
+                        height: 96%;
+                    }
+                    
+                    .cloth-message-box {
+                        display: flex;
+                        flex-direction: column;
+                        padding-top: 16rpx;
+                        padding-bottom: 16rpx;
+                        justify-content: space-between;
+                        .cloth-title {
+                            font-size: 32rpx;
+                            font-style: initial;
+                        }
+                        
+                        .tag-mes {
+                            font-weight: bold;
+                        }
+                        
+                        .cloth-price {
+                            font-size: 32rpx;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -4,12 +4,15 @@
         "pages/index/index",
         "pages/logs/logs",
         "pages/match/match",
+        "pages/match/questionDetail/questionDetail",
+        "pages/match/master/master",
         "pages/mine/mine",
         "pages/category/category",
         "pages/test/test",
         "pages/closet/closet",
         "pages/contact/contact",
-        "pages/post/post"
+        "pages/post/post",
+        "pages/post/postQuestion/postQuestion"
     ],
     "window": {
         "backgroundTextStyle": "light",
