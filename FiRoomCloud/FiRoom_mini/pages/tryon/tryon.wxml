@@ -1,0 +1,32 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="image_on">
+    <image id="image-on" src="http://127.0.0.1:8087/static/images/model_1.png" mode="aspectFill" />
+    
+  </view>
+  <view class="bottom_area">
+    <view class="but_left">
+      <view class="but_choose_user">上传照片</view>
+      <view class="index-camera">
+        <button class="camera-file" bindtap="chooseImageTap"></button>
+        <image class="camera-icon" src="http://127.0.0.1:8087/static/icons/camera.png"></image>
+      </view>
+      <view class="but_choose_user">输入链接</view>
+    </view>
+  </view>
+
+  <view class="right_area">
+    <scroll-view class="checked_clothes" scroll-y >
+      <view id="green" class="scroll-view-item">
+        <image class="c_cloth" src="http://127.0.0.1:8087/static/images/cloth_1.png" mode="aspectFill"/></view>
+      <view id="red"  class="scroll-view-item">
+        <image class="c_cloth" src="http://127.0.0.1:8087/static/images/cloth_2.png" mode="aspectFill"/></view>
+      <view id="yellow" class="scroll-view-item">
+        <image class="c_cloth" src="http://127.0.0.1:8087/static/images/cloth_3.png" mode="aspectFill"/></view>
+      <view id="blue" class="scroll-view-item">
+        <image class="c_cloth" src="http://127.0.0.1:8087/static/images/cloth_4.png" mode="aspectFill"/></view>
+      <view id="blue" class="scroll-view-item">
+        <image class="c_cloth" src="http://127.0.0.1:8087/static/images/cloth_5.png" mode="aspectFill"/></view>
+    </scroll-view>
+  </view>
+</view>

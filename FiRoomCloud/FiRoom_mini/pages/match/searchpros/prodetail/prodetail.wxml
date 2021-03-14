@@ -1,0 +1,79 @@
+<!--index.wxml-->
+<import src="../../../../wxParse/wxParse.wxml"/> 
+<view class="container">
+    <!--轮播-->
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{imgUrls}}" wx:key="0">
+            <swiper-item>
+                <image src="{{ctx}}{{item}}" class="slide-image" width="355" height="150" mode="aspectFit"/>
+            </swiper-item>
+        </block>
+    </swiper>
+
+    
+    <!--产品标题--> 
+    <view class="prodetail-title">
+      <text class="protitle11">{{style}}</text>
+      <view class="prodetail-title2">
+        <text class="protitle21">定价</text>
+        <text class="protitle22">{{price}}</text>
+      </view>
+    </view>
+
+    <!--产品详情-->
+    <view class="prodetail-con">
+        <view class="lineMes">
+            <text class="con1">风格:</text>
+            <text class="con2">{{secondNames}}</text>
+        </view>
+        <view class="lineMes">
+            <text class="con1">方案组成:</text>
+            <text class="con2">{{secondNames}}</text>
+        </view>
+        <navigator class="prodetail-con lineMes" url="inventory/inventory?styleId={{styleId}}">
+            <text class="con1">作者 :</text>
+            <text class="con2">{{store < 1000 ? store : '1000+'}}</text>
+
+            <view class="seeDetail">
+                <text class="con1" >查看详情</text>
+                <image class="seeDetailimg" src="{{weixinCtx}}see_detail.png"></image>
+            </view>
+        </navigator>
+    </view>
+
+    <!--产品详情、产品图片 -->
+    <view class="imgDetail">
+        <view class="imgDetailTitle">
+            <text class="detail1 {{detailsClass}}" bindtap="showDetails">产品详情</text>
+            <text class="detail2 {{attentionsClass}}" bindtap="showAttentions">注意事项</text>
+        </view>
+
+        <!--产品详情 -->
+        <template wx:if="{{detailsShow}}" is="wxParse" data="{{wxParseData:show_details.nodes}}"/>
+
+        <!--注意事项 -->
+        <template wx:if="{{attentionsShow}}" is="wxParse" data="{{wxParseData:attentions.nodes}}"/>
+
+        <text class="bottomCon">已经到底啦~</text>
+
+    </view>
+
+    <!--采购咨询 -->
+    <view class="cont">
+      <image class="cont-icon" type="default-light" size="27" session-from="weapp" src="../../../../assets/images/Add-Basket.png"></image>
+      <text class="cont-text" >加入试穿</text>
+    </view>
+
+    <view class="footer-box">        
+        <view class="contact">
+          <contact-button style="opacity:0;position:absolute;" type="default-dark"  session-from="weapp" size="27"></contact-button>
+          客服
+        </view>
+        <view class="shop-cart-btn" bindtap="">
+            <view class="shop-num">({{shopNum}})</view>
+            收藏
+        </view>
+        <view class="join-shop-cart" bindtap="toAddShopCar">加入衣柜</view>
+        <navigator class="now-buy" url="../../../contact/message/message">联系达人</navigator>
+   </view>
+</view>

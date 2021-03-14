@@ -1,14 +1,18 @@
 .container{
-  background-color: rgb(241, 241, 236);
+  background-color: rgba(148, 148, 144, 0.562);
   width: 100%;
-  height: 1300rpx;
+  height: 100vh;
   padding: 6rpx;
+  box-sizing: border-box;
+  position: relative;
   .image_on{
       display: flex;
       width: 100%;
-      height: 80%;
+      height: 100%;
       padding: 24rpx;
+      box-sizing: border-box;
       justify-content: center;
+      position: absolute;
       #image-on{
           display: flex;
           width: 80%;
@@ -20,74 +24,238 @@
   }
   .bottom_area{
       position: fixed;
-      justify-content: center;
       display: flex;
+      justify-content: center;
+      align-items: center;
       flex-direction: row;
       flex-wrap: wrap;
       bottom: 0;
       width: 100%;
-      margin-right: 48rpx;
-      .but_left{
-          display: flex;
-          flex-wrap: wrap;
-          flex-direction: row;
-          justify-content: center;
-          align-items: center;
-          .but_choose_user{
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              padding: 6rpx;
-              width: 200rpx;
-              font-size: 32rpx;
-              height: 64rpx;
-              background-color: rgb(232, 240, 240);
-              box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
-              border-radius: 24rpx;
-          }
-          .index-camera{
-            background-color: rgb(211, 244, 245);
-            box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
-            width: 120rpx;
-            height: 120rpx;
-            border-radius: 500rpx;
-            z-index: 10;
-            .camera-icon {
-                width: 100%;
-                height: 100%;
-            }
-            
-            .camera-file {
-                display: block;
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                opacity: 0;
-            }
-          }
+      height: 100rpx;
+      .but-view{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        padding: 6rpx;
+        width: 32%;
+        font-size: 32rpx;
+        height: 64rpx;
+        background-color: rgb(232, 240, 240);
+        box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
+        border-radius: 24rpx;
+        margin-left: 16rpx;
+
       }
+     .but_input_link{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6rpx;
+      box-sizing: border-box;
+      width: 200rpx;
+      font-size: 32rpx;
+      height: 64rpx;
+      background-color: rgb(232, 240, 240);
+      box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
+      border-radius: 24rpx;
+    }
+    .camera-icon {
+      width: 80rpx;
+      height: 80rpx;
   }
+  }
+  // 右部试衣栏
   .right_area{
       position: fixed;
       right: 0;
+      width: 160rpx;
+      height: 90vh;
       display: flex;
       flex-direction: column;
-      flex-wrap: wrap;
-      width: 100rpx;
-      height: 480rpx;
-      background-color: rgb(245, 242, 238);
-      margin-top: 64rpx;
-      margin-right: 24rpx;
+      align-items: flex-end;
+      
       white-space: nowrap;
-      border-radius: 24rpx;
-      box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
-      .scroll-view-item{
-          width: 100rpx;
-          height: 100rpx;
+      box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(105, 99, 99, 0.205);
+      .checked_clothes{
+          width: 100%;
+          height: 100%;
+          padding: 12rpx;
+          box-sizing: border-box;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          background-color: rgb(245, 242, 238);
+          border-radius: 6rpx;
+          .scroll-view-item{
+            width: 100%;
+            height: 120rpx;
+            margin-top: 16rpx;
+            border-bottom: 2rpx solid rgba(0, 0, 0, 0.226);
+          }
+          .c_cloth{
+            width: 100%;
+            height: 100rpx;
+          }
       }
-      .c_cloth{
+      .right-but{
+          width: 48rpx;
+          height: 80rpx;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 6rpx;
+          margin-right: 0rpx;
+          background-color: rgb(245, 242, 238);
+          padding: 6rpx;
+          .right-but-img{
+              height: 100%;
+          }
+      }
+      
+      
+  }
+  .hide-right-container{
+    width: 48rpx;
+    height: 80rpx;
+    position: fixed;
+    right: 0;
+    bottom: 8rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6rpx;
+    background-color: rgb(245, 242, 238);
+    padding: 6rpx;
+    .right-but{
+        height: 100%;
+        width: 100%;
+        .right-but-img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+  }
+  // 左部试衣栏
+  .left_area{
+    position: fixed;
+    left: 0;
+    width: 160rpx;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    margin-right: 24rpx;
+    white-space: nowrap;
+    box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(105, 99, 99, 0.205);
+    .checked_clothes{
+        width: 100%;
+        height: 100%;
+        padding: 12rpx;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: rgb(245, 242, 238);
+        border-radius: 6rpx;
+        .scroll-view-item{
+          width: 100%;
+          height: 120rpx;
+          margin-top: 16rpx;
+          border-bottom: 2rpx solid rgba(0, 0, 0, 0.226);
+        }
+        .c_cloth{
           width: 100%;
           height: 100rpx;
+        }
+    }
+    .left-but{
+        width: 48rpx;
+        height: 80rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 6rpx;
+        background-color: rgb(245, 242, 238);
+        padding: 6rpx;
+        .left-but-img{
+            height: 100%;
+        }
+    }
+  }
+  .hide-left-container{
+    width: 48rpx;
+    height: 80rpx;
+    position: fixed;
+    left: 0;
+    bottom: 8rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 6rpx;
+    background-color: rgb(245, 242, 238);
+    padding: 6rpx;
+    .left-but{
+        height: 100%;
+        width: 100%;
+        .left-but-img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+  }
+  .input-view-wrap{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      .input-link-pop-view{
+          width: 90%;
+          height: 320rpx;
+          padding: 12rpx;
+          background-color: rgba(216, 236, 236, 0.541);
+          box-sizing: border-box;
+          display: flexbox;
+          flex-direction: column;
+          justify-content: space-evenly;
+          .input-view-title{
+              width: 100%;
+              height: 30%;
+              display: flex;
+              align-items: center;
+              padding-left: 16rpx;
+              box-sizing: border-box;
+          }
+          .input-view{
+              width: 100%;
+              height: 40%;
+              border: 2rpx solid black;
+              padding-left: 16rpx;
+              font-size: 36rpx;
+              box-sizing: border-box;
+          }
+          .confirm-or-cancle{
+              width: 100%;
+              height: 30%;
+              display: flex;
+              flex-direction: row;
+              background-color: aqua;
+              button{
+                  width: 50%;
+                  height: 100%;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+              }
+              .cancle{
+                  background-color: #e7e7e7;
+                  color: black;
+              }
+              .confirm{
+                  background-color: #4CAF50;
+              }
+          }
       }
+    
   }
 }

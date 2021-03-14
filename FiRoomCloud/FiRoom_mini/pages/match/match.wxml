@@ -1,0 +1,122 @@
+<!--index.wxml-->
+<!--1px = 750/320 = 2.34rpx;-->
+<view class="container">
+    <!--搜索区域-->
+  <view class="index-topcon" style="background-image:url(../mine/images/bg.png);">
+    <view class="index-search">
+      <!--图片搜索结果图-->
+      <view wx:if="{{isShow}}" class="camera-image" bindtap="deleteImage">
+        <image class="search-image" src="{{chaImgSrc}}"></image>
+        <image class="search-cha" src="{{weixinCtx}}cha.png"></image>
+      </view>
+      <input class="search-ipt" type="text" placeholder="搜索您想搭配的衣服" bindinput="styleName" />
+      <view class="search-btn" bindtap="searchStyle">搜索</view>
+
+      <!--搜索图标-->
+      <image class="search-icon" src="../../assets/icons/search.png"></image>
+
+      <!--图片上传-->
+      <view class="index-camera">
+        <button class="camera-file" bindtap="chooseImageTap"></button>
+        <image class="camera-icon" src="../../assets/icons/camera.png"></image>
+      </view>
+    </view>
+  </view>
+
+   <view class="swiper-container">
+        <swiper class="swiper_box" 
+                    autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+            <block wx:for="{{banners}}" wx:key="id">
+                <swiper-item>
+                    <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}" class="slide-image" mode="aspectFit"/>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="dots">  
+            <block wx:for="{{banners}}" wx:key="unique">  
+                <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+            </block>  
+        </view>  
+   </view>
+
+    <view class="type-container">
+        <scroll-view class="type-navbar" scroll-x="true">
+            <view class="type-box" wx:for-items="{{categories}}" wx:key="id">
+                <view id="{{item.id}}" class="type-navbar-item {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick">
+                    {{item.name}}
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+
+    <!-- 公告 -->
+    <view wx:if="{{noticeList}}" class="notice">
+      <view class="notice_iteml">公告：</view>
+      <swiper wx:if="{{noticeList}}" class="notice_swiper" vertical="true" autoplay="true" circular="true" interval="3000">
+        <navigator wx:for-items="{{noticeList.dataList}}" wx:key="id" url="/pages/notice/show?id={{item.id}}" open-type="navigate">
+          <swiper-item >
+            <view class="notice_itemr">{{item.title}}</view>
+          </swiper-item>
+        </navigator>
+      </swiper>
+    </view>
+    
+    <!-- 商品列表-->
+    <!-- 达人方案列表-->
+    <view class="goods-container" wx:if="{{activeCategoryId==1 || activeCategoryId==0}}">
+        <navigator class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}" url="searchpros/prodetail/prodetail?styleId={{item.id}}">
+           <view class="img-box">
+              <image src="{{item.pic}}" class="image" mode="aspectFill" lazy-load="true"/>
+           </view>
+           <view class="goods-title">{{item.name}}</view>
+           <view class="goods-price">¥ {{item.minPrice}}</view>
+        </navigator>
+    </view>
+    <!-- 搭配问答列表 -->
+    <view class="goods-container" wx:if="{{activeCategoryId==2 || activeCategoryId==0}}">
+      <navigator url="questionDetail/questionDetail" class="question-box" wx:for="{{questions}}" wx:key="{{index}}" bindtap="toDetailQuestion">
+        <!-- 头像，昵称，发布时间 -->
+        <view class="poster-head-box">
+          <image class="head-img" src="{{item.headImage}}" />
+          <view class="poster-name-box">
+            <text class="poster-name">{{item.writerName}}</text>
+            <text class="post-time">19:30</text>
+          </view>
+        </view>
+        <!-- 搭配方案内容 -->
+        <view class="match-message-box">
+          <text class="match-depic">蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤</text>
+          <view class="image-wrap">
+            <view class="images-box" wx:for="{{item.matchImages}}">
+              <image class="match-image"  src="{{item.matchImg}}" />
+            </view>
+          </view>
+        </view>
+        <!-- 达人解答 -->
+        <view class="master-unswer-wrap">
+          <view class="master-box">
+            <image class="master-head" src="http://127.0.0.1:8087/static/icons/mine_s.png" />
+            <view class="master-message-box">
+              <text class="master-name">达人姓名</text>
+              <text class="unswer-message">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+            </view>
+          </view>
+        </view>
+        <!-- 点赞 评论 浏览次数 -->
+        <view class="like-comment-wrap">
+          <text class="view-count">浏览37次</text>
+          <view class="like-comment">
+            <image class="like" src="http://127.0.0.1:8087/static/icons/like.png"/>
+            <image class="comment" src="http://127.0.0.1:8087/static/icons/comment.png" />
+          </view>
+        </view>
+      </navigator>
+      
+    </view>
+
+    <view >
+      <image src="http://127.0.0.1:8087/static/icons/add.png" class="add-container" bindtap="naviPost"/>
+    </view>
+    
+    <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>
+</view>

@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 
 from match.models import Category, Swiper, Notice, BluePrint
+import os
 
 
 def listorders(request):
@@ -42,3 +43,14 @@ def listBluePrint(request):
     blueprint_data = BluePrint.objects.values()
     blueprint_list = list(blueprint_data)
     return JsonResponse({'code': 0, 'data': blueprint_list, 'msg': 'success'})
+
+
+def listTest(request):
+    image = request.FILES['name']
+    print(image)
+    basedir = 'D:\\ProgramSoft\\Git\Virtual-try-on\\FiRoom_backend\\static\\'
+    if not os.path.exists(basedir + 'test.jpg'):
+        with open(basedir + 'test.jpg', ) as f:
+            f.write(image.read())
+            f.close()
+    return JsonResponse({'res': 0})

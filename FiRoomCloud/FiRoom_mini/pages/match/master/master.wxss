@@ -1,0 +1,227 @@
+.container {
+  width: 100%;
+  background-color: #111010;
+}
+.container .top-master-message-wrap {
+  width: 100%;
+  height: 380rpx;
+  padding: 24rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.container .top-master-message-wrap .head-name-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .top-master-message-wrap .head-name-wrap .head-imag {
+  width: 120rpx;
+  height: 120rpx;
+  padding: 6rpx;
+  border-radius: 1000rpx;
+}
+.container .top-master-message-wrap .head-name-wrap .name-wrap {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin-left: 24rpx;
+}
+.container .top-master-message-wrap .head-name-wrap .name-wrap .master-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: white;
+}
+.container .top-master-message-wrap .head-name-wrap .name-wrap .master-id {
+  font-size: 24rpx;
+  font-weight: lighter;
+  color: rgba(255, 255, 255, 0.637);
+}
+.container .top-master-message-wrap .head-name-wrap .name-wrap .master-tags {
+  height: 36rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .top-master-message-wrap .head-name-wrap .name-wrap .master-tags .gender {
+  width: 48rpx;
+  height: 100%;
+  border-radius: 24rpx;
+  background-color: rgba(128, 128, 128, 0.664);
+  margin-right: 16rpx;
+}
+.container .top-master-message-wrap .head-name-wrap .name-wrap .master-tags .degree {
+  width: 64rpx;
+  height: 100%;
+  border-radius: 24rpx;
+  background-color: rgba(128, 128, 128, 0.664);
+  margin-right: 16rpx;
+  font-size: 22rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f08521;
+  font-weight: lighter;
+}
+.container .top-master-message-wrap .master-massage {
+  width: 100%;
+  height: 48rpx;
+  font-weight: lighter;
+  color: white;
+}
+.container .top-master-message-wrap .like-wrap {
+  width: 100%;
+  height: 64rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.container .top-master-message-wrap .like-wrap .left-wrap {
+  width: 300rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.container .top-master-message-wrap .like-wrap .left-wrap .box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rpx;
+  box-sizing: border-box;
+}
+.container .top-master-message-wrap .like-wrap .left-wrap .box .number {
+  font-size: 28rpx;
+  color: white;
+}
+.container .top-master-message-wrap .like-wrap .left-wrap .box .title {
+  font-size: 24rpx;
+  font-weight: lighter;
+  color: rgba(255, 255, 255, 0.774);
+}
+.container .top-master-message-wrap .like-wrap .right-wrap {
+  width: 300rpx;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.container .top-master-message-wrap .like-wrap .right-wrap .follow-but {
+  width: 60%;
+  height: 100%;
+  border-radius: 100rpx;
+  background-color: #cf0d0d;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  margin-right: 12rpx;
+}
+.container .top-master-message-wrap .like-wrap .right-wrap .chat-but {
+  width: 40%;
+  height: 100%;
+  border-radius: 100rpx;
+  border: 1rpx solid white;
+}
+.container .mainbody-wrap {
+  width: 100%;
+  padding: 12rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20rpx;
+  background-color: white;
+}
+.container .mainbody-wrap .top-title-wrap {
+  width: 100%;
+  height: 36rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.container .mainbody-wrap .top-title-wrap .note {
+  margin-right: 24rpx;
+}
+.container .mainbody-wrap .top-title-wrap .tit {
+  height: 100%;
+  border-bottom: 4rpx solid #7c0f0f;
+  padding: 24rpx 12rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container .mainbody-wrap .mainbody {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.808);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 36rpx;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint {
+  width: 48%;
+  height: 500rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 12rpx;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint .cover {
+  width: 100%;
+  border-radius: 12rpx;
+  height: 360rpx;
+  background-color: yellow;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint .title {
+  width: 100%;
+  height: 40rpx;
+  font-size: 30rpx;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint .writer {
+  width: 100%;
+  height: 40rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint .writer .left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint .writer .left .writer-head {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 16rpx;
+  margin-right: 16rpx;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint .writer .left .witer-name {
+  font-size: 24rpx;
+  font-weight: lighter;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint .writer .right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint .writer .right .like-icon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 16rpx;
+  margin-right: 16rpx;
+}
+.container .mainbody-wrap .mainbody .navi-blueprint .writer .right .number {
+  font-size: 24rpx;
+  font-weight: lighter;
+  margin-right: 16rpx;
+}

@@ -1,0 +1,53 @@
+<view class="container">
+    <view class="title-wrap" >
+        <text class="title" >标题</text>
+    </view>
+    <!-- 发布者头像 -->
+    <view class="poster-head-wrap">
+        <image class="head-img" src="http://127.0.0.1:8087/static/icons/tag.png" />
+        <view class="poster-name-wrap">
+            <text class="name">梦若</text>
+            <text class="time">03-08</text>
+        </view>
+        <view class="like">关注</view>
+    </view>
+    <!-- 正文 -->
+    <view class="mainbody-wrap" >
+        <text class="mainbody" >正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</text>
+    </view>
+    <!-- 图片区域-->
+    <view class="images-wrap">
+        <view class="image-box" wx:for="{{imageUpload}}" >
+            <image src="{{item.picUrl}}" class="img"></image>
+        </view>
+    </view>
+ 
+    <!-- 达人解答 -->
+    <view class="master-unswer-title">
+        <view class="line"></view>
+        <view class="master-un">达人解答</view>
+        <view class="line"></view>
+    </view>
+   
+    <!-- 发布者头像 -->
+    <navigator class="master-head-wrap" url="">
+        <image class="master-head-img" src="http://127.0.0.1:8087/static/icons/tag.png" />
+        <view class="master-name-wrap">
+            <text class="name">梦若</text>
+            <text class="time">03-08</text>
+        </view>
+        <image class="navi-img" src="http://127.0.0.1:8087/static/icons/jiantou.png" />
+    </navigator>
+    <!-- 正文 -->
+    <view class="master-mainbody-wrap" >
+        <text class="mainbody" >正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</text>
+    </view>
+    <swiper class="imgs-swiper" autoplay="true" circular="true" interval="3000">
+        <block wx:for="{{imageUpload}}">
+            <swiper-item >
+                <image class="swiper-img" src="{{item.picUrl}}"/>
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
+ 

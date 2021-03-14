@@ -7,4 +7,5 @@ urlpatterns = [
     path('recommend/swiper', views.listSwiper),
     path('recommend/notice', views.listNotice),
     path('recommend/blueprint', views.listBluePrint),
+    path('recommend/test', views.listTest),
 ]

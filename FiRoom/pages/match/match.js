@@ -34,7 +34,7 @@ Page({
         coupons: [],
         matchOrAsk: false,
         questions: [{
-            headImage: 'http://127.0.0.1:8087/static/icons/mine_s.png',
+            headImage: 'http://192.168.1.116:8087/static/icons/mine_s.png',
             writerName: '李白',
             matchImages: [{
                 matchImg: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/recomand1.jpg'
@@ -110,7 +110,7 @@ Page({
         })
 
         wx.request({
-            url: 'http://127.0.0.1:8087/match/recommend/swiper',
+            url: 'http://192.168.1.116:8087/match/recommend/swiper',
             data: {
                 key: 'mallName'
             },
@@ -130,7 +130,7 @@ Page({
             }
         })
         wx.request({
-            url: 'http://127.0.0.1:8087/match/recommend/category',
+            url: 'http://192.168.1.116:8087/match/recommend/category',
             success: function(res) {
                 console.log(res);
                 var categories = [{ id: 0, name: "全部" }];
@@ -229,7 +229,7 @@ Page({
         console.log('categoryId')
         var that = this;
         wx.request({
-            url: 'http://127.0.0.1:8087/match/recommend/blueprint',
+            url: 'http://192.168.1.116:8087/match/recommend/blueprint',
             data: {
                 categoryId: categoryId
             },

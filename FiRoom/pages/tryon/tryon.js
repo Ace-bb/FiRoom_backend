@@ -1,8 +1,59 @@
 var order = ['red', 'yellow', 'blue', 'green', 'red']
 Page({
     data: {
+        backend_url: "http://192.168.1.116:8087/",
         toView: 'red',
-        scrollTop: 100
+        scrollTop: 100,
+        isShow: false,
+        inputLink: false,
+        showRightContainer: true,
+        showLeftContainer: true,
+        clothes: [{
+                clothurl: 'http://192.168.1.116:8087/static/images/cloth_1.png'
+            },
+            {
+                clothurl: 'http://192.168.1.116:8087/static/images/cloth_2.png'
+            },
+            {
+                clothurl: 'http://192.168.1.116:8087/static/images/cloth_3.png'
+            },
+            {
+                clothurl: 'http://192.168.1.116:8087/static/images/cloth_4.png'
+            },
+            {
+                clothurl: 'http://192.168.1.116:8087/static/images/cloth_5.png'
+            },
+            {
+                clothurl: 'http://192.168.1.116:8087/static/images/cloth_5.png'
+            },
+            {
+                clothurl: 'http://192.168.1.116:8087/static/images/cloth_5.png'
+            },
+            {
+                clothurl: 'http://192.168.1.116:8087/static/images/cloth_5.png'
+            }
+        ]
+    },
+    inputlink: function(e) {
+        this.setData({
+            inputLink: !this.data.inputLink
+        })
+    },
+    input_confirm: function() {
+        this.setData({
+                inputLink: !this.data.inputLink
+            })
+            // 调用处理链接的函数
+    },
+    show_right_container: function() {
+        this.setData({
+            showRightContainer: !this.data.showRightContainer
+        })
+    },
+    show_left_container: function() {
+        this.setData({
+            showLeftContainer: !this.data.showLeftContainer
+        })
     },
     upper: function(e) {
         console.log(e)
@@ -52,22 +103,23 @@ Page({
             sourceType: [type], // 可以指定来源是相册还是相机，默认二者都有  
             success: function(res) {
                 var picPath = res.tempFilePaths[0];
+                console.log(res);
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
                 that.setData({
                         chaImgSrc: picPath,
                         isShow: true
                     })
                     //图片上传到定制链服务器进行款式搜索
-                util.uploadFile(picPath,
-                    function(path) { //path为定制链图片链接
-                        that.setData({
-                            imageUrl: path
-                        })
-                        var style = that.data.styleName
-                        wx.navigateTo({
-                            url: 'searchpros/searchpros?style=' + style + '&imageUrl=' + path + '&chaImgSrc=' + picPath
-                        })
-                    })
+                wx.uploadFile({
+                    filePath: picPath,
+                    name: 'name',
+                    url: 'http://192.168.1.116:8087/match/recommend/test',
+                    header: { "Content-Type": "multipart/form-data" },
+                    success: (res) => {
+                        const data = JSON.parse(res.data)
+                        console.log(res)
+                    }
+                })
             }
         })
     }
