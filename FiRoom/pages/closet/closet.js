@@ -25,28 +25,18 @@ Page({
             {
                 title: '市场总价值',
                 value: '￥3665'
-            },
-            {
-                title: '成本',
-                value: '￥3665'
-            },
-            {
-                title: '总利润',
-                value: '+￥3665'
             }
         ],
         categoryList: [{
-            name: '目录目录'
+            name: '我的试衣'
         }, {
-            name: '目录目录'
+            name: '已购衣服'
         }, {
-            name: '目录目录'
+            name: '上装'
         }, {
-            name: '目录目录'
+            name: '下装'
         }, {
-            name: '目录目录'
-        }, {
-            name: '目录目录'
+            name: '鞋子'
         }]
     },
 

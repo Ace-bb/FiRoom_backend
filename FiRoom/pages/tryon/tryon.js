@@ -8,31 +8,11 @@ Page({
         inputLink: false,
         showRightContainer: true,
         showLeftContainer: true,
-        clothes: [{
-                clothurl: 'http://192.168.1.116:8087/static/images/cloth_1.png'
-            },
-            {
-                clothurl: 'http://192.168.1.116:8087/static/images/cloth_2.png'
-            },
-            {
-                clothurl: 'http://192.168.1.116:8087/static/images/cloth_3.png'
-            },
-            {
-                clothurl: 'http://192.168.1.116:8087/static/images/cloth_4.png'
-            },
-            {
-                clothurl: 'http://192.168.1.116:8087/static/images/cloth_5.png'
-            },
-            {
-                clothurl: 'http://192.168.1.116:8087/static/images/cloth_5.png'
-            },
-            {
-                clothurl: 'http://192.168.1.116:8087/static/images/cloth_5.png'
-            },
-            {
-                clothurl: 'http://192.168.1.116:8087/static/images/cloth_5.png'
-            }
-        ]
+        clothes: [],
+        userBodyShot: [],
+        choosedData: [],
+        index: 0,
+        resImg: 'static/images/model_1.png'
     },
     inputlink: function(e) {
         this.setData({
@@ -53,6 +33,15 @@ Page({
     show_left_container: function() {
         this.setData({
             showLeftContainer: !this.data.showLeftContainer
+        })
+    },
+    listClick: function(e) {
+        let me = this;
+        console.log(e)
+        index: e.currentTarget.dataset.index;
+        console.log(this.data.userBodyShot[1]['shot']);
+        me.setData({
+            resImg: this.data.userBodyShot[e.currentTarget.dataset.index]['shot']
         })
     },
     upper: function(e) {
@@ -119,6 +108,36 @@ Page({
                         const data = JSON.parse(res.data)
                         console.log(res)
                     }
+                })
+            }
+        })
+    },
+    getClothesHamber: function() {
+
+    },
+    onLoad: function() {
+        var that = this;
+        wx.request({
+            url: 'http://192.168.1.116:8087/tryon/clothes/basket',
+            data: {
+                key: 'clothesHamber'
+            },
+            success: function(res) {
+                console.log(res.data)
+                that.setData({
+                    clothes: res.data.data
+                })
+            }
+        })
+        wx.request({
+            url: 'http://192.168.1.116:8087/tryon/userBodyShow/images',
+            data: {
+                key: 'userBodyShow'
+            },
+            success: function(res) {
+                console.log(res.data)
+                that.setData({
+                    userBodyShot: res.data.data
                 })
             }
         })

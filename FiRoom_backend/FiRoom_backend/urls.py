@@ -26,4 +26,5 @@ urlpatterns = [
     # 凡是 url 以 sales/  开头的，
     # 都根据 sales.urls 里面的 子路由表进行路由
     path('match/', include('match.urls')),
+    path('tryon/', include('tryon.urls')),
 ]

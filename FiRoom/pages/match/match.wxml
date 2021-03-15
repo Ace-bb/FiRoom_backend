@@ -102,9 +102,9 @@
             </view>
           </view>
         </view>
-        <!-- 点赞 评论 浏览次数 -->
+        <!-- 点赞 评论 浏览次数    static/userBodyShot/shot1.png -->
         <view class="like-comment-wrap">
-          <text class="view-count">浏览37次</text>
+          <text class="view-count">浏览37次</text> 
           <view class="like-comment">
             <image class="like" src="http://127.0.0.1:8087/static/icons/like.png"/>
             <image class="comment" src="http://127.0.0.1:8087/static/icons/comment.png" />

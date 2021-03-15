@@ -53,7 +53,7 @@ for cloth in cloth_list_raw:
 # Use "/web" url to get web page
 @app.route('/web')
 def hello_world():
-    return render_template('#前端界面.html', img_list=cloth_list)
+    return render_template('login.html', img_list=cloth_list)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -180,6 +180,6 @@ if __name__ == '__main__':
     app.config['TEMPLATES_AUTO_RELOAD'] = True
 
     # run server locally
-    app.run(host='127.0.0.1')
+    app.run(host='127.0.0.1', port='8081')
 
     # or as a servers

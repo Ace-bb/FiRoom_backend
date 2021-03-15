@@ -15,7 +15,7 @@
       position: absolute;
       #image-on{
           display: flex;
-          width: 80%;
+          width: 90%;
           height: 100%;
           box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.6);
           margin-left: 24rpx;
@@ -69,13 +69,25 @@
       position: fixed;
       right: 0;
       width: 160rpx;
-      height: 90vh;
+      height: 85vh;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      
       white-space: nowrap;
       box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(105, 99, 99, 0.205);
+      
+      .title{
+          width: 100%;
+          height: 60rpx;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-bottom: 1rpx solid blue;
+          padding: 10rpx;
+          box-sizing: border-box;
+          background-color: rgb(245, 242, 238);
+          border-radius: 6rpx;
+      }
       .checked_clothes{
           width: 100%;
           height: 100%;
@@ -140,12 +152,24 @@
     position: fixed;
     left: 0;
     width: 160rpx;
-    height: 90vh;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     margin-right: 24rpx;
     white-space: nowrap;
     box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(105, 99, 99, 0.205);
+    .title{
+        width: 100%;
+        height: 60rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1rpx solid blue;
+        padding: 10rpx;
+        box-sizing: border-box;
+        background-color: rgb(245, 242, 238);
+        border-radius: 6rpx;
+    }
     .checked_clothes{
         width: 100%;
         height: 100%;
@@ -158,13 +182,13 @@
         border-radius: 6rpx;
         .scroll-view-item{
           width: 100%;
-          height: 120rpx;
+          height: 240rpx;
           margin-top: 16rpx;
           border-bottom: 2rpx solid rgba(0, 0, 0, 0.226);
         }
         .c_cloth{
           width: 100%;
-          height: 100rpx;
+          height: 100%;
         }
     }
     .left-but{

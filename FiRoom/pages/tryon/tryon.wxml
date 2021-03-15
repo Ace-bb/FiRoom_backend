@@ -2,7 +2,7 @@
 <view class="container">
   <view class="image_on">
     <image id="image-on" wx:if="{{isShow}}" src="{{chaImgSrc}}"/>
-    <image id="image-on" wx:else src="https://img.alicdn.com/imgextra/i1/1762431907/O1CN01nZuH7P1PxRxLLfP8t_!!1762431907.jpg" mode="aspectFill" />
+    <image id="image-on" wx:else src="{{backend_url}}{{resImg}}" mode="aspectFill" />
   </view>
   <view class="bottom_area">
     <view class="but-view" bindtap="chooseImageTap">
@@ -10,12 +10,13 @@
       <text class="">上传照片</text>
     </view>
     <view class="but-view" bindtap="inputlink">
-      <image class="camera-icon" src="{{backend_url}}static/icons/camera.png"></image>
-      <text class="">输入链接</text>
+      <image class="camera-icon" src="{{backend_url}}static/icons/cloth_index.png"></image>
+      <text class="">上传衣服</text>
     </view>
   </view>
   <!-- 右部试衣篮 -->
   <view class="{{ showRightContainer ? 'right_area' : 'hide-right-container' }}">
+    <view class="title" wx:if="{{showRightContainer}}">试衣篮</view>
     <scroll-view class="checked_clothes" scroll-y wx:if="{{showRightContainer}}">
       <view id="green" class="scroll-view-item" wx:for="{{clothes}}">
         <image class="c_cloth" src="{{item.clothurl}}" mode="aspectFill"/></view>
@@ -27,9 +28,10 @@
   </view>
   <!-- 左部试衣篮 -->
   <view class="{{ showLeftContainer ? 'left_area' : 'hide-left-container' }}">
+    <view class="title" wx:if="{{showLeftContainer}}">个人照片</view>
     <scroll-view class="checked_clothes" scroll-y wx:if="{{showLeftContainer}}">
-      <view id="green" class="scroll-view-item" wx:for="{{clothes}}">
-        <image class="c_cloth" src="{{item.clothurl}}" mode="aspectFill"/></view>
+      <view id="green" class="scroll-view-item" wx:for="{{userBodyShot}}" data-id='{{item.id}}' bindtap="listClick" data-index='{{index}}'>
+        <image class="c_cloth" src="http://192.168.1.116:8087/{{item.shot}}" mode="aspectFill"/></view>
     </scroll-view>
     <view class="left-but" bindtap="show_left_container">
       <image wx:if="{{showLeftContainer}}" class="left-but-img" src="{{backend_url}}static/icons/right_arrow.png" mode="aspectFill"/>
@@ -40,7 +42,7 @@
   <view class="input-view-wrap" wx:if="{{inputLink}}">
     <view class="input-link-pop-view">
       <view class="input-view-title">请输入衣服链接</view>
-      <input class="input-view" placeholder="ssss"/>
+      <input class="input-view" placeholder="淘口令"/>
       <view class="confirm-or-cancle">
         <button class="cancle" bindtap="input_cancle">取消</button>
         <button class="confirm" bindtap="input_confirm">确认</button>

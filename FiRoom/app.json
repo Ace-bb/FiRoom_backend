@@ -32,23 +32,18 @@
             "text": "搭配",
             "iconPath": "assets/icons/match.png",
             "selectedIconPath": "assets/icons/match_s.png"
-        },{
-            "pagePath": "pages/contact/contact",
-            "text": "消息",
-            "iconPath": "assets/icons/message.png",
-            "selectedIconPath": "assets/icons/message_s.png"
-        },{
+        }, {
             "pagePath": "pages/closet/closet",
             "text": "衣柜",
-            "iconPath": "assets/icons/closet.png",
-            "selectedIconPath": "assets/icons/closet_s.png"
+                            "iconPath": "assets/icons/closet_s.png",
+            "selectedIconPath": "assets/icons/closet.png"
         }, {
             "pagePath": "pages/mine/mine",
             "text": "我的",
-            "iconPath": "assets/icons/mine.png",
-            "selectedIconPath": "assets/icons/mine_s.png"
+            "iconPath": "assets/icons/mine_s.png",
+            "selectedIconPath": "assets/icons/mine.png"
         }]
     },
-    "cloud":true
+    "cloud": true
 
 }

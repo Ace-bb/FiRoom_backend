@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'match.apps.MatchConfig',
+    'tryon.apps.TryonConfig',
+    'closet.apps.ClosetConfig',
 ]
 
 MIDDLEWARE = [
