@@ -1,36 +1,36 @@
 <view class="container">
     <view class="top-master-message-wrap">
         <view class="head-name-wrap">
-            <image class="head-imag" src="http://127.0.0.1:8087/static/images/image/ben.png"/>
+            <image class="head-imag" src="{{backend_url}}static/images/image/ben.png"/>
             <view class="name-wrap">
-                <text class="master-name">镜香</text>
-                <text class="master-id">FiRoomId:420016320</text>
+                <text class="master-name">{{masters.masterName}}</text>
+                <text class="master-id">FiRoomId:{{masters.masterId}}</text>
                 <view class="master-tags">
-                    <image class="gender" wx:if="{{male}}" src="" />
-                    <image class="gender"  wx:else src="" />
-                    <view class="degree">达人</view>
+                    <image class="gender" wx:if="{{male}}" src="{{backend_url}}static/icons/male.png" mode="aspectFill"/>
+                    <image class="gender"  wx:else src="{{backend_url}}static/icons/female.png" mode="aspectFill"/>
+                    <view class="degree">{{masters.masterDegree}}</view>
                 </view>
             </view>
         </view>
-        <view class="master-massage">搭配搭配搭配搭配搭配搭配搭配搭配搭配</view>
+        <view class="master-massage">{{masters.signature}}</view>
         <view class="like-wrap">
             <view class="left-wrap">
                 <view class="box">
-                    <view class="number">16</view>
+                    <view class="number">{{masters.followNum}}</view>
                     <view class="title">关注</view>
                 </view>
                 <view class="box">
-                    <view class="number">1.1万</view>
+                    <view class="number">{{masters.fans}}万</view>
                     <view class="title">粉丝</view>
                 </view>
                 <view class="box">
-                    <view class="number">4.3万</view>
+                    <view class="number">{{masters.collect}}万</view>
                     <view class="title">获赞与收藏</view>
                 </view>
             </view>
             <view class="right-wrap">
                 <view class="follow-but">关注</view>
-                <image class="chat-but" src="" /> 
+                <icon class="iconfont icon-xinfeng chat-but"></icon>
             </view>
         </view>
     </view>
@@ -40,31 +40,17 @@
             <view class="unswer tit">问答</view>
         </view>
         <view class="mainbody">
-            <navigator class="navi-blueprint" url="">
-                <image class="cover" />
-                <view class="title">搭配搭配搭配搭配搭配</view>
+            <navigator class="navi-blueprint" url="../searchpros/prodetail/prodetail?styleId={{item.masterId}}&current=master" wx:for="{{masterPrint}}">
+                <image class="cover" src="{{backend_url}}{{item.coverPic}}" mode="aspectFill"/>
+                <view class="title">{{item.printName}}</view>
                 <view class="writer">
                     <view class="left">
-                        <image class="writer-head" src="" />
-                        <view class="witer-name">静香</view>
+                        <image class="writer-head" src="{{backend_url}}{{item.authorIcon}}" />
+                        <view class="witer-name">{{item.masterName}}</view>
                     </view>
                     <view class="right">
-                        <image class="like-icon" src="" />
-                        <view class="number">3491</view>
-                    </view>
-                </view>
-            </navigator>
-            <navigator class="navi-blueprint" url="">
-                <image class="cover" />
-                <view class="title">搭配搭配搭配搭配搭配</view>
-                <view class="writer">
-                    <view class="left">
-                        <image class="writer-head" src="" />
-                        <view class="witer-name">静香</view>
-                    </view>
-                    <view class="right">
-                        <image class="like-icon" src="" />
-                        <view class="number">3491</view>
+                        <image class="like-icon" src="{{backend_url}}static/masterBluePrint/icons/heart.png" />
+                        <view class="number">{{item.likeNum}}</view>
                     </view>
                 </view>
             </navigator>

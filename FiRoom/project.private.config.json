@@ -51,7 +51,19 @@
         {
           "name": "达人详情界面",
           "pathName": "pages/match/master/master",
+          "query": "masterId=1",
+          "scene": null
+        },
+        {
+          "name": "搭配方案详情",
+          "pathName": "pages/match/searchpros/prodetail/prodetail",
           "query": "",
+          "scene": null
+        },
+        {
+          "name": "搭配方案详情",
+          "pathName": "pages/match/searchpros/prodetail/prodetail",
+          "query": "detailId=1",
           "scene": null
         }
       ]

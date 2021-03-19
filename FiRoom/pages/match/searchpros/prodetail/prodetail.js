@@ -9,18 +9,13 @@ Page({
         }
     },
     data: {
+        backend_url: util.backend_url,
         ctx: util.ctx,
         weixinCtx: util.weixinCtx,
         detailsClass: 'activedetail',
         detailsShow: true,
         attentionsClass: '',
         attentionsShow: false,
-        imgUrls: [
-            "https://s3.ax1x.com/2021/01/31/yAfklV.jpg",
-            "https://s3.ax1x.com/2021/01/31/yAfMf1.jpg",
-            "https://s3.ax1x.com/2021/01/31/yAfKYR.jpg",
-            "https://s3.ax1x.com/2021/01/31/yAfuk9.jpg"
-        ],
         indicatorDots: true,
         autoplay: false,
         interval: 3000,
@@ -32,53 +27,55 @@ Page({
         colors: [{
             value: null,
             color_name: "蓝色"
-        }]
+        }],
+        swipers: [],
+        detailId: 1,
+        MatchTitle: '',
+        detail: '',
+        postTime: ''
     },
     onLoad: function(option) {
         var that = this
         var styleId = option.styleId
+        var current = option.current
 
-        console.log(styleId)
-            /*
-            util.requestSupply("getStyleDetail", "?styleId=" + styleId,
-                function(res) {
-                    var result = res.result;
-                    //转换html代码
-                    WxParse.wxParse('show_details', 'html', result.show_details, that, 5)
-                    WxParse.wxParse('attentions', 'html', result.attentions, that, 5)
+        console.log('styleId', styleId)
+        console.log('current:', current)
+        util.requestSupply(current, styleId,
+            function(res) {
+                console.log('res', res)
+                var result = res.data;
+                console.log("result:", result);
+                that.setData({
+                    detailId: result[0].id,
+                    detail: result[0].detailDescrib,
+                    MatchTitle: result[0].name,
+                    postTime: result[0].postTime,
+                    tags: result[0].tags
+                });
+            },
+            function(res) {
+                console.log(res);
+            });
 
-                    var seconds = result.seconds,
-                        secondNames = '';
-                    for (var s = 0; s < seconds.length; s++) {
-                        secondNames += seconds[s].name + '  '
-                    }
-                    console.log(result);
+        wx.request({
+            url: 'http://192.168.1.116:8087/match/recommend/DetailImages',
+            method: 'GET',
+            data: {
+                userId: styleId
+            },
+            header: {
+                'content-type': 'multipart/x-www-form-urlencoded;charset=UTF-8'
+            },
+            success: function(res) {
+                console.log('detailImages:', res.data.data);
+                if (res.statusCode == 200 && res.data.code == "0") {
                     that.setData({
-                        styleId: styleId,
-                        style: result.style,
-                        imgUrls: result.thumb.split(","),
-                        price: result.price_of_foreign,
-                        // fabric: result.fabric,
-                        fabric: "纯棉",
-                        // secondNames: secondNames,
-                        secondNames: "修身款",
-                        // colors: result.seconds[0].colors,
-                        colors: [{
-                            value: null,
-                            color_name: 蓝色
-                        }],
-                        store: result.store,
-                        province: result.province,
-                        city: result.city,
-                        phone: result.contact,
-                        qq: result.qq,
-                        showDetails: result.show_details,
-                        attentions: result.attentions
-                    });
-                },
-                function(res) {
-                    console.log(res);
-                }); */
+                        swipers: res.data.data
+                    })
+                }
+            }
+        })
     },
     changeIndicatorDots: function(e) {
         this.setData({

@@ -7,6 +7,9 @@ from django.db import models
 
 
 # 轮播图下的目录，搭配方案 最受好评 免费方案 推荐
+from django.utils import timezone
+
+
 class Category(models.Model):
     # 目录编号
     id = models.IntegerField(primary_key=True)
@@ -99,3 +102,125 @@ class BluePrint(models.Model):
     statusStr = models.CharField(max_length=64, default='热卖中')
     type = models.IntegerField(default=0)
     userId = models.IntegerField(default=0)
+    # 达人昵称
+    authorName = models.CharField(max_length=64, default='tutu')
+    # 达人头像
+    authorIcon = models.CharField(max_length=1024, default='http://192.168.1.116:8087/static/authorIcons/icon1.png')
+    # 点赞人数
+    likeNum = models.IntegerField(default=1.1)
+
+
+class detailImages(models.Model):
+    # 达人编号
+    userId = models.IntegerField()
+    # 图片链接
+    imageUrl = models.CharField(max_length=1024)
+
+
+# 方案详情
+class MatchDetail(models.Model):
+    # 方案id
+    id = models.IntegerField(primary_key=True)
+    # 用户id
+    userID = models.IntegerField(default=0)
+    # 作者
+    author = models.CharField(max_length=128)
+    # 方案名称
+    name = models.CharField(max_length=1048)
+    # 方案具体描述
+    detailDescrib = models.TextField(max_length=1024)
+    # 方案图片组ID
+    detailImages= models.IntegerField()
+    # 评论组ID
+    commentId = models.IntegerField()
+    # 评论数量
+    commentNum = models.IntegerField()
+    # 方案组成图片组ID
+    compriseImageId = models.IntegerField()
+    # 标签
+    tags =models.CharField(max_length=512)
+    # 点赞数量
+    likeNum = models.IntegerField()
+    # 收藏数量
+    collet = models.IntegerField()
+    # 发布时间
+    postTime = models.DateTimeField(auto_now_add=True)
+
+
+# class DetailImages(models.Model):
+#     name = models.CharField(max_length=100)
+
+
+# 一个方案的评论组序列
+class Comment(models.Model):
+    # 评论组ID
+    commentId = models.IntegerField(primary_key=True)
+    # 评论者名称
+    commentAuthorName = models.CharField(max_length=128)
+    # 评论者头像
+    AuthorIcon = models.CharField(max_length=1024)
+    # 评论时间
+    commentTime = models.DateTimeField(auto_now_add=True)
+    # 点赞数量
+    commentLikeNum = models.IntegerField()
+
+
+# 一个搭配方案所用到的衣服图片
+class CompriseImages(models.Model):
+    # 方案组成图片组ID
+    compriseImageId = models.IntegerField(primary_key=True)
+    # 方案组成图片名称
+    imageName = models.CharField(max_length=128)
+    # 图片链接
+    compriseImageUrl = models.CharField(max_length=1024)
+
+# 搭配大师
+class Masters(models.Model):
+    # 大师ID
+    masterId = models.IntegerField()
+    # 大师方案名称
+    masterTitle = models.CharField(max_length=64)
+    # 大师名称
+    masterName = models.CharField(max_length=64,default='搭配师')
+    # 封面
+    masterCover = models.CharField(max_length=1024)
+    # 大师头像
+    masterIcon = models.CharField(max_length=1024, default='static/masterBluePrint/icons/icon1.png')
+    # 发布搭配方案数量
+    matchNum = models.IntegerField()
+    # 粉丝数量
+    fans = models.FloatField()
+    # 关注用户数量
+    followNum = models.FloatField()
+    # 收藏数量
+    collect = models.FloatField()
+    # 个性签名
+    signature = models.TextField()
+    # 大师等级
+    masterDegree = models.CharField(max_length=32, default='大师')
+
+
+# 大师方案表
+class MasterPrint(models.Model):
+    # 添加时间
+    dateAdd = models.DateTimeField(auto_now_add=True)
+    # 修改时间
+    dateUpdate = models.DateTimeField(auto_now=True)
+    # fxType
+    fxType = models.IntegerField(default=0)
+    # 得分
+    gotScore = models.IntegerField(default=5.0)
+    # 大师ID
+    masterId = models.IntegerField()
+    # 大师名称
+    masterName = models.CharField(max_length=64)
+    # 方案id
+    printId = models.IntegerField()
+    # 方案名称
+    printName = models.CharField(max_length=1048)
+    # 封面链接
+    coverPic = models.CharField(max_length=1048)
+    # 达人头像
+    authorIcon = models.CharField(max_length=1024)
+    # 点赞人数
+    likeNum = models.IntegerField(default=1.1)

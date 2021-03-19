@@ -2,78 +2,61 @@
 <import src="../../../../wxParse/wxParse.wxml"/> 
 <view class="container">
     <!--轮播-->
-    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-        <block wx:for="{{imgUrls}}" wx:key="0">
-            <swiper-item>
-                <image src="{{ctx}}{{item}}" class="slide-image" width="355" height="150" mode="aspectFit"/>
-            </swiper-item>
-        </block>
-    </swiper>
+    <view class="Match-swiper">
+      <swiper class="notice_swiper" autoplay="true" circular="true" interval="3000">
+        <navigator wx:for-items="{{swipers}}" wx:key="id" url="/pages/notice/show?id={{item.id}}" open-type="navigate">
+          <swiper-item >
+            <image class="notice_itemr" src="{{backend_url}}{{item.imageUrl}}" mode="aspectFit"/>
+          </swiper-item>
+        </navigator>
+      </swiper>
+    </view>
 
     
-    <!--产品标题--> 
-    <view class="prodetail-title">
-      <text class="protitle11">{{style}}</text>
-      <view class="prodetail-title2">
-        <text class="protitle21">定价</text>
-        <text class="protitle22">{{price}}</text>
+    <!--搭配方案标题 --> 
+    <view class="match-detail-title">
+      {{MatchTitle}}
+    </view>
+
+    <!--搭配方案详情 -->
+    <view class="match-detail-wrap">
+        <view class="match-detail-wrap" decode="{{true}}">
+          <view class="details" wx:for="{{detail}}">{{item.mes}}</view>
+          <view class="details" decode="{{true}}" >&emsp;</view>
+        </view>
+        <view class="tags-wrap">
+            <view class="tag">{{tags}}</view>
+        </view>
+        <view class="wrap-bottom">
+            <view class="edit-time">编辑于</view>
+            
+        </view>
+    </view>
+
+    <view class="comment-wrap">
+      <view class="comment-number">共237条评论</view>
+      <view class="user-comment-wrap">
+        <image class="user-icon" src="{{backend_url}}static/authorIcons/icon1.png" />
+        <input class="user-input-comment" type="text" placeholder="喜欢就给个评论吧"/>
+      </view>
+      <view class="other-comment-wrap">
+        <view class="other-comment">
+          <view class="icon-wrap">
+            <image class="other-icon" src="{{backend_url}}static/authorIcons/icon2.jpg" />
+          </view>
+          <view class="main-box">
+            <view class="usernamne">小朱</view>
+            <view class="comment">喜欢你的搭配风格，日系简单大方</view>
+            <view class="comment-time">Dec/11/2019</view>
+          </view>
+          <view class="like-wrap">
+            <image class="like-icon" src="{{backend_url}}static/masterBluePrint/icons/heart.png"/>
+            <view class="like-num">65</view>
+          </view>
+        </view>
       </view>
     </view>
 
-    <!--产品详情-->
-    <view class="prodetail-con">
-        <view class="lineMes">
-            <text class="con1">风格:</text>
-            <text class="con2">{{secondNames}}</text>
-        </view>
-        <view class="lineMes">
-            <text class="con1">方案组成:</text>
-            <text class="con2">{{secondNames}}</text>
-        </view>
-        <navigator class="prodetail-con lineMes" url="inventory/inventory?styleId={{styleId}}">
-            <text class="con1">作者 :</text>
-            <text class="con2">{{store < 1000 ? store : '1000+'}}</text>
 
-            <view class="seeDetail">
-                <text class="con1" >查看详情</text>
-                <image class="seeDetailimg" src="{{weixinCtx}}see_detail.png"></image>
-            </view>
-        </navigator>
-    </view>
 
-    <!--产品详情、产品图片 -->
-    <view class="imgDetail">
-        <view class="imgDetailTitle">
-            <text class="detail1 {{detailsClass}}" bindtap="showDetails">产品详情</text>
-            <text class="detail2 {{attentionsClass}}" bindtap="showAttentions">注意事项</text>
-        </view>
-
-        <!--产品详情 -->
-        <template wx:if="{{detailsShow}}" is="wxParse" data="{{wxParseData:show_details.nodes}}"/>
-
-        <!--注意事项 -->
-        <template wx:if="{{attentionsShow}}" is="wxParse" data="{{wxParseData:attentions.nodes}}"/>
-
-        <text class="bottomCon">已经到底啦~</text>
-
-    </view>
-
-    <!--采购咨询 -->
-    <view class="cont">
-      <image class="cont-icon" type="default-light" size="27" session-from="weapp" src="../../../../assets/images/Add-Basket.png"></image>
-      <text class="cont-text" >加入试穿</text>
-    </view>
-
-    <view class="footer-box">        
-        <view class="contact">
-          <contact-button style="opacity:0;position:absolute;" type="default-dark"  session-from="weapp" size="27"></contact-button>
-          客服
-        </view>
-        <view class="shop-cart-btn" bindtap="">
-            <view class="shop-num">({{shopNum}})</view>
-            收藏
-        </view>
-        <view class="join-shop-cart" bindtap="toAddShopCar">加入衣柜</view>
-        <navigator class="now-buy" url="../../../contact/message/message">联系达人</navigator>
-   </view>
 </view>

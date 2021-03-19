@@ -23,12 +23,13 @@
     </view>
   </view>
 
+  <!-- 轮播图 -->
    <view class="swiper-container">
         <swiper class="swiper_box" 
                     autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
             <block wx:for="{{banners}}" wx:key="id">
                 <swiper-item>
-                    <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}" class="slide-image" mode="aspectFit"/>
+                    <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{backend_url}}{{item.picUrl}}" class="slide-image" mode="aspectFit"/>
                 </swiper-item>
             </block>
         </swiper>
@@ -62,18 +63,62 @@
     </view>
     
     <!-- 商品列表-->
-    <!-- 达人方案列表-->
+    <!-- 达人搭配列表 -->
     <view class="goods-container" wx:if="{{activeCategoryId==1 || activeCategoryId==0}}">
-        <navigator class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}" url="searchpros/prodetail/prodetail?styleId={{item.id}}">
+      <view class="title-wrap" wx:if="{{activeCategoryId==0}}">
+        <view class="line"></view>
+        <view class="title">达人搭配</view>
+        <view class="line"></view>
+      </view>
+        <navigator class="goods-box" wx:for-items="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}" url="searchpros/prodetail/prodetail?styleId={{item.id}}&current=dresser">
            <view class="img-box">
-              <image src="{{item.pic}}" class="image" mode="aspectFill" lazy-load="true"/>
+              <image src="{{backend_url}}{{item.pic}}" class="image" mode="aspectFill" lazy-load="true"/>
            </view>
-           <view class="goods-title">{{item.name}}</view>
-           <view class="goods-price">¥ {{item.minPrice}}</view>
+           <view class="goods-title" >{{item.name}}</view>
+           <view class="box-bottom-wrap">
+             <view class="author-wrap">
+              <image class="author-icon" src="{{backend_url}}{{item.authorIcon}}"/>
+              <view class="author-name textView">{{item.authorName}}</view>
+             </view>
+             <view class="like-wrap">
+               <image class="like-img" src="{{backend_url}}static/masterBluePrint/icons/heart.png"/>
+               <view class="like-num text-View">{{item.likeNum}}万</view>
+             </view>
+           </view>
         </navigator>
     </view>
-    <!-- 搭配问答列表 -->
+    <!-- 大师方案 -->
     <view class="goods-container" wx:if="{{activeCategoryId==2 || activeCategoryId==0}}">
+      <view class="title-wrap" wx:if="{{activeCategoryId==0}}">
+        <view class="line"></view>
+        <view class="title">大师方案</view>
+        <view class="line"></view>
+      </view>
+        <navigator class="goods-box" wx:for-items="{{masters}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}" url="../match/master/master?masterId={{item.masterId}}">
+           <view class="img-box">
+              <image src="{{backend_url}}{{item.masterCover}}" class="image"  mode="aspectFit" lazy-load="true"/>
+           </view>
+           <view class="goods-title" >{{item.masterTitle}}</view>
+           <view class="box-bottom-wrap">
+             <view class="author-wrap">
+              <image class="author-icon" src="{{backend_url}}{{item.masterIcon}}"/>
+              <view class="author-name textView">{{item.masterName}}</view>
+             </view>
+             <view class="like-wrap">
+               <image class="like-img" src="{{backend_url}}static/masterBluePrint/icons/heart.png"/>
+               <view class="like-num text-View">{{item.collect}}万</view>
+             </view>
+           </view>
+        </navigator>
+    </view>
+
+    <!-- 搭配问答列表 -->
+    <view class="goods-container" wx:if="{{activeCategoryId==3 || activeCategoryId==0}}">
+      <view class="title-wrap" wx:if="{{activeCategoryId==0}}">
+        <view class="line"></view>
+        <view class="title">搭配问答</view>
+        <view class="line"></view>
+      </view>
       <navigator url="questionDetail/questionDetail" class="question-box" wx:for="{{questions}}" wx:key="{{index}}" bindtap="toDetailQuestion">
         <!-- 头像，昵称，发布时间 -->
         <view class="poster-head-box">
@@ -83,22 +128,24 @@
             <text class="post-time">19:30</text>
           </view>
         </view>
+
         <!-- 搭配方案内容 -->
         <view class="match-message-box">
-          <text class="match-depic">蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤蛤</text>
+          <text class="match-depic">178男生春季求搭配，微胖型，要有春季穿搭方法，学生风</text>
           <view class="image-wrap">
             <view class="images-box" wx:for="{{item.matchImages}}">
-              <image class="match-image"  src="{{item.matchImg}}" />
+              <image class="match-image"  src="{{backend_url}}{{item.matchImg}}" />
             </view>
           </view>
         </view>
+
         <!-- 达人解答 -->
         <view class="master-unswer-wrap">
           <view class="master-box">
-            <image class="master-head" src="http://127.0.0.1:8087/static/icons/mine_s.png" />
+            <image class="master-head" src="{{backend_url}}static/authorIcons/icon2.jpg" />
             <view class="master-message-box">
-              <text class="master-name">达人姓名</text>
-              <text class="unswer-message">哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</text>
+              <text class="master-name">初春雪</text>
+              <text class="unswer-message">178的男生可以考虑学院风穿搭，春季直板休闲西裤加衬衣</text>
             </view>
           </view>
         </view>
@@ -106,8 +153,8 @@
         <view class="like-comment-wrap">
           <text class="view-count">浏览37次</text> 
           <view class="like-comment">
-            <image class="like" src="http://127.0.0.1:8087/static/icons/like.png"/>
-            <image class="comment" src="http://127.0.0.1:8087/static/icons/comment.png" />
+            <image class="like" src="{{backend_url}}static/icons/like.png"/>
+            <image class="comment" src="{{backend_url}}static/icons/comment.png" />
           </view>
         </view>
       </navigator>
@@ -115,7 +162,7 @@
     </view>
 
     <view >
-      <image src="http://127.0.0.1:8087/static/icons/add.png" class="add-container" bindtap="naviPost"/>
+      <image src="{{backend_url}}static/icons/add.png" class="add-container" bindtap="naviPost"/>
     </view>
     
     <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">没有更多啦</view>

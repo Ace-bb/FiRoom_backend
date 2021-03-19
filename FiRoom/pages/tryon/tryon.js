@@ -2,6 +2,7 @@ var order = ['red', 'yellow', 'blue', 'green', 'red']
 Page({
     data: {
         backend_url: "http://192.168.1.116:8087/",
+        // backend_url: "http://192.168.1.102:8087/",
         toView: 'red',
         scrollTop: 100,
         isShow: false,
@@ -12,7 +13,8 @@ Page({
         userBodyShot: [],
         choosedData: [],
         index: 0,
-        resImg: 'static/images/model_1.png'
+        resImg: 'static/images/model_1.png',
+        uploadType:''
     },
     inputlink: function(e) {
         this.setData({
@@ -68,24 +70,30 @@ Page({
             scrollTop: this.data.scrollTop + 10
         })
     },
-    chooseImageTap: function() {
+    chooseImageTap: function(e) {
         var that = this;
+        console.log(e.currentTarget.dataset.uploadtype);
+        this.setData({
+            uploadType: e.currentTarget.dataset.uploadtype
+        });
         wx.showActionSheet({
             itemList: ['从相册中选择', '拍照'],
             itemColor: "#f7982a",
             success: function(res) {
                 if (!res.cancel) {
                     if (res.tapIndex == 0) {
-                        that.chooseWxImage('album')
+                        console.log(e.currentTarget.dataset.uploadtype);
+                        that.chooseWxImage('album', e.currentTarget.dataset.uploadtype)
                     } else if (res.tapIndex == 1) {
-                        that.chooseWxImage('camera')
+                        that.chooseWxImage('camera', e.currentTarget.dataset.uploadtype)
                     }
                 }
             }
         })
     },
-    chooseWxImage: function(type) {
+    chooseWxImage: function(type, uploadType) {
         var that = this;
+        console.log(uploadType)
         wx.chooseImage({
             count: 1,
             sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有  
@@ -93,6 +101,11 @@ Page({
             success: function(res) {
                 var picPath = res.tempFilePaths[0];
                 console.log(res);
+                if (uploadType == 'UserShot'){
+                    var uploadUrl = 'http://192.168.1.116:8087/match/recommend/test'
+                }else if(uploadType == 'ClothImg'){
+                    var uploadUrl = 'http://192.168.1.116:8087/match/recommend/test2'
+                }
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
                 that.setData({
                         chaImgSrc: picPath,
@@ -102,9 +115,15 @@ Page({
                 wx.uploadFile({
                     filePath: picPath,
                     name: 'name',
-                    url: 'http://192.168.1.116:8087/match/recommend/test',
+                    //url: 'http://192.168.1.102:8087/tryon/userImage/shot',
+                    //url: 'http://192.168.1.102:8087/match/recommend/test',
+                    url: uploadUrl,
                     header: { "Content-Type": "multipart/form-data" },
+                    formData:{
+                        type: uploadType
+                    },
                     success: (res) => {
+                        console.log("res")
                         const data = JSON.parse(res.data)
                         console.log(res)
                     }
@@ -118,7 +137,7 @@ Page({
     onLoad: function() {
         var that = this;
         wx.request({
-            url: 'http://192.168.1.116:8087/tryon/clothes/basket',
+            url: this.data.backend_url+'tryon/clothes/basket',
             data: {
                 key: 'clothesHamber'
             },
@@ -130,7 +149,7 @@ Page({
             }
         })
         wx.request({
-            url: 'http://192.168.1.116:8087/tryon/userBodyShow/images',
+            url: this.data.backend_url+'tryon/userBodyShow/images',
             data: {
                 key: 'userBodyShow'
             },

@@ -10,6 +10,7 @@ Page({
         }
     },
     data: {
+        backend_url: util.backend_url,
         ctx: util.ctx,
         weixinCtx: util.weixinCtx,
         chaImgSrc: '',
@@ -37,15 +38,10 @@ Page({
             headImage: 'http://192.168.1.116:8087/static/icons/mine_s.png',
             writerName: '李白',
             matchImages: [{
-                matchImg: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/recomand1.jpg'
-            }, {
-                matchImg: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/recomand2.jpg'
-            }, {
-                matchImg: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/hansome1.jpg'
-            }, {
-                matchImg: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/cute1.jpg'
+                matchImg: 'static/masterBluePrint/icons/178boy1.png'
             }]
-        }]
+        }],
+        masters: []
     },
 
     tabClick: function(e) {
@@ -98,7 +94,7 @@ Page({
     },
     onLoad: function() {
         var that = this;
-
+        console.log(util.backend_url)
         wx.login({
             success: function(e) {
                 console.log(e)
@@ -146,7 +142,6 @@ Page({
                 that.getGoodsList(0);
             }
         })
-
         that.getCoupons();
         that.getNotice();
     },
@@ -234,7 +229,7 @@ Page({
                 categoryId: categoryId
             },
             success: function(res) {
-                console.log(res.data);
+                console.log('blueprint:', res.data);
                 that.setData({
                     goods: [],
                     loadingMoreHidden: true
@@ -251,6 +246,28 @@ Page({
                 }
                 that.setData({
                     goods: goods,
+                });
+            }
+        })
+        wx.request({
+            url: 'http://192.168.1.116:8087/match/recommend/masters',
+            data: {
+                categoryId: categoryId
+            },
+            success: function(res) {
+                console.log('masters:', res.data.data);
+                that.setData({
+                    masters: [],
+                    loadingMoreHidden: true
+                });
+                if (res.data.code != 0 || res.data.data.length == 0) {
+                    that.setData({
+                        loadingMoreHidden: false,
+                    });
+                    return;
+                }
+                that.setData({
+                    masters: res.data.data,
                 });
             }
         })
@@ -347,7 +364,8 @@ Page({
             url: 'http://127.0.0.1:8087/match/recommend/notice',
             data: { pageSize: 5 },
             success: function(res) {
-                console.log(res.data)
+                console.log('getNotice')
+                console.log(res.data.data)
                 if (res.data.code == 0) {
                     that.setData({
                         noticeList: res.data.data
