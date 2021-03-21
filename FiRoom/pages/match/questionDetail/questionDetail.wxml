@@ -1,24 +1,23 @@
 <view class="container">
-    <view class="title-wrap" >
-        <text class="title" >标题</text>
-    </view>
-    <!-- 发布者头像 -->
-    <view class="poster-head-wrap">
-        <image class="head-img" src="http://127.0.0.1:8087/static/icons/tag.png" />
-        <view class="poster-name-wrap">
-            <text class="name">梦若</text>
-            <text class="time">03-08</text>
+    <view class="user-question-wrap">
+        <!-- 发布者头像 -->
+        <view class="poster-head-wrap">
+            <image class="head-img" src="{{backend_url}}{{questions.userIcon}}" />
+            <view class="poster-name-wrap">
+                <text class="name">{{questions.userName}}</text>
+                <text class="time">03-08</text>
+            </view>
+            <view class="like">关注</view>
         </view>
-        <view class="like">关注</view>
-    </view>
-    <!-- 正文 -->
-    <view class="mainbody-wrap" >
-        <text class="mainbody" >正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</text>
-    </view>
-    <!-- 图片区域-->
-    <view class="images-wrap">
-        <view class="image-box" wx:for="{{imageUpload}}" >
-            <image src="{{item.picUrl}}" class="img"></image>
+        <!-- 正文 -->
+        <view class="mainbody-wrap" >
+            <text class="mainbody" >{{questions.questionDetail}}</text>
+        </view>
+        <!-- 图片区域-->
+        <view class="images-wrap">
+            <view class="image-box" wx:for="{{questions.userShots}}" wx:key="index" >
+                <image src="{{backend_url}}{{item.shotUrl}}" class="img" mode="aspectFill"></image>
+            </view>
         </view>
     </view>
  
@@ -31,21 +30,22 @@
    
     <!-- 发布者头像 -->
     <navigator class="master-head-wrap" url="">
-        <image class="master-head-img" src="http://127.0.0.1:8087/static/icons/tag.png" />
+        <image class="master-head-img" src="{{backend_url}}{{questions.answerMessage.masterIcon}}" />
         <view class="master-name-wrap">
-            <text class="name">梦若</text>
+            <text class="name">{{questions.answerMessage.masterName}}</text>
             <text class="time">03-08</text>
         </view>
         <image class="navi-img" src="http://127.0.0.1:8087/static/icons/jiantou.png" />
     </navigator>
     <!-- 正文 -->
     <view class="master-mainbody-wrap" >
-        <text class="mainbody" >正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文正文</text>
+        <view class="title">{{questions.answerMessage.AnswerName}}</view>
+        <text class="mainbody" >{{questions.answerMessage.detailDescrip}}</text>
     </view>
     <swiper class="imgs-swiper" autoplay="true" circular="true" interval="3000">
-        <block wx:for="{{imageUpload}}">
+        <block wx:for="{{questions.answerImages}}" wx:key="index">
             <swiper-item >
-                <image class="swiper-img" src="{{item.picUrl}}"/>
+                <image class="swiper-img" src="{{backend_url}}{{item.imageUrl}}" mode="aspectFill"/>
             </swiper-item>
         </block>
     </swiper>

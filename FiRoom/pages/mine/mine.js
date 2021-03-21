@@ -40,6 +40,18 @@ Page({
             cut: true,
             url: '../addresses/addresses'
         }, {
+            icon: 'images/dresser.png',
+            text: '申请成为达人',
+            tip: '',
+            cut: true,
+            url: '../mine/dresserApply/dresserApply'
+        }, {
+            icon: 'images/master.png',
+            text: '大师认证',
+            tip: '',
+            cut: true,
+            url: '../mine/masterApply/masterApply'
+        }, {
             icon: 'images/tel.png',
             text: '客服电话',
             tip: '13488223385',

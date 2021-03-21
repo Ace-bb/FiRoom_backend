@@ -1,172 +1,117 @@
-Page{
-    padding: 24rpx;
+.container{
+    width: 100%;
+    padding: 10rpx;
     box-sizing: border-box;
-    .container{
-        .post-image-wrap {
-            width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            box-sizing: content-box;
-            .image-upload {
-                width: 23%;
-                height: 180rpx;
-                overflow: hidden;
-                margin-left: 12rpx;
-                margin-bottom: 24rpx;
-                padding: 2rpx;
-                border-radius: 12rpx;
-                box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(32, 31, 31, 0.4);
-                .img {
-                    width: 100%;
-                    height: 100%;
-                    border-radius: 12rpx;
-                }
-            }
-            .image-upload-but {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                width: 23%;
-                height: 180rpx;
-                padding: 2rpx;
-                margin-bottom: 24rpx;
-                margin-left: 12rpx;
-                border-radius: 12rpx;
-                box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(32, 31, 31, 0.4);
-                
-                .img-photo {
-                    width: 40%;
-                    height: 30%;
-                    border-radius: 12rpx;
-                }
-                .text-photon{
-                    font-size: 32rpx;
-                }
-                .add-img{
-                    width: 48rpx;
-                    height: 48rpx;
-                    position: relative;
-                    right: -70rpx;
-                    bottom: 130rpx;
-                }
-            }
-        }
-        .post-title-wrap {
-            height: 72rpx;
-            width: 100%;
-            min-height: 0px;
-            padding: 12 rpx;
-            box-sizing: border-box;
-            .post-title {
+    .post-image-wrap {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        box-sizing: border-box;
+        .image-upload {
+            width: 23%;
+            height: 180rpx;
+            overflow: hidden;
+            margin-left: 12rpx;
+            margin-bottom: 24rpx;
+            border-radius: 12rpx;
+            box-shadow: 3rpx 3rpx 3rpx 3rpx rgba(32, 31, 31, 0.226);
+            .img {
+                width: 100%;
                 height: 100%;
-                line-height: 25px;
-                font-family: monospace;
-                white-space: pre-wrap;
-                font: 36rpx Arial;
-                font-weight: bold;
-                display: flex;
+                border-radius: 12rpx;
             }
         }
-        .post-mainbody-wrap {
-            height: 120px;
-            padding: 12 rpx;
-            .post-mainbody {
-                height: 150px;
-                padding: 6px;
-                font-family: monospace;
-                white-space: pre-wrap;
-                font: 13.3333px Arial;
-                border-width: 1px;
-                border-style: none;
-                border-top-style: solid;
-                border-color: rgba(162, 167, 167, 0.521);
-            }
+        .image-upload-but {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 23%;
+            height: 180rpx;
+            padding: 2rpx;
+            margin-bottom: 24rpx;
+            margin-left: 12rpx;
+            border-radius: 12rpx;
+            box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(32, 31, 31, 0.4);
             
-        }
-        .simgle-cloth-wrap {
-            width: 100%;
-            height: 80rpx;
-            padding: 6rpx;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            .simgle-cloth{
-                width: 48rpx;
-                height: 48rpx;
+            .img-photo {
+                width: 40%;
+                height: 30%;
+                border-radius: 12rpx;
             }
-            .cloth-name-title {
-                margin-left: 12rpx;
-                width: 200rpx;
+            .text-photon{
                 font-size: 32rpx;
             }
-            .post-image-wrap{
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                .cloth-image{
-                    margin-left: 12rpx;
+            .add-img{
+                width: 48rpx;
+                height: 48rpx;
+                position: relative;
+                right: -70rpx;
+                bottom: 130rpx;
+            }
+        }
+    }
+    .post-title-wrap {
+        height: 72rpx;
+        width: 100%;
+        min-height: 0px;
+        padding: 12 rpx;
+        box-sizing: border-box;
+        .post-title {
+            height: 100%;
+            line-height: 25px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font: 36rpx Arial;
+            font-weight: bold;
+            display: flex;
+        }
+    }
+    .post-mainbody-wrap {
+        height: 120px;
+        padding: 12 rpx;
+        .post-mainbody {
+            height: 150px;
+            padding: 6px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font: 13.3333px Arial;
+            border-width: 1px;
+            border-style: none;
+            border-top-style: solid;
+            border-color: rgba(162, 167, 167, 0.521);
+        }
+        
+    }
+    .simgle-cloth-wrap {
+        width: 100%;
+        height: 80rpx;
+        padding: 6rpx;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .simgle-cloth{
+            width: 48rpx;
+            height: 48rpx;
+        }
+        .cloth-name-title {
+            margin-left: 12rpx;
+            width: 200rpx;
+            font-size: 32rpx;
+        }
+        .post-image-wrap{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .cloth-image{
+                margin-left: 12rpx;
+                height: 64rpx;
+                .img{
+                    width: 64rpx;
                     height: 64rpx;
-                    .img{
-                        width: 64rpx;
-                        height: 64rpx;
-                    }
-                    .tag{
-                        height: 32rpx;
-                        padding: 12rpx;
-                        margin-left: 12rpx;
-                        font-size: 28rpx;
-                        border-radius: 24rpx;
-                        background-color: rgba(216, 112, 147, 0.26);
-                    }
-                    .plus-price{
-                        width: 48rpx;
-                        height: 48rpx;
-                        margin-right: 24rpx;
-                    }
-                    .price{
-                        height: 32rpx;
-                        margin-right: 24rpx;
-                    }
-                    .add-price{
-                        width: 48rpx;
-                        height: 48rpx;
-                        margin-right: 48rpx;
-                    }
                 }
-            }
-            .jiantou{
-                margin-left: 12rpx;
-                width: 48rpx;
-                height: 48rpx;
-            }
-
-        }
-
-        .cloth-tags{
-            width: 100%;
-            height: 80rpx;
-            padding: 6rpx;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            .tag-img{
-                width: 48rpx;
-                height: 48rpx;
-            }
-            .tag-title{
-                margin-left: 12rpx;
-                width: 200rpx;
-                font-size: 32rpx;
-            }
-            .tags-list{
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
                 .tag{
                     height: 32rpx;
                     padding: 12rpx;
@@ -175,49 +120,153 @@ Page{
                     border-radius: 24rpx;
                     background-color: rgba(216, 112, 147, 0.26);
                 }
-            }
-            .jiantou{
-                margin-left: 12rpx;
-                width: 48rpx;
-                height: 48rpx;
+                .plus-price{
+                    width: 48rpx;
+                    height: 48rpx;
+                    margin-right: 24rpx;
+                }
+                .price{
+                    height: 32rpx;
+                    margin-right: 24rpx;
+                }
+                .add-price{
+                    width: 48rpx;
+                    height: 48rpx;
+                    margin-right: 48rpx;
+                }
             }
         }
-        .post-submit-container {
-            width: 100%;
-            height: 100rpx;
+        .jiantou{
+            margin-left: 12rpx;
+            width: 48rpx;
+            height: 48rpx;
+        }
+
+    }
+
+    .cloth-tags{
+        width: 100%;
+        height: 80rpx;
+        padding: 6rpx;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        .tag-img{
+            width: 48rpx;
+            height: 48rpx;
+        }
+        .tag-title{
+            margin-left: 12rpx;
+            width: 200rpx;
+            font-size: 32rpx;
+        }
+        .tags-list{
+            height: 100%;
             display: flex;
             align-items: center;
-            padding: 12rpx;
+            justify-content: flex-end;
+            .tag{
+                height: 32rpx;
+                padding: 12rpx;
+                margin-left: 12rpx;
+                font-size: 28rpx;
+                border-radius: 24rpx;
+                background-color: rgba(216, 112, 147, 0.26);
+            }
+        }
+        .jiantou{
+            margin-left: 12rpx;
+            width: 48rpx;
+            height: 48rpx;
+        }
+    }
+    
+    .post-submit-container {
+        width: 100%;
+        height: 100rpx;
+        display: flex;
+        align-items: center;
+        padding: 12rpx;
+        box-sizing: border-box;
+        position: fixed;
+        bottom: 0;
+        .post-position-wrap {
+            width: 100rpx;
+            height: 100rpx;
+            padding: 6rpx;
             box-sizing: border-box;
-            position: fixed;
-            bottom: 0;
-            .post-position-wrap {
-                width: 100rpx;
-                height: 100rpx;
-                padding: 6rpx;
-                box-sizing: border-box;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                .draft-img{
-                    width: 50%;
-                    height: 50%;
-                }
-                .draft-text{
-                    font-size: 20rpx;
-                }
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            .draft-img{
+                width: 50%;
+                height: 50%;
             }
-            .post-submit {
-                height: 100%;
-                width: 100%;
-                text-align: center;
-                font-size: 14px;
-                background-size: initial;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+            .draft-text{
+                font-size: 20rpx;
             }
+        }
+        .post-submit {
+            height: 100%;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+            background-size: initial;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.input-link-pop-view{
+    width: 90%;
+    height: 320rpx;
+    padding: 12rpx;
+    background-color: rgba(201, 228, 228, 0.904);
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 40vh;
+    left: 5vw;
+    .input-view-title{
+        width: 100%;
+        height: 30%;
+        display: flex;
+        align-items: center;
+        padding-left: 16rpx;
+        box-sizing: border-box;
+    }
+    .input-view{
+        width: 100%;
+        height: 40%;
+        border: 2rpx solid black;
+        padding-left: 16rpx;
+        font-size: 36rpx;
+        box-sizing: border-box;
+    }
+    .confirm-or-cancle{
+        width: 100%;
+        height: 30%;
+        display: flex;
+        flex-direction: row;
+        background-color: aqua;
+        button{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .cancle{
+            background-color: #e7e7e7;
+            color: black;
+        }
+        .confirm{
+            background-color: #4CAF50;
         }
     }
 }

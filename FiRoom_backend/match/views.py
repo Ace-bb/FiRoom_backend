@@ -3,7 +3,8 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse, JsonResponse
 
-from match.models import Category, Swiper, Notice, BluePrint, MatchDetail, detailImages, Masters, MasterPrint
+from match.models import Category, Swiper, Notice, BluePrint, MatchDetail, detailImages, Masters, MasterPrint, \
+    masterDetailImages, masterPrintDetail,CompriseImages
 import os
 
 
@@ -70,13 +71,22 @@ def listBlueDetail(request):
 
 
 def listDetailImages(request):
-    Images = detailImages.objects.values()
+    type = request.GET.get('type', None)
+    print('type:', type)
+    if type == 'master':
+        Images = masterDetailImages.objects.values()
+    elif type == 'dresser':
+        Images = detailImages.objects.values()
+    else:
+        Images = detailImages.objects.values()
 
     id = request.GET.get('userId', None)
     print(id)
 
-    if id:
+    if type == 'dresser':
         Images = Images.filter(userId=id)
+    elif type == 'master':
+        Images = Images.filter(masterId=id)
     Images = list(Images)
     return JsonResponse({'code': 0, 'data': Images, 'msg': 'success'})
 
@@ -115,8 +125,8 @@ def listMasterDetail(request):
     if id:
         Masters_List = Masters_List.filter(masterId=id)
     Masters_List = list(Masters_List)
+    print(Masters_List)
     return JsonResponse({'code': 0, 'data': Masters_List, 'msg': 'success'})
-    return JsonResponse({'res': 0})
 
 
 def listMasterPrint(request):
@@ -128,3 +138,65 @@ def listMasterPrint(request):
         masterPrint_List = masterPrint_List.filter(masterId=id)
     masterPrint_List = list(masterPrint_List)
     return JsonResponse({'code': 0, 'data': masterPrint_List, 'msg': 'success'})
+
+
+def listMasterPrintDetail(request):
+    masterPrintDetails = masterPrintDetail.objects.values()
+    id = request.GET.get('masterId', None)
+    print(id)
+
+    if id:
+        masterPrintDetails = masterPrintDetails.filter(masterId=id)
+    masterPrintDetails = list(masterPrintDetails)
+    printDetail = masterPrintDetails[0]['detailDescrib'].split("\r\n\r\n")
+    detailList = []
+    for item in printDetail:
+        detailList.append({'mes': item})
+    print(masterPrintDetail)
+    masterPrintDetails[0]['detailDescrib'] = detailList
+    return JsonResponse({'code': 0, 'data': masterPrintDetails, 'msg': 'success'})
+
+
+def uploadPrintImages(request):
+    image = request.FILES['printImages']
+    print(image)
+    print('uploadClothes')
+    type = request.POST.get('fileName')
+    print(type)
+    basedir = 'D:\\ProgramSoft\\Git\\Virtual-try-on\\FiRoom_backend\\static\\BluePrintImage\\detail\\upload1\\'
+    success = False
+    if not os.path.exists(basedir + type + '.jpg'):
+        with open(basedir + type + '.jpg   ', 'wb') as f:
+            f.write(image.read())
+            success = True
+            f.close()
+    print(success)
+    imgUrl = 'static/BluePrintImage/detail/upload1/' + type + '.jpg'
+    record = detailImages.objects.create(userId=5, imageUrl=imgUrl)
+
+    resUrl = {'imgUrl': imgUrl}
+    return JsonResponse({'res': 0, 'id': record, 'msg': 'success'})
+
+
+def uploadSingleImages(request):
+    singleImage = request.FILES['singleImages']
+    print(singleImage)
+    print('singleImages')
+    type = request.POST.get('fileName')
+    print(type)
+    basedir = 'D:\\ProgramSoft\\Git\\Virtual-try-on\\FiRoom_backend\\static\\BluePrintImage\\detail\\upload1\\single\\'
+    success = False
+    if not os.path.exists(basedir + type + '.jpg'):
+        with open(basedir + type + '.jpg   ', 'wb') as f:
+            f.write(singleImage.read())
+            success = True
+            f.close()
+    singleUrl = 'static/BluePrintImage/detail/upload1/single/' + type + '.jpg'
+    record = CompriseImages.objects.create(compriseImageId=105, imageName='单件', compriseImageUrl=singleUrl)
+    return JsonResponse({'res': 0, 'id': record, 'msg': 'success'})
+
+
+def savePrintData(request):
+    printData = request.POST.get('printData')
+    print(printData)
+    return JsonResponse({'res': 0})

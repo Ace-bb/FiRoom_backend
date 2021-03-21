@@ -1,30 +1,43 @@
 // pages/match/questionDetail/questionDetail.js
+var util = require('../../../utils/util.js')
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        imageUpload: [{
-                picUrl: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/recomand1.jpg'
-            },
-            {
-                picUrl: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/recomand2.jpg'
-            },
-            {
-                picUrl: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/recommand3.jpg'
-            },
-            {
-                picUrl: 'http://127.0.0.1:8087/static/BluePrintImage/recommand/recommand4.jpg'
-            }
-        ]
+        backend_url: util.backend_url,
+        questions: []
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function(options) {
-
+        var that = this;
+        var userId = options.userId;
+        wx.request({
+            url: this.data.backend_url + 'matchPro/problem/stateDetail',
+            data: {
+                userId: userId
+            },
+            success: function(res) {
+                console.log('questions:', res.data.data);
+                that.setData({
+                    questions: [],
+                    loadingMoreHidden: true
+                });
+                if (res.data.code != 0 || res.data.data.length == 0) {
+                    that.setData({
+                        loadingMoreHidden: false,
+                    });
+                    return;
+                }
+                that.setData({
+                    questions: res.data.data[0],
+                });
+            }
+        })
     },
 
     /**

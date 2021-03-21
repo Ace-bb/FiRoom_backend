@@ -40,9 +40,9 @@ function requestSupply(page, params, success, fail) {
     console.log('params:', params)
     var getURL = ''
     if (page == 'dresser') {
-        getURL = 'http://192.168.1.116:8087/match/recommend/blueDetail'
+        getURL = this.backend_url + 'match/recommend/blueDetail'
     } else if (page == 'master') {
-        getURL = 'http://192.168.1.116:8087/match/recommend/masterDetail'
+        getURL = this.backend_url + 'match/recommend/masterPrintDetail'
     }
     wx.request({
         url: getURL, //method为方法名,params为参数
@@ -235,5 +235,6 @@ module.exports = {
     getMessage: getMessage,
     getUser: getUser,
     getMoments: getMoments,
-    backend_url: 'http://192.168.1.116:8087/'
+    backend_url: 'http://192.168.1.116:8087/',
+    //backend_url: 'http://172.21.136.10:8087/'
 }

@@ -1,64 +1,74 @@
-<view class="container">
+<form class="container" bindsubmit="formSubmit" bindreset="formReset">
+    <!-- 上传图片 -->
     <view class="post-image-wrap">
-        <view class="image-upload" wx:for="{{imageUpload}}" >
-            <image src="{{item.picUrl}}" class="img"></image>
+        <view class="image-upload" wx:for="{{imageUpload}}" wx:key="index" >
+            <image src="{{item.path}}" class="img"></image>
         </view>
-        <view class="image-upload-but">
-            <image src="{{upImage}}" class="img-photo"></image>
+        <view class="image-upload-but" bindtap="choosePrintImages" data-type="printImages">
+            <image src="{{backend_url}}{{upImage}}" class="img-photo"></image>
             <text class="text-photon">图片/视频</text>
-            <image class="add-img" src="http://127.0.0.1:8087/static/icons/add.png" />
+            <image class="add-img" src="{{backend_url}}static/icons/add.png" />
         </view>
     </view>
+    <!-- 标题-->
     <view class="post-title-wrap" >
-        <textarea class="c-fullwidth post-title"  name="textarea1" placeholder="填写标题会有更多人喜欢哦~" type="textarea"/>
+        <textarea class="c-fullwidth post-title"  name="title" placeholder="填写标题会有更多人喜欢哦~" type="textarea"/>
     </view>
+    <!--正文-->
     <view class="post-mainbody-wrap" >
-        <textarea class="c-fullwidth post-mainbody"  name="textarea1" placeholder="添加正文" type="textarea"/>
+        <textarea class="c-fullwidth post-mainbody"  name="mainText" placeholder="添加正文" type="textarea"/>
     </view>
     <!--搭配效果图-->
-    
     <!--单间服装-->
-    <view class="simgle-cloth-wrap">
-        <image class="simgle-cloth" src="http://127.0.0.1:8087/static/icons/cloth.png" />
-        <view class="cloth-name-title">单间衣服</view>
+    <view class="simgle-cloth-wrap" >
+        <image class="simgle-cloth" src="{{backend_url}}static/icons/cloth.png" />
+        <view class="cloth-name-title" bindtap="chooseSingleImages" data-type="single" >单间衣服</view>
         <view class="post-image-wrap">
-            <view class="cloth-image" wx:for="{{simgleCloth_list}}">
-                <image class="img" src="{{item.picUrl}}"></image>
+            <view class="cloth-image" wx:for="{{singleImages}}" wx:key="index">
+                <image class="img" src="{{item.path}}"></image>
             </view>
         </view>
-        <image class="jiantou" src="http://127.0.0.1:8087/static/icons/jiantou.png" />
+        <image class="jiantou" src="{{backend_url}}static/icons/jiantou.png" bindtap="chooseSingleImages" data-type="single"/>
     </view>
 
     <!-- 衣服标签 -->
-    <view class="simgle-cloth-wrap">
-        <image class="simgle-cloth" src="http://127.0.0.1:8087/static/icons/tag.png" />
+    <view class="simgle-cloth-wrap" bindtap="showTagInput">
+        <image class="simgle-cloth" src="{{backend_url}}static/icons/tag.png" />
         <view class="cloth-name-title">衣服标签</view>
         <view class="post-image-wrap">
-            <view class="cloth-image" wx:for="{{tags}}">
-                <text class="tag" >{{item.name}}</text>
+            <view class="cloth-image" wx:for="{{tags}}" wx:key="index">
+                <text class="tag" >{{item.tags}}</text>
             </view>
         </view>
-        <image class="jiantou" src="http://127.0.0.1:8087/static/icons/jiantou.png" />
+        <image class="jiantou" src="{{backend_url}}static/icons/jiantou.png" />
     </view>
     <!--设置价格-->
     <view class="simgle-cloth-wrap">
-        <image class="simgle-cloth" src="http://127.0.0.1:8087/static/icons/price.png" />
+        <image class="simgle-cloth" src="{{backend_url}}static/icons/price.png" />
         <view class="cloth-name-title">设置价格</view>
         <view class="post-image-wrap">
             <view class="cloth-image" >
-                <image class="plus-price" src="http://127.0.0.1:8087/static/icons/plus.png"/>
-                <text class="price" >0</text>
-                <image class="add-price" src="http://127.0.0.1:8087/static/icons/addd.png"/>
+                <image class="plus-price" src="{{backend_url}}static/icons/plus.png" bindtap="plusPrince"/>
+                <text class="price" >{{price}}</text>
+                <image class="add-price" src="{{backend_url}}static/icons/addd.png" bindtap="addPrince"/>
             </view>
         </view>
     </view>
     <!--提交栏-->
     <view class="post-submit-container" >
         <view class="post-position-wrap" >
-            <image class="draft-img"  src="http://127.0.0.1:8087/static/icons/draft.png"/>
+            <image class="draft-img"  src="{{backend_url}}static/icons/draft.png"/>
             <text class="draft-text">草稿箱</text>
         </view>
-        <button class="post-submit"  hover-class="button-hover" size="default" type="default" style="color:#fff;background-color:rgba(23,181,238,1)">发布</button>
+        <button  formType="submit" class="post-submit"  style="color:#fff;background-color:rgba(23,181,238,1)">发布</button>
     </view>
-</view>
+</form>
+<form class="input-link-pop-view" wx:if="{{showTagInputView}}" bindsubmit="tagsSubmit" bindreset="tagsReset">
+    <view class="input-view-title">请输入要添加的标签</view>
+    <input class="input-view" placeholder="标签" name="tags"/>
+    <view class="confirm-or-cancle">
+        <button class="cancle" bindtap="showTagInput">取消</button>
+        <button formType="submit" class="confirm" >确认</button>
+    </view>
+</form>
  

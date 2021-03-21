@@ -1,0 +1,31 @@
+<view class="container" >
+    <view class="box-wrap">
+        <view class="title introTi">什么是大师认证</view>
+        <view class="message">{{identify_introduce}}</view>
+    </view>
+    <view class="box-wrap message">
+        <view class="title mesTi">认证信息</view>
+        <view class="message">{{identify_message}}</view>
+    </view>
+    <view class="indetify-factor">
+        <view class="factor-title">认证申请主要考核因素</view>
+        <view class="factor-view" wx:for="{{main_factor}}" wx:key="index">
+            <view class="dot"></view>
+            <view class="factor">{{item.factor}}</view>
+        </view>
+    </view>
+    <view class="final-condition-wrap">
+        <view class="conditions">
+            <view class="title">认证条件</view>
+            <checkbox class="isMeetCondition" wx:for="{{main_condition}}" wx:key="index">{{item.condition}}</checkbox>
+        </view>
+    </view>
+    <view class="notice-wrap">
+        <view class="notice-view" wx:for="{{notices}}" wx:key="index">
+            <view class="dot"></view>
+            <view class="factor">{{item.notice}}</view>
+        </view>
+    </view>
+
+</view>
+<navigator class="apply-button" url="masterIdentify/mastereIdentify">我要认证</navigator>

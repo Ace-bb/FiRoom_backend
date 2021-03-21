@@ -1,0 +1,204 @@
+.container{
+    width: 100%;
+    padding: 36rpx;
+    box-sizing: border-box;
+    color: white;
+    background-image: url('http://192.168.1.116:8087/static/images/back_image.png');
+    .box-wrap{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        .title{
+            font-size: 36rpx;
+            font-weight: bolder;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 180px;
+            padding: 10rpx;
+            color: white;
+            margin-left:20px;
+            -webkit-transform: skew(-20deg);
+            -moz-transform: skew(-20deg);
+            -o-transform: skew(-20deg);
+            
+            border-radius: 12rpx;
+        }
+        .message{
+            width: 100%;
+            margin-top: 16rpx;
+            font-size: 28rpx;
+            color: white;
+            margin-top: 36rpx;
+        }
+        .introTi{
+            background: rgba(228, 27, 27, 0.795);
+        }
+    }
+    .message{
+        margin-top: 48rpx;
+        .mesTi{
+            background: rgba(240, 63, 92, 0.795);
+        }
+    }
+    .indetify-factor{
+        width: 100%;
+        margin-top: 24rpx;
+        display: flex;
+        flex-direction: column;
+        margin-top: 36rpx;
+        border-bottom: 1rpx solid rgba(0, 0, 0, 0.527);
+        
+        padding-bottom: 36rpx;
+        .factor-title{
+            width: 46%;
+            font-size: 28rpx;
+            background: rgba(228, 27, 211, 0.685);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rpx;
+            margin-bottom: 16rpx;
+        }
+        .factor-view{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            margin-bottom: 6rpx;
+            .dot{
+                width: 20rpx;
+                height: 20rpx;
+                border-radius: 100rpx;
+                background: gray;
+                margin-top: 12rpx;
+            }
+            .factor{
+                width: 100%;
+                margin-left: 10rpx;
+            }
+        }
+    }
+    .final-condition-wrap{
+        width: 100%;
+        margin-top: 24rpx;
+        .conditions{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            .title{
+                width: 25%;
+                padding: 6rpx;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 28rpx;
+                color: white;
+                border-radius: 8rpx;
+                margin-bottom: 12rpx;
+                background-color: rgba(145, 19, 134, 0.521);
+            }
+            .isMeetCondition{
+                margin-top: 8rpx;
+                font-size: 28rpx;
+            }
+            .isMeetCondition .wx-checkbox-input {
+                width: 32rpx;
+                height: 32rpx;
+              }
+        }
+    }
+    .notice-wrap{
+        width: 100%;
+        margin-top: 24rpx;
+        display: flex;
+        flex-direction: column;
+        margin-top: 36rpx;
+        padding-bottom: 36rpx;
+        margin-bottom: 12rpx;
+        .notice-view{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            margin-bottom: 6rpx;
+            .dot{
+                width: 20rpx;
+                height: 20rpx;
+                border-radius: 100rpx;
+                background: gray;
+                margin-top: 12rpx;
+            }
+            .factor{
+                width: 100%;
+                margin-left: 10rpx;
+            }
+        }
+    }
+}
+.apply-button{
+    width: 100%;
+    height: 80rpx;
+    background-color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    position: fixed;
+    bottom: 0;
+}
+.apply-toast-view{
+    width: 80%;
+    height: 300rpx;
+    position: absolute;
+    left: 11vw;
+    top: 30vh;
+    background-color: whitesmoke;
+    border-radius: 12rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .title{
+        width: 100%;
+        padding: 16rpx;
+        box-sizing: border-box;
+        font-weight: bold;
+        font-size: 36rpx;
+        border-bottom: 1rpx solid black;
+    }
+    .can{
+        width: 100%;
+        padding: 16rpx;
+        box-sizing: border-box;
+    }
+    .confirm-view{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 84rpx;
+        .cancel{
+            width: 50%;
+            height: 100%;
+            background-color: gray;
+            font-size: 32rpx;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .confirm{
+            width: 50%;
+            height: 100%;
+            background-color: green;
+            font-size: 32rpx;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

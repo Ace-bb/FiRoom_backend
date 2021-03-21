@@ -18,7 +18,7 @@
   <view class="{{ showRightContainer ? 'right_area' : 'hide-right-container' }}">
     <view class="title" wx:if="{{showRightContainer}}">试衣篮</view>
     <scroll-view class="checked_clothes" scroll-y wx:if="{{showRightContainer}}">
-      <view id="green" class="scroll-view-item" wx:for="{{clothes}}">
+      <view id="green" class="scroll-view-item" wx:for="{{clothes}}" wx:key="clothurl">
         <image class="c_cloth" src="{{backend_url}}{{item.clothurl}}" mode="aspectFill"/></view>
     </scroll-view>
     <view class="right-but" bindtap="show_right_container">
@@ -30,7 +30,7 @@
   <view class="{{ showLeftContainer ? 'left_area' : 'hide-left-container' }}">
     <view class="title" wx:if="{{showLeftContainer}}">个人照片</view>
     <scroll-view class="checked_clothes" scroll-y wx:if="{{showLeftContainer}}">
-      <view id="green" class="scroll-view-item" wx:for="{{userBodyShot}}" data-id='{{item.id}}' bindtap="listClick" data-index='{{index}}'>
+      <view id="green" class="scroll-view-item" wx:for="{{userBodyShot}}" wx:key="shot" data-id='{{item.id}}' bindtap="listClick" data-index='{{index}}'>
         <image class="c_cloth" src="{{backend_url}}{{item.shot}}" mode="aspectFill"/></view>
     </scroll-view>
     <view class="left-but" bindtap="show_left_container">
@@ -40,13 +40,6 @@
   </view>
   <!-- 输入衣服链接弹窗 -->
   <view class="input-view-wrap" wx:if="{{inputLink}}">
-    <view class="input-link-pop-view">
-      <view class="input-view-title">请输入衣服链接</view>
-      <input class="input-view" placeholder="淘口令"/>
-      <view class="confirm-or-cancle">
-        <button class="cancle" bindtap="input_cancle">取消</button>
-        <button class="confirm" bindtap="input_confirm">确认</button>
-      </view>
-    </view>
+    
   </view>
 </view>

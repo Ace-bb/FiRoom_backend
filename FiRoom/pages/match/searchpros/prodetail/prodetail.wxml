@@ -21,7 +21,7 @@
     <!--搭配方案详情 -->
     <view class="match-detail-wrap">
         <view class="match-detail-wrap" decode="{{true}}">
-          <view class="details" wx:for="{{detail}}">{{item.mes}}</view>
+          <view class="details" wx:for="{{detail}}" wx:key="index">{{item.mes}}</view>
           <view class="details" decode="{{true}}" >&emsp;</view>
         </view>
         <view class="tags-wrap">

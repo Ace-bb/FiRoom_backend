@@ -18,7 +18,7 @@ Page({
         var that = this;
         var masterId = options.masterId;
         wx.request({
-            url: 'http://192.168.1.116:8087/match/recommend/masterDetail?masterId=' + masterId,
+            url: this.data.backend_url + 'match/recommend/masterDetail?masterId=' + masterId + '&type=master',
             header: {
                 'Content-Type': 'application/json'
             },
@@ -40,7 +40,7 @@ Page({
             }
         })
         wx.request({
-            url: 'http://192.168.1.116:8087/match/recommend/masterPrint?masterId=' + masterId,
+            url: this.data.backend_url + 'match/recommend/masterPrint?masterId=' + masterId,
             header: {
                 'Content-Type': 'application/json'
             },

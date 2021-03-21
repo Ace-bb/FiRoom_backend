@@ -34,14 +34,9 @@ Page({
         hasNoCoupons: true,
         coupons: [],
         matchOrAsk: false,
-        questions: [{
-            headImage: 'http://192.168.1.116:8087/static/icons/mine_s.png',
-            writerName: '李白',
-            matchImages: [{
-                matchImg: 'static/masterBluePrint/icons/178boy1.png'
-            }]
-        }],
-        masters: []
+        questions: [],
+        masters: [],
+        isUnswered: false
     },
 
     tabClick: function(e) {
@@ -106,7 +101,7 @@ Page({
         })
 
         wx.request({
-            url: 'http://192.168.1.116:8087/match/recommend/swiper',
+            url: this.data.backend_url + 'match/recommend/swiper',
             data: {
                 key: 'mallName'
             },
@@ -126,7 +121,7 @@ Page({
             }
         })
         wx.request({
-            url: 'http://192.168.1.116:8087/match/recommend/category',
+            url: this.data.backend_url + 'match/recommend/category',
             success: function(res) {
                 console.log(res);
                 var categories = [{ id: 0, name: "全部" }];
@@ -224,7 +219,7 @@ Page({
         console.log('categoryId')
         var that = this;
         wx.request({
-            url: 'http://192.168.1.116:8087/match/recommend/blueprint',
+            url: this.data.backend_url + 'match/recommend/blueprint',
             data: {
                 categoryId: categoryId
             },
@@ -250,7 +245,7 @@ Page({
             }
         })
         wx.request({
-            url: 'http://192.168.1.116:8087/match/recommend/masters',
+            url: this.data.backend_url + 'match/recommend/masters',
             data: {
                 categoryId: categoryId
             },
@@ -268,6 +263,28 @@ Page({
                 }
                 that.setData({
                     masters: res.data.data,
+                });
+            }
+        })
+        wx.request({
+            url: this.data.backend_url + 'matchPro/problem/state',
+            data: {
+                categoryId: categoryId
+            },
+            success: function(res) {
+                console.log('questions:', res.data.data);
+                that.setData({
+                    questions: [],
+                    loadingMoreHidden: true
+                });
+                if (res.data.code != 0 || res.data.data.length == 0) {
+                    that.setData({
+                        loadingMoreHidden: false,
+                    });
+                    return;
+                }
+                that.setData({
+                    questions: res.data.data,
                 });
             }
         })

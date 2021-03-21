@@ -59,10 +59,11 @@ Page({
             });
 
         wx.request({
-            url: 'http://192.168.1.116:8087/match/recommend/DetailImages',
+            url: this.data.backend_url + 'match/recommend/DetailImages',
             method: 'GET',
             data: {
-                userId: styleId
+                userId: styleId,
+                type: current
             },
             header: {
                 'content-type': 'multipart/x-www-form-urlencoded;charset=UTF-8'

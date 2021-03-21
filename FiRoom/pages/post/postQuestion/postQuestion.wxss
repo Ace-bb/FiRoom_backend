@@ -3,6 +3,7 @@ Page {
   box-sizing: border-box;
 }
 Page .container {
+  width: 100%;
   background-color: rgba(231, 229, 226, 0.267);
 }
 Page .container .offer-reward-wrap {
@@ -201,7 +202,7 @@ Page .container .post-submit-container .post-position-wrap .draft-text {
 }
 Page .container .post-submit-container .post-submit {
   height: 100%;
-  width: 100%;
+  width: 300rpx;
   text-align: center;
   font-size: 14px;
   background-size: initial;

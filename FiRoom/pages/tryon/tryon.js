@@ -1,7 +1,9 @@
 var order = ['red', 'yellow', 'blue', 'green', 'red']
+const { backend_url } = require('../../utils/util.js')
+var util = require('../../utils/util.js')
 Page({
     data: {
-        backend_url: "http://192.168.1.116:8087/",
+        backend_url: util.backend_url,
         // backend_url: "http://192.168.1.102:8087/",
         toView: 'red',
         scrollTop: 100,
@@ -14,7 +16,8 @@ Page({
         choosedData: [],
         index: 0,
         resImg: 'static/images/model_1.png',
-        uploadType:''
+        uploadType: '',
+        chaImgSrc: ''
     },
     inputlink: function(e) {
         this.setData({
@@ -100,18 +103,18 @@ Page({
             sourceType: [type], // 可以指定来源是相册还是相机，默认二者都有  
             success: function(res) {
                 var picPath = res.tempFilePaths[0];
-                console.log(res);
-                if (uploadType == 'UserShot'){
-                    var uploadUrl = 'http://192.168.1.116:8087/match/recommend/test'
-                }else if(uploadType == 'ClothImg'){
-                    var uploadUrl = 'http://192.168.1.116:8087/match/recommend/test2'
+                console.log(picPath);
+                if (uploadType == 'UserShot') {
+                    var uploadUrl = that.data.backend_url + 'match/recommend/test'
+                } else if (uploadType == 'ClothImg') {
+                    var uploadUrl = that.data.backend_url + 'match/recommend/test2'
                 }
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
                 that.setData({
-                        chaImgSrc: picPath,
-                        isShow: true
-                    })
-                    //图片上传到定制链服务器进行款式搜索
+                    chaImgSrc: picPath,
+                    isShow: true
+                });
+                //图片上传到定制链服务器进行款式搜索
                 wx.uploadFile({
                     filePath: picPath,
                     name: 'name',
@@ -119,7 +122,7 @@ Page({
                     //url: 'http://192.168.1.102:8087/match/recommend/test',
                     url: uploadUrl,
                     header: { "Content-Type": "multipart/form-data" },
-                    formData:{
+                    formData: {
                         type: uploadType
                     },
                     success: (res) => {
@@ -136,8 +139,9 @@ Page({
     },
     onLoad: function() {
         var that = this;
+        console.log('backend_url:', backend_url);
         wx.request({
-            url: this.data.backend_url+'tryon/clothes/basket',
+            url: this.data.backend_url + 'tryon/clothes/basket',
             data: {
                 key: 'clothesHamber'
             },
@@ -149,7 +153,7 @@ Page({
             }
         })
         wx.request({
-            url: this.data.backend_url+'tryon/userBodyShow/images',
+            url: this.data.backend_url + 'tryon/userBodyShow/images',
             data: {
                 key: 'userBodyShow'
             },

@@ -1,43 +1,32 @@
-<view class="container">
+<view class="container" >
     <view class="offer-reward-wrap">
         <view class="reward-title">悬赏金额:</view>
-        <text class="input-reward-area" placeholder="">建议悬赏5-20金币</text>
+        <input class="input-reward-area" placeholder="建议悬赏5-20金币" bindinput="getReward" name="reward" type="number"></input>
     </view>
     <view class="post-title-wrap" >
-        <textarea class="c-fullwidth post-title"  name="textarea1" placeholder="填写标题会有更多人喜欢哦~" type="textarea"/>
+        <textarea bindinput="getTitle" class="c-fullwidth post-title"  name="title" placeholder="填写标题会有更多人喜欢哦~" placeholder-class="title-placeholder" type="textarea"/>
     </view>
     <view class="post-mainbody-wrap" >
-        <textarea class="c-fullwidth post-mainbody"  name="textarea1" placeholder="添加正文" type="textarea"/>
+        <textarea bindinput="getMainText" class="c-fullwidth post-mainbody"  name="mainText" placeholder="添加正文" type="textarea"/>
     </view>
     <view class="post-image-wrap">
-        <view class="image-upload" wx:for="{{imageUpload}}" >
-            <image src="{{item.picUrl}}" class="img"></image>
+        <view class="image-upload" wx:for="{{userShotImages}}" >
+            <image src="{{item.path}}" class="img"></image>
         </view>
-        <view class="image-upload-but">
-            <image src="{{upImage}}" class="img-photo"></image>
+        <view class="image-upload-but" bindtap="chooseShotImages">
+            <image src="{{backend_url}}{{upImage}}" class="img-photo"></image>
             <text class="text-photon">图片/视频</text>
             <image class="add-img" src="http://127.0.0.1:8087/static/icons/add.png" />
         </view>
     </view>
 
-    <!-- 衣服标签 -->
-    <view class="simgle-cloth-wrap">
-        <image class="simgle-cloth" src="http://127.0.0.1:8087/static/icons/tag.png" />
-        <view class="cloth-name-title">衣服标签</view>
-        <view class="post-image-wrap">
-            <view class="cloth-image" wx:for="{{tags}}">
-                <text class="tag" >{{item.name}}</text>
-            </view>
-        </view>
-        <image class="jiantou" src="http://127.0.0.1:8087/static/icons/jiantou.png" />
-    </view>
     <!--提交栏-->
     <view class="post-submit-container" >
         <view class="post-position-wrap" >
             <image class="draft-img"  src="http://127.0.0.1:8087/static/icons/draft.png"/>
             <text class="draft-text">草稿箱</text>
         </view>
-        <button class="post-submit"  hover-class="button-hover" size="default" type="default" style="color:#fff;background-color:rgba(23,181,238,1)">发布</button>
+        <button bindtap="postQuestion" class="post-submit"  hover-class="button-hover" size="default" type="default" style="color:#fff;background-color:rgba(23,181,238,1)">发布</button>
     </view>
 </view>
  

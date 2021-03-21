@@ -224,3 +224,37 @@ class MasterPrint(models.Model):
     authorIcon = models.CharField(max_length=1024)
     # 点赞人数
     likeNum = models.IntegerField(default=1.1)
+
+
+class masterDetailImages(models.Model):
+    # 达人编号
+    masterId = models.IntegerField()
+    # 图片链接
+    imageUrl = models.CharField(max_length=1024)
+
+
+class masterPrintDetail(models.Model):
+    # 用户id
+    masterId = models.IntegerField(default=0)
+    # 作者
+    masterName = models.CharField(max_length=128)
+    # 方案名称
+    name = models.CharField(max_length=1048)
+    # 方案具体描述
+    detailDescrib = models.TextField(max_length=1024)
+    # 方案图片组ID
+    detailImages = models.IntegerField()
+    # 评论组ID
+    commentId = models.IntegerField()
+    # 评论数量
+    commentNum = models.IntegerField()
+    # 方案组成图片组ID
+    compriseImageId = models.IntegerField()
+    # 标签
+    tags = models.CharField(max_length=512)
+    # 点赞数量
+    likeNum = models.IntegerField()
+    # 收藏数量
+    collet = models.IntegerField()
+    # 发布时间
+    postTime = models.DateTimeField(auto_now_add=True)

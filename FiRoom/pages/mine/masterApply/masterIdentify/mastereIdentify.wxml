@@ -1,0 +1,40 @@
+<form bindsubmit="formSubmit" bindreset="formReset" class="form-container">
+    <view class="wrap">
+        <view class="title">真实姓名:</view>
+        <input class="name main-box" name="realName" placeholder="请输入您的真实姓名" placeholder-class="phcolor"/>
+    </view>
+    <view class="wrap">
+        <view class="title">性别:</view>
+        <radio-group name="radio-group" class="main-box">
+            <label><radio value="male"/>男</label>
+            <label><radio value="female"/>女</label>
+        </radio-group>
+    </view>
+    <view class="wrap">
+        <view class="title">手机号码:</view>
+        <input class="phone main-box" name="phoneNumber" placeholder="请输入您的手机号码" placeholder-class="phcolor"/>
+    </view>
+    <view class="wrap">
+        <view class="title">身份证号:</view>
+        <input class="id main-box" name="identification" placeholder="请输入身份证号" placeholder-class="phcolor"/>
+    </view>
+    <view class="wrap">
+        <view class="title">学历:</view>
+        <input class="education main-box" name="education" placeholder="(本科) or (专科) or (职业培训)" placeholder-class="phcolor"/>
+    </view>
+    <view class="wrap upload-view">
+        <view class="title">是否获得相关证书</view>
+        <switch name="switch" class="main-box"/>
+        <view class="upload">上传证书照片</view>
+        <image class="upload-img" src="{{backend_url}}static/images/add.png" bindtap="chooseImageTap"/>
+    </view>
+    <image class="certificate-img" wx:if="{{haveUpload}}" src="{{certificateImgUrl}}"/>
+    <view class="wrap">
+        <view class="title">个人简介:</view>
+        <textarea class="introduce main-box" type="text" placeholder="请输入您的个人简介，相关作品发布情况，工作经历，实习经历等" placeholder-class="phcolor"/>
+    </view>
+    <view class="btn-area">
+        <button formType="reset" class="but reset" type="warn">Reset</button>
+        <button formType="submit" plain="false" class="but submit" type="primary">Submit</button>
+    </view>
+</form>

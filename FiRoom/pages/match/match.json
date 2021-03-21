@@ -1,5 +1,4 @@
 {
-  "navigationBarBackgroundColor": "#fff",
-  "navigationBarTitleText": "FiRoom-搭配",
-  "navigationBarTextStyle":"black"
+    "usingComponents": {},
+    "navigationBarTitleText": "搭配"
 }

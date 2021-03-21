@@ -40,7 +40,7 @@
             <view class="unswer tit">问答</view>
         </view>
         <view class="mainbody">
-            <navigator class="navi-blueprint" url="../searchpros/prodetail/prodetail?styleId={{item.masterId}}&current=master" wx:for="{{masterPrint}}">
+            <navigator class="navi-blueprint" url="../searchpros/prodetail/prodetail?styleId={{item.masterId}}&current=master" wx:for="{{masterPrint}}" wx:key="index">
                 <image class="cover" src="{{backend_url}}{{item.coverPic}}" mode="aspectFill"/>
                 <view class="title">{{item.printName}}</view>
                 <view class="writer">

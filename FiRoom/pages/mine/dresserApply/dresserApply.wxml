@@ -1,0 +1,38 @@
+<view class="container" >
+    <view class="box-wrap">
+        <view class="title introTi">什么是达人认证</view>
+        <view class="message">{{identify_introduce}}</view>
+    </view>
+    <view class="box-wrap message">
+        <view class="title mesTi">认证信息</view>
+        <view class="message">{{identify_message}}</view>
+    </view>
+    <view class="indetify-factor">
+        <view class="factor-title">认证申请主要考核因素</view>
+        <view class="factor-view" wx:for="{{main_factor}}" wx:key="index">
+            <view class="dot"></view>
+            <view class="factor">{{item.factor}}</view>
+        </view>
+    </view>
+    <view class="final-condition-wrap">
+        <view class="conditions">
+            <view class="title">认证条件</view>
+            <checkbox class="isMeetCondition" wx:for="{{main_condition}}" wx:key="index">{{item.condition}}</checkbox>
+        </view>
+    </view>
+    <view class="notice-wrap">
+        <view class="notice-view" wx:for="{{notices}}" wx:key="index">
+            <view class="dot"></view>
+            <view class="factor">{{item.notice}}</view>
+        </view>
+    </view>
+</view>
+<view class="apply-button" bindtap="apply_for_dresser">我要申请</view>
+<view class="apply-toast-view" wx:if="{{showApply}}">
+    <view class="title">是否确认申请?</view>
+    <view class="can">您已符合申请条件，提交申请后将在5个工作日内进行处理</view>
+    <view class="confirm-view">
+        <view class="cancel" bindtap="cancel_apply">取消</view>
+        <view class="confirm" bindtap="confrim_apply">确认</view>
+    </view>
+</view>

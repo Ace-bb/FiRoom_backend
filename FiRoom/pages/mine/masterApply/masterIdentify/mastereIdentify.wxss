@@ -1,0 +1,62 @@
+Page {
+  background-image: url("http://192.168.1.116:8087/static/images/back_image4.png");
+  background-size: cover;
+}
+.form-container {
+  width: 100%;
+  padding: 16rpx;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.form-container .wrap {
+  width: 100%;
+  padding: 6rpx;
+  margin-bottom: 24rpx;
+  display: flex;
+  align-items: flex-start;
+  justify-content: start;
+  background-color: rgba(252, 248, 234, 0.61);
+  border-radius: 6rpx;
+  padding: 12rpx;
+}
+.form-container .wrap .title {
+  font-weight: bold;
+}
+.form-container .wrap .main-box {
+  margin-left: 12rpx;
+}
+.form-container .wrap .upload-img {
+  width: 64rpx;
+  height: 64rpx;
+  margin-left: 12rpx;
+}
+.form-container .wrap .upload {
+  font-size: 28rpx;
+  margin-left: 64rpx;
+}
+.form-container .wrap .introduce {
+  width: 70%;
+}
+.form-container .wrap .phcolor {
+  color: black;
+}
+.form-container .upload-view {
+  display: flex;
+  align-items: center;
+}
+.form-container .btn-area {
+  width: 100%;
+  height: 120rpx;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  box-sizing: border-box;
+}
+.form-container .btn-area .but {
+  width: 40%;
+  height: 80%;
+}

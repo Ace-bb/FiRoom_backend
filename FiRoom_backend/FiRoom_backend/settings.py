@@ -25,7 +25,7 @@ SECRET_KEY = '!l+)x8i1pjsg(nu3mdj6b+^31&n2(7j4&(din9s!vj8$^mln+b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.116', '127.0.0.1', '192.168.1.100', '192.168.1.103', '192.168.1.102']
+ALLOWED_HOSTS = ['192.168.1.116', '127.0.0.1', '192.168.1.100', '192.168.1.103', '192.168.1.102', '172.21.136.10']
 
 
 # Application definition
@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'tryon.apps.TryonConfig',
     'closet.apps.ClosetConfig',
     'matchPro.apps.MatchproConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [

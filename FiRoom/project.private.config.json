@@ -65,6 +65,41 @@
           "pathName": "pages/match/searchpros/prodetail/prodetail",
           "query": "detailId=1",
           "scene": null
+        },
+        {
+          "name": "问答详情界面",
+          "pathName": "pages/match/questionDetail/questionDetail",
+          "query": "userId=1",
+          "scene": null
+        },
+        {
+          "name": "搭配达人申请",
+          "pathName": "pages/mine/dresserApply/dresserApply",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "大师认证",
+          "pathName": "pages/mine/masterApply/masterApply",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "大师认证信息输入界面",
+          "pathName": "pages/mine/masterApply/masterIdentify/mastereIdentify",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "发布搭配方案",
+          "pathName": "pages/post/post",
+          "query": "",
+          "scene": null
+        },
+        {
+          "name": "发布搭配问答问题",
+          "pathName": "pages/post/postQuestion/postQuestion",
+          "scene": null
         }
       ]
     }

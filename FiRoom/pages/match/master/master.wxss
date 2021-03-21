@@ -20,8 +20,7 @@
 .container .top-master-message-wrap .head-name-wrap .head-imag {
   width: 120rpx;
   height: 120rpx;
-  padding: 6rpx;
-  border-radius: 1000rpx;
+  border-radius: 100rpx;
 }
 .container .top-master-message-wrap .head-name-wrap .name-wrap {
   width: 100%;
