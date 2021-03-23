@@ -7,4 +7,5 @@ urlpatterns = [
     path('userBodyShow/images', views.listUserBodyShot),
     path('upload/uploadUserShot', views.uploadUserShot),
     path('upload/uploadClothImg', views.uploadClothes),
+    path('tryon/getTryonImage', views.getTryonImage),
 ]

@@ -3,7 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse, JsonResponse
 
-from tryon.models import clothesHamper, userBodyShot
+from tryon.models import clothesHamper, userBodyShot, tryonCloth
 import os
 import datetime
 
@@ -52,12 +52,27 @@ def uploadClothes(request):
         with open(basedir + type + '.jpg   ', 'wb') as f:
             f.write(image.read())
             f.close()
+    userId = len(clothes) + 1
     clothUrl = 'static/clothes_hamper/' + type + '.jpg'
-    clothesHamper.objects.create(userId=len(clothes) + 1, clothName='T恤', clothurl=clothUrl,
+    clothesHamper.objects.create(userId=userId, clothName='T恤', clothurl=clothUrl,
                                  uploadTime=datetime.datetime.now())
 
+    tryonCloths = tryonCloth.objects.values()
+    if userId:
+        tryonCloths = tryonCloths.filter(userId=userId)
+    clothes = list(tryonCloths)
     tryon = request.POST.get('isTryon')
     #if tryon:
         # 调用试穿函数
 
     return JsonResponse({'res': 0, 'resUrl': clothUrl})
+
+
+def getTryonImage(request):
+    userId = request.POST.get('userId')
+    tryonCloths = tryonCloth.objects.values()
+    if userId:
+        tryonCloths = tryonCloths.filter(userId=userId)
+    clothes = list(tryonCloths)
+    print(clothes)
+    return JsonResponse({'res': 0, 'rescloth': clothes})

@@ -25,7 +25,11 @@ var GetList = function(that) {
             'content-type': 'multipart/x-www-form-urlencoded;charset=UTF-8'
         },
         success: function(res) {
-            console.log(res);
+            console.log('searchRes:', res.data.resSearchList);
+            var resList = res.data.resSearchList
+            that.setData({
+                list: resList
+            })
             if (res.statusCode == 200 && res.data.code == "0") {
                 typeof success == "function" && success(res.data);
             } else {
@@ -33,7 +37,7 @@ var GetList = function(that) {
             }
         },
         fail: function(res) {
-            console.log(res);
+            console.log('searchRes:', res);
             typeof fail == "function" && fail(res);
         }
     })

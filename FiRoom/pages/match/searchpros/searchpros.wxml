@@ -41,14 +41,20 @@
     <!--产品区域-->
     <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" class="list" bindscrolltolower="{{hasMore ? 'bindDownLoad' : ''}}" bindscroll="scroll">
       <view class="procon">
-        <navigator wx:for="{{list}}" class="procon-imgmes" url="prodetail/prodetail?styleId={{item.id}}" wx:key="index">
-          <image class="imgmes-img" src="{{item.pic}}"></image>
+        <navigator wx:for="{{list}}" class="procon-imgmes" url="prodetail/prodetail?styleId={{item.userId}}" wx:key="index">
+          <image class="imgmes-img" src="{{backend_url}}{{item.pic}}"></image>
           <text class="imgmes-mes1">{{item.name}}</text>
-          <view class="imgmes-mes2">
-            <text class="mes1">库存 : {{item.categoryId
-              < 1000 ? item.categoryId : '1000+'}}</text>
-                <text class="mes2">￥{{item.minPrice}}</text>
-          </view>
+          <view class="box-bottom-wrap">
+             <view class="author-wrap">
+              <image wx:if="{{item.isUpload}}" class="author-icon" src="{{item.authorIcon}}"/>
+              <image wx:else class="author-icon" src="{{backend_url}}{{item.authorIcon}}"/>
+              <view class="author-name textView">{{item.authorName}}</view>
+             </view>
+             <view class="like-wrap">
+               <image class="like-img" src="{{backend_url}}static/masterBluePrint/icons/heart.png"/>
+               <view class="like-num text-View">{{item.likeNum}}万</view>
+             </view>
+           </view>
         </navigator>
       </view>
 

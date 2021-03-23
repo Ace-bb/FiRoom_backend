@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="image_on">
-    <image id="image-on" wx:if="{{isShow}}" src="{{backend_url}}{{chaImgSrc}}"/>
+    <image id="image-on" wx:if="{{isShow}}" src="{{backend_url}}{{chaImgSrc}}" mode="aspectFill"/>
     <image id="image-on" wx:else src="{{backend_url}}{{resImg}}" mode="aspectFill" />
   </view>
   <view class="bottom_area">
@@ -18,7 +18,7 @@
   <view class="{{ showRightContainer ? 'right_area' : 'hide-right-container' }}">
     <view class="title" wx:if="{{showRightContainer}}">试衣篮</view>
     <scroll-view class="checked_clothes" scroll-y wx:if="{{showRightContainer}}">
-      <view id="green" class="scroll-view-item" wx:for="{{clothes}}" wx:key="clothurl">
+      <view id="green" class="scroll-view-item" wx:for="{{clothes}}" wx:key="clothurl" data-id="{{item.userId}}" bindtap="tapClothTryOn">
         <image class="c_cloth" src="{{backend_url}}{{item.clothurl}}" mode="aspectFill"/></view>
     </scroll-view>
     <view class="right-but" bindtap="show_right_container">

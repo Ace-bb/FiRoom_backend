@@ -43,13 +43,45 @@ Page({
         })
     },
     listClick: function(e) {
-        let me = this;
+        let that = this;
         console.log(e)
-        index: e.currentTarget.dataset.index;
-        console.log(this.data.userBodyShot[1]['shot']);
-        me.setData({
-            resImg: this.data.userBodyShot[e.currentTarget.dataset.index]['shot']
+        var index = e.currentTarget.dataset.index;
+        console.log(this.data.userBodyShot[index]['shot']);
+        that.setData({
+            chaImgSrc: this.data.userBodyShot[index]['shot']
         })
+    },
+    tapClothTryOn: function(e) {
+        var that = this
+        console.log(e.currentTarget.dataset.id)
+        var userId = e.currentTarget.dataset.id
+        var index = e.currentTarget.dataset.index;
+        wx.showToast({
+            title: '试穿中...',
+            icon: 'loading',
+            duration: 1500
+        })
+        setTimeout(function() {
+                //要延时执行的代码
+                wx.showToast({
+                    title: '试穿成功', // 标题
+                    icon: 'success', // 图标类型，默认success
+                    duration: 500 // 提示窗停留时间，默认1500ms
+                })
+                wx.request({
+                    url: that.data.backend_url + 'tryon/tryon/getTryonImage',
+                    data: {
+                        userId: userId
+                    },
+                    success: function(res) {
+                        console.log(res.data.rescloth[0]['resCloth'])
+                        that.setData({
+                            chaImgSrc: res.data.rescloth[0]['resCloth']
+                        })
+                    }
+                })
+            }, 1500) //延迟时间 这里是2秒
+
     },
     upper: function(e) {
         console.log(e)

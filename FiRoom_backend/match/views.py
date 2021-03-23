@@ -49,12 +49,11 @@ def listBluePrint(request):
     print(pageNum)
     resBluePrint = []
     itemNum = 0
-    maxItemNum = pageNum*2
+    maxItemNum = pageNum * 2
     for item in blueprint_list:
         if itemNum < maxItemNum:
             resBluePrint.append(item)
             itemNum += 1
-
 
     return JsonResponse({'code': 0, 'data': resBluePrint, 'msg': 'success'})
 
@@ -236,17 +235,12 @@ def searchMatch(request):
     bluePrint = BluePrint.objects.values()
     bluePrint = list(bluePrint)
     resPrint = []
-    page = 0
     itemNum = 0
-    while page < pageNumber:
-        for item in bluePrint:
-            str = item['name']
-            if str.find(keyWord) != -1:
-                resPrint.append(item)
-                itemNum += 1
-                if itemNum > 20:
-                    itemNum = 0
-                    page += 1
+    maxItemNum = pageNumber * 10
+    for item in bluePrint:
+        if item['name'].find(keyWord) != -1 and itemNum <= maxItemNum:
+            resPrint.append(item)
+            itemNum += 1
 
     print(resPrint)
-    return JsonResponse({'res': 0})
+    return JsonResponse({'res': 0, 'resSearchList': resPrint})

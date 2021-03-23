@@ -38,7 +38,7 @@ Page({
             text: '个人信息',
             tip: '',
             cut: true,
-            url: '../addresses/addresses'
+            url: 'userHome/userHome'
         }, {
             icon: 'images/dresser.png',
             text: '申请成为达人',
@@ -60,12 +60,12 @@ Page({
             text: '意见反馈',
             tip: '',
             cut: true,
-            url: '../feedback/feedback'
+            url: 'feedback/feedback'
         }, {
             icon: 'images/about.png',
             text: '关于商城',
             tip: '',
-            url: '../about/about'
+            url: 'about/about'
         }]
     },
     countOrder(orderList) {

@@ -19,3 +19,10 @@ class userBodyShot(models.Model):
     userName = models.CharField(max_length=64)
     # 用户照片
     shot = models.CharField(max_length=1024)
+
+
+class tryonCloth(models.Model):
+    # 用户编号
+    userId = models.IntegerField()
+    #
+    resCloth = models.CharField(max_length=1024)
