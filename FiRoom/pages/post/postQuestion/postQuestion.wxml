@@ -4,10 +4,10 @@
         <input class="input-reward-area" placeholder="建议悬赏5-20金币" bindinput="getReward" name="reward" type="number"></input>
     </view>
     <view class="post-title-wrap" >
-        <textarea bindinput="getTitle" class="c-fullwidth post-title"  name="title" placeholder="填写标题会有更多人喜欢哦~" placeholder-class="title-placeholder" type="textarea"/>
+        <textarea bindinput="getTitle" class="post-title"  name="title" placeholder="填写标题会有更多人喜欢哦~" placeholder-class="title-placeholder" type="textarea"/>
     </view>
     <view class="post-mainbody-wrap" >
-        <textarea bindinput="getMainText" class="c-fullwidth post-mainbody"  name="mainText" placeholder="添加正文" type="textarea"/>
+        <textarea bindinput="getMainText" class="post-mainbody"  name="mainText" placeholder="添加正文" type="textarea"/>
     </view>
     <view class="post-image-wrap">
         <view class="image-upload" wx:for="{{userShotImages}}" >

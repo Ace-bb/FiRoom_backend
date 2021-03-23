@@ -1,10 +1,12 @@
+import json
+
 from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse, JsonResponse
 
 from match.models import Category, Swiper, Notice, BluePrint, MatchDetail, detailImages, Masters, MasterPrint, \
-    masterDetailImages, masterPrintDetail,CompriseImages
+    masterDetailImages, masterPrintDetail, CompriseImages
 import os
 
 
@@ -43,13 +45,33 @@ def listNotice(request):
 def listBluePrint(request):
     blueprint_data = BluePrint.objects.values()
     blueprint_list = list(blueprint_data)
-    return JsonResponse({'code': 0, 'data': blueprint_list, 'msg': 'success'})
+    pageNum = int(request.GET.get('pageNum'))
+    print(pageNum)
+    resBluePrint = []
+    itemNum = 0
+    maxItemNum = pageNum*2
+    for item in blueprint_list:
+        if itemNum < maxItemNum:
+            resBluePrint.append(item)
+            itemNum += 1
+
+
+    return JsonResponse({'code': 0, 'data': resBluePrint, 'msg': 'success'})
 
 
 def listMasters(request):
     masters = Masters.objects.values()
     masters_list = list(masters)
-    return JsonResponse({'code': 0, 'data': masters_list, 'msg': 'success'})
+    pageNum = int(request.GET.get('pageNum'))
+    print(pageNum)
+    resMasters = []
+    itemNum = 0
+    maxItemNum = pageNum * 2
+    for item in masters_list:
+        if itemNum < maxItemNum:
+            resMasters.append(item)
+            itemNum += 1
+    return JsonResponse({'code': 0, 'data': resMasters, 'msg': 'success'})
 
 
 def listBlueDetail(request):
@@ -59,7 +81,7 @@ def listBlueDetail(request):
     print(id)
 
     if id:
-        MatchDetails = MatchDetails.filter(id=id)
+        MatchDetails = MatchDetails.filter(printId=id)
     MatchDetails = list(MatchDetails)
     details = MatchDetails[0]['detailDescrib'].split("\r\n\r\n")
     detailList = []
@@ -84,37 +106,11 @@ def listDetailImages(request):
     print(id)
 
     if type == 'dresser':
-        Images = Images.filter(userId=id)
+        Images = Images.filter(printId=id)
     elif type == 'master':
         Images = Images.filter(masterId=id)
     Images = list(Images)
     return JsonResponse({'code': 0, 'data': Images, 'msg': 'success'})
-
-
-def uploadUserShot(request):
-    image = request.FILES['name']
-    print(image)
-    print('uploadUserShot')
-    type = request.POST.get('type')
-    basedir = 'D:\\ProgramSoft\\Git\\Virtual-try-on\\FiRoom_backend\\static\\masterBluePrint\\compriseImages\\'
-    if not os.path.exists(basedir + type + '.jpg'):
-        with open(basedir + type + '.jpg', 'wb') as f:
-            f.write(image.read())
-            f.close()
-    return JsonResponse({'res': 0})
-
-
-def uploadClothes(request):
-    image = request.FILES['name']
-    print(image)
-    print('uploadClothes')
-    type = request.POST.get('type')
-    basedir = 'D:\\ProgramSoft\\Git\\Virtual-try-on\\FiRoom_backend\\static\\masterBluePrint\\detailImages\\'
-    if not os.path.exists(basedir + type + '.jpg'):
-        with open(basedir + type + '.jpg   ', 'wb') as f:
-            f.write(image.read())
-            f.close()
-    return JsonResponse({'res': 0})
 
 
 def listMasterDetail(request):
@@ -158,31 +154,38 @@ def listMasterPrintDetail(request):
 
 
 def uploadPrintImages(request):
+    print('uploadPrintImages')
     image = request.FILES['printImages']
     print(image)
     print('uploadClothes')
     type = request.POST.get('fileName')
+    printId = request.POST.get('printId')
+    detailImage_list = detailImages.objects.values()
+    detailImage_list = list(detailImage_list)
+    type = type + str(len(detailImage_list) + 1)
     print(type)
     basedir = 'D:\\ProgramSoft\\Git\\Virtual-try-on\\FiRoom_backend\\static\\BluePrintImage\\detail\\upload1\\'
-    success = False
     if not os.path.exists(basedir + type + '.jpg'):
         with open(basedir + type + '.jpg   ', 'wb') as f:
             f.write(image.read())
-            success = True
             f.close()
-    print(success)
     imgUrl = 'static/BluePrintImage/detail/upload1/' + type + '.jpg'
-    record = detailImages.objects.create(userId=5, imageUrl=imgUrl)
-
-    resUrl = {'imgUrl': imgUrl}
-    return JsonResponse({'res': 0, 'id': record, 'msg': 'success'})
+    record = detailImages.objects.create(printId=printId, imageUrl=imgUrl)
+    print(record)
+    return JsonResponse({'res': 0, 'imgUrl': imgUrl, 'msg': 'success'})
 
 
 def uploadSingleImages(request):
+    singleImages = CompriseImages.objects.values()
+    singleImages = list(singleImages)
+    id = len(singleImages) + 1
+    print('uploadSingleImages')
     singleImage = request.FILES['singleImages']
     print(singleImage)
     print('singleImages')
     type = request.POST.get('fileName')
+    printId = request.POST.get('printId')
+    compriseImageId = request.POST.get('compriseImageId')
     print(type)
     basedir = 'D:\\ProgramSoft\\Git\\Virtual-try-on\\FiRoom_backend\\static\\BluePrintImage\\detail\\upload1\\single\\'
     success = False
@@ -192,11 +195,58 @@ def uploadSingleImages(request):
             success = True
             f.close()
     singleUrl = 'static/BluePrintImage/detail/upload1/single/' + type + '.jpg'
-    record = CompriseImages.objects.create(compriseImageId=105, imageName='单件', compriseImageUrl=singleUrl)
-    return JsonResponse({'res': 0, 'id': record, 'msg': 'success'})
+    record = CompriseImages.objects.create(printId=printId, compriseImageId=compriseImageId, imageName='单件',
+                                           compriseImageUrl=singleUrl)
+    print(record)
+    return JsonResponse({'res': 0, '': singleUrl, 'msg': 'success'})
 
 
 def savePrintData(request):
-    printData = request.POST.get('printData')
-    print(printData)
+    print('savePrintData')
+    printData = json.loads(request.body)
+    upData = printData['printData']
+    print(upData)
+    bluePrint = BluePrint.objects.values()
+    bluePrint = list(bluePrint)
+    printImages = detailImages.objects.values()
+    printImages = printImages.filter(printId=5)
+    printImages = list(printImages)
+    id = len(bluePrint) + 1
+    name = upData['name']
+    minPrice = upData['minPrice']
+    pic = upData['coverUrl']['path']
+    authorName = upData['authorName']
+    authorIcon = upData['avatarUrl']
+    mainText = upData['mainText']
+    tags = upData['tags'][0]['tags']
+    print(pic)
+    compriseImageId = 100 + int(id)
+    BluePrint.objects.create(printId=id, name=name, minPrice=minPrice, pic=pic, authorName=authorName,
+                             authorIcon=authorIcon, likeNum=0)
+    MatchDetail.objects.create(printId=id, author=authorName, name=name, detailDescrib=mainText,
+                               detailImages=compriseImageId, commentId=compriseImageId, commentNum=0,
+                               compriseImageId=compriseImageId, tags=tags, likeNum=0, collet=0)
+    return JsonResponse({'res': 0, 'printId': id, 'compriseImageId': compriseImageId})
+
+
+def searchMatch(request):
+    method = request.GET.get('method')
+    keyWord = request.GET.get('style')
+    pageNumber = int(request.GET.get('pageNumber'))
+    bluePrint = BluePrint.objects.values()
+    bluePrint = list(bluePrint)
+    resPrint = []
+    page = 0
+    itemNum = 0
+    while page < pageNumber:
+        for item in bluePrint:
+            str = item['name']
+            if str.find(keyWord) != -1:
+                resPrint.append(item)
+                itemNum += 1
+                if itemNum > 20:
+                    itemNum = 0
+                    page += 1
+
+    print(resPrint)
     return JsonResponse({'res': 0})

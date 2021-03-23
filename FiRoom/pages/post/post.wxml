@@ -1,4 +1,4 @@
-<form class="container" bindsubmit="formSubmit" bindreset="formReset">
+<view class="container" >
     <!-- 上传图片 -->
     <view class="post-image-wrap">
         <view class="image-upload" wx:for="{{imageUpload}}" wx:key="index" >
@@ -12,23 +12,23 @@
     </view>
     <!-- 标题-->
     <view class="post-title-wrap" >
-        <textarea class="c-fullwidth post-title"  name="title" placeholder="填写标题会有更多人喜欢哦~" type="textarea"/>
+        <textarea bindinput="getTitle" class="post-title"  name="title" placeholder="填写标题会有更多人喜欢哦~" type="textarea"/>
     </view>
     <!--正文-->
     <view class="post-mainbody-wrap" >
-        <textarea class="c-fullwidth post-mainbody"  name="mainText" placeholder="添加正文" type="textarea"/>
+        <textarea bindinput="getMainText" class="post-mainbody"  name="mainText" placeholder="添加正文" type="textarea"/>
     </view>
     <!--搭配效果图-->
     <!--单间服装-->
-    <view class="simgle-cloth-wrap" >
-        <image class="simgle-cloth" src="{{backend_url}}static/icons/cloth.png" />
-        <view class="cloth-name-title" bindtap="chooseSingleImages" data-type="single" >单间衣服</view>
+    <view class="simgle-cloth-wrap simgle-wrap" bindtap="choosePrintImages" data-type="single">
+        <image class="simgle-cloth" src="{{backend_url}}static/icons/cloth.png"/>
+        <view class="cloth-name-title" >单间衣服</view>
         <view class="post-image-wrap">
             <view class="cloth-image" wx:for="{{singleImages}}" wx:key="index">
                 <image class="img" src="{{item.path}}"></image>
             </view>
         </view>
-        <image class="jiantou" src="{{backend_url}}static/icons/jiantou.png" bindtap="chooseSingleImages" data-type="single"/>
+        <image class="jiantou" src="{{backend_url}}static/icons/jiantou.png"/>
     </view>
 
     <!-- 衣服标签 -->
@@ -49,7 +49,7 @@
         <view class="post-image-wrap">
             <view class="cloth-image" >
                 <image class="plus-price" src="{{backend_url}}static/icons/plus.png" bindtap="plusPrince"/>
-                <text class="price" >{{price}}</text>
+                <input class="price" value="{{price}}"></input>
                 <image class="add-price" src="{{backend_url}}static/icons/addd.png" bindtap="addPrince"/>
             </view>
         </view>
@@ -60,9 +60,9 @@
             <image class="draft-img"  src="{{backend_url}}static/icons/draft.png"/>
             <text class="draft-text">草稿箱</text>
         </view>
-        <button  formType="submit" class="post-submit"  style="color:#fff;background-color:rgba(23,181,238,1)">发布</button>
+        <button  bindtap="formSubmit" class="post-submit"  style="color:#fff;background-color:rgba(23,181,238,1)">发布</button>
     </view>
-</form>
+</view>
 <form class="input-link-pop-view" wx:if="{{showTagInputView}}" bindsubmit="tagsSubmit" bindreset="tagsReset">
     <view class="input-view-title">请输入要添加的标签</view>
     <input class="input-view" placeholder="标签" name="tags"/>

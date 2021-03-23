@@ -235,6 +235,7 @@ module.exports = {
     getMessage: getMessage,
     getUser: getUser,
     getMoments: getMoments,
-    backend_url: 'http://192.168.1.116:8087/',
-    //backend_url: 'http://172.21.136.10:8087/'
+    backend_url: 'http://192.168.1.116:8087/'
+        //backend_url: 'http://192.168.1.105:8087/'
+        //backend_url: 'http://172.21.136.10:8087/'
 }

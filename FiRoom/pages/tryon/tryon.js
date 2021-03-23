@@ -4,7 +4,7 @@ var util = require('../../utils/util.js')
 Page({
     data: {
         backend_url: util.backend_url,
-        // backend_url: "http://192.168.1.102:8087/",
+        tryOnbackend_url: 'http://192.168.1.103:8087/',
         toView: 'red',
         scrollTop: 100,
         isShow: false,
@@ -17,7 +17,9 @@ Page({
         index: 0,
         resImg: 'static/images/model_1.png',
         uploadType: '',
-        chaImgSrc: ''
+        chaImgSrc: '',
+        firstLoad: true
+
     },
     inputlink: function(e) {
         this.setData({
@@ -76,25 +78,36 @@ Page({
     chooseImageTap: function(e) {
         var that = this;
         console.log(e.currentTarget.dataset.uploadtype);
+        var uploadType = e.currentTarget.dataset.uploadtype
         this.setData({
-            uploadType: e.currentTarget.dataset.uploadtype
+            uploadType: uploadType
         });
+        var itemLists = []
+        if (uploadType == 'UserShot') {
+            itemLists = ['从相册中选择', '拍照']
+        } else if (uploadType == 'ClothImg') {
+            itemLists = ['从相册中选择', '仅上传不试穿', '拍照', '仅拍照不试穿']
+        }
         wx.showActionSheet({
-            itemList: ['从相册中选择', '拍照'],
+            itemList: itemLists,
             itemColor: "#f7982a",
             success: function(res) {
                 if (!res.cancel) {
                     if (res.tapIndex == 0) {
-                        console.log(e.currentTarget.dataset.uploadtype);
-                        that.chooseWxImage('album', e.currentTarget.dataset.uploadtype)
+                        console.log(uploadType);
+                        that.chooseWxImage('album', uploadType, true)
                     } else if (res.tapIndex == 1) {
-                        that.chooseWxImage('camera', e.currentTarget.dataset.uploadtype)
+                        that.chooseWxImage('album', uploadType, false)
+                    } else if (res.tapIndex == 2) {
+                        that.chooseWxImage('camera', uploadType, true)
+                    } else if (res.tapIndex == 3) {
+                        that.chooseWxImage('camera', uploadType, false)
                     }
                 }
             }
         })
     },
-    chooseWxImage: function(type, uploadType) {
+    chooseWxImage: function(type, uploadType, tryon) {
         var that = this;
         console.log(uploadType)
         wx.chooseImage({
@@ -105,9 +118,9 @@ Page({
                 var picPath = res.tempFilePaths[0];
                 console.log(picPath);
                 if (uploadType == 'UserShot') {
-                    var uploadUrl = that.data.backend_url + 'match/recommend/test'
+                    var uploadUrl = that.data.backend_url + 'tryon/upload/uploadUserShot'
                 } else if (uploadType == 'ClothImg') {
-                    var uploadUrl = that.data.backend_url + 'match/recommend/test2'
+                    var uploadUrl = that.data.backend_url + 'tryon/upload/uploadClothImg'
                 }
                 // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
                 that.setData({
@@ -123,12 +136,23 @@ Page({
                     url: uploadUrl,
                     header: { "Content-Type": "multipart/form-data" },
                     formData: {
-                        type: uploadType
+                        type: uploadType,
+                        isTryon: tryon
                     },
                     success: (res) => {
-                        console.log("res")
-                        const data = JSON.parse(res.data)
-                        console.log(res)
+                        console.log("res");
+                        const data = JSON.parse(res.data);
+                        console.log(data);
+                        that.getShotsAndClothes();
+                        if (uploadType == 'UserShot') {
+                            that.setData({
+                                chaImgSrc: data.resUrl
+                            })
+                        } else if (uploadType == 'ClothImg') {
+                            that.setData({
+                                chaImgSrc: data.resUrl
+                            })
+                        }
                     }
                 })
             }
@@ -139,7 +163,10 @@ Page({
     },
     onLoad: function() {
         var that = this;
-        console.log('backend_url:', backend_url);
+        that.getShotsAndClothes();
+    },
+    getShotsAndClothes: function() {
+        var that = this;
         wx.request({
             url: this.data.backend_url + 'tryon/clothes/basket',
             data: {
@@ -158,11 +185,24 @@ Page({
                 key: 'userBodyShow'
             },
             success: function(res) {
-                console.log(res.data)
+                console.log('userBodyShow:', res.data)
                 that.setData({
-                    userBodyShot: res.data.data
+                    userBodyShot: res.data.data,
                 })
+                if (that.data.firstLoad && res.data.data.length > 0) {
+                    that.setData({
+                        chaImgSrc: res.data.data[0]['shot'],
+                        isShow: true,
+                        firstLoad: false
+                    })
+                }
+                console.log(that.data.fileLoad)
             }
         })
+    },
+    onShow: function() {
+        // 页面显示
+        var that = this;
+        that.getShotsAndClothes();
     }
 })

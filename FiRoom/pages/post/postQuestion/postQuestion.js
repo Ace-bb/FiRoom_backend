@@ -38,11 +38,6 @@ Page({
     },
     chooseShotImages: function(e) {
         var that = this;
-        console.log(e.currentTarget.dataset.type);
-        var type = e.currentTarget.dataset.type;
-        this.setData({
-            uploadType: e.currentTarget.dataset.uploadtype
-        });
         wx.showActionSheet({
             itemList: ['从相册中选择', '拍照'],
             itemColor: "#f7982a",
@@ -51,17 +46,16 @@ Page({
                 if (!res.cancel) {
                     if (res.tapIndex == 0) {
                         console.log(e.currentTarget.dataset.uploadtype);
-                        that.chooseWxImage('album', e.currentTarget.dataset.type)
+                        that.chooseWxImage('album')
                     } else if (res.tapIndex == 1) {
-                        that.chooseWxImage('camera', e.currentTarget.dataset.type)
+                        that.chooseWxImage('camera')
                     }
                 }
             }
         })
     },
-    chooseWxImage: function(type, uploadType) {
+    chooseWxImage: function(type) {
         var that = this;
-        console.log(uploadType)
         wx.chooseImage({
             count: 9,
             sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有  
@@ -75,13 +69,9 @@ Page({
                 }
                 console.log('shotImages:', shotImages)
                 that.setData({
-                        userShotImages: shotImages,
-                        isShow: true
-                    })
-                    // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-
-                //图片上传到定制链服务器进行款式搜索
-
+                    userShotImages: shotImages,
+                    isShow: true
+                })
             }
         })
     },
@@ -103,7 +93,7 @@ Page({
             mainText: e.detail.value
         })
     },
-    postMatchPrint: function() {
+    postMatchPrint: function(questionId, userShotId) {
         var that = this;
         var imgPath = that.data.userShotImages;
         console.log('postMatchPrint')
@@ -119,7 +109,9 @@ Page({
                 url: this.data.backend_url + "matchPro/post/problemShots",
                 header: { "Content-Type": "multipart/form-data" },
                 formData: {
-                    fileName: 'shot' + i
+                    fileName: 'shot' + i,
+                    questionId: questionId,
+                    userShotId: userShotId
                 },
                 success: (res) => {
                     var data = JSON.parse(res.data);
@@ -130,7 +122,6 @@ Page({
     },
     postQuestion: function() {
         var that = this;
-        that.postMatchPrint();
         var reward = this.data.reward_price;
         var title = this.data.title;
         var mainText = this.data.mainText;
@@ -151,6 +142,9 @@ Page({
             },
             success: function(res) {
                 console.log(res.data)
+                var questionId = res.data.questionId
+                var userShotId = res.data.userShotId
+                that.postMatchPrint(questionId, userShotId);
                 wx.navigateTo({
                     url: '../../match/match'
                 })

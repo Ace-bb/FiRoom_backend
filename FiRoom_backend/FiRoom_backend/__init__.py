@@ -17,6 +17,7 @@ pymysql.install_as_MySQLdb()
 # python manage.py migrate
 # 创建管理员用户
 # python manage.py createsuperuser
-# 管理员 134@qq.com   密码 132115abc
+# 管理员 134@qq.com   密码 132115abc2
+# firoom 132115abc 132115@qq.com
 # 数据库管理平台
 # http://127.0.0.1:8087/admin/

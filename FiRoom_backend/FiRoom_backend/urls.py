@@ -29,4 +29,5 @@ urlpatterns = [
     path('tryon/', include('tryon.urls')),
     path('matchPro/', include('matchPro.urls')),
     path('users/', include('users.urls')),
+    path('closet/', include('closet.urls')),
 ]

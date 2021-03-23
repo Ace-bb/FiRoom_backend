@@ -76,31 +76,31 @@ class Notice(models.Model):
 # 穿搭方案
 class BluePrint(models.Model):
     # 所属目录编号ID
-    categoryId = models.IntegerField()
+    # categoryId = models.IntegerField()
     # 添加时间
     dataAdd = models.DateTimeField(auto_now_add=True)
     # 修改时间
     dataUpdate = models.DateTimeField(auto_now=True)
     # fxType
-    fxType = models.IntegerField(default=0)
+    # fxType = models.IntegerField(default=0)
     # 得分
-    gotScore = models.IntegerField(default=5.0)
+    # gotScore = models.IntegerField(default=5.0)
     # ID
-    id = models.IntegerField(primary_key=True)
+    printId = models.IntegerField(primary_key=True)
     # 方案名称
     name = models.CharField(max_length=1048)
     # 最低价格
     minPrice = models.FloatField()
     # 最低得分
-    minScore = models.FloatField(default=1.0)
+    # minScore = models.FloatField(default=1.0)
     # 图片链接
     pic = models.CharField(max_length=1048)
     # 商品状态
-    recommendStatusStr = models.CharField(max_length=128, default='sale')
+    # recommendStatusStr = models.CharField(max_length=128, default='sale')
     # 达人ID
     expertId = models.IntegerField(default=101)
-    statusStr = models.CharField(max_length=64, default='热卖中')
-    type = models.IntegerField(default=0)
+    # statusStr = models.CharField(max_length=64, default='热卖中')
+    type = models.CharField( max_length=1024, default='0')
     userId = models.IntegerField(default=0)
     # 达人昵称
     authorName = models.CharField(max_length=64, default='tutu')
@@ -108,11 +108,13 @@ class BluePrint(models.Model):
     authorIcon = models.CharField(max_length=1024, default='http://192.168.1.116:8087/static/authorIcons/icon1.png')
     # 点赞人数
     likeNum = models.IntegerField(default=1.1)
+    # 是否上传的方案
+    isUpload = models.BooleanField(default=False)
 
 
 class detailImages(models.Model):
     # 达人编号
-    userId = models.IntegerField()
+    printId = models.IntegerField()
     # 图片链接
     imageUrl = models.CharField(max_length=1024)
 
@@ -120,7 +122,7 @@ class detailImages(models.Model):
 # 方案详情
 class MatchDetail(models.Model):
     # 方案id
-    id = models.IntegerField(primary_key=True)
+    printId = models.IntegerField(primary_key=True)
     # 用户id
     userID = models.IntegerField(default=0)
     # 作者
@@ -167,8 +169,9 @@ class Comment(models.Model):
 
 # 一个搭配方案所用到的衣服图片
 class CompriseImages(models.Model):
+    printId = models.IntegerField(primary_key=True)
     # 方案组成图片组ID
-    compriseImageId = models.IntegerField(primary_key=True)
+    compriseImageId = models.IntegerField()
     # 方案组成图片名称
     imageName = models.CharField(max_length=128)
     # 图片链接

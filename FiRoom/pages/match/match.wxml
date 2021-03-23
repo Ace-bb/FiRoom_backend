@@ -5,10 +5,6 @@
   <view class="index-topcon" style="background-image:url(../mine/images/bg.png);">
     <view class="index-search">
       <!--图片搜索结果图-->
-      <view wx:if="{{isShow}}" class="camera-image" bindtap="deleteImage">
-        <image class="search-image" src="{{chaImgSrc}}"></image>
-        <image class="search-cha" src="{{weixinCtx}}cha.png"></image>
-      </view>
       <input class="search-ipt" type="text" placeholder="搜索您想搭配的衣服" bindinput="styleName" />
       <view class="search-btn" bindtap="searchStyle">搜索</view>
 
@@ -17,7 +13,7 @@
 
       <!--图片上传-->
       <view class="index-camera">
-        <button class="camera-file" bindtap="chooseImageTap"></button>
+        <button class="camera-file"></button>
         <image class="camera-icon" src="../../assets/icons/camera.png"></image>
       </view>
     </view>
@@ -70,14 +66,16 @@
         <view class="title">达人搭配</view>
         <view class="line"></view>
       </view>
-        <navigator class="goods-box" wx:for-items="{{goods}}" wx:key="index" data-id="{{item.id}}" url="searchpros/prodetail/prodetail?styleId={{item.id}}&current=dresser">
+        <navigator class="goods-box" wx:for-items="{{goods}}" wx:key="index" data-id="{{item.id}}" url="searchpros/prodetail/prodetail?printId={{item.printId}}&current=dresser">
            <view class="img-box">
-              <image src="{{backend_url}}{{item.pic}}" class="image" mode="aspectFill" lazy-load="true"/>
+              <image wx:if="{{item.isUpload}}" src="{{item.pic}}" class="image" mode="aspectFill" lazy-load="true"/>
+              <image wx:else src="{{backend_url}}{{item.pic}}" class="image" mode="aspectFill" lazy-load="true"/>
            </view>
            <view class="goods-title" >{{item.name}}</view>
            <view class="box-bottom-wrap">
              <view class="author-wrap">
-              <image class="author-icon" src="{{backend_url}}{{item.authorIcon}}"/>
+              <image wx:if="{{item.isUpload}}" class="author-icon" src="{{item.authorIcon}}"/>
+              <image wx:else class="author-icon" src="{{backend_url}}{{item.authorIcon}}"/>
               <view class="author-name textView">{{item.authorName}}</view>
              </view>
              <view class="like-wrap">
@@ -86,6 +84,7 @@
              </view>
            </view>
         </navigator>
+        <view wx:if="{{activeCategoryId==0}}" class="loadMore" bindtap="loadMoreItems" data-type="dresserPrint">点击加载更多...</view>
     </view>
     <!-- 大师方案 -->
     <view class="goods-container" wx:if="{{activeCategoryId==2 || activeCategoryId==0}}">
@@ -110,6 +109,7 @@
              </view>
            </view>
         </navigator>
+        <view wx:if="{{activeCategoryId==0}}" class="loadMore" bindtap="loadMoreItems" data-type="masterPrint">点击加载更多...</view>
     </view>
 
     <!-- 搭配问答列表 -->
@@ -119,10 +119,11 @@
         <view class="title">搭配问答</view>
         <view class="line"></view>
       </view>
-      <navigator url="questionDetail/questionDetail?userId = {{item.userId}}" class="question-box" wx:for="{{questions}}" wx:key="index" bindtap="toDetailQuestion">
+      <navigator url="questionDetail/questionDetail?userId={{item.userID}}" class="question-box" wx:for="{{questions}}" wx:key="index" bindtap="toDetailQuestion">
         <!-- 头像，昵称，发布时间 -->
         <view class="poster-head-box">
-          <image class="head-img" src="{{backend_url}}{{item.userIcon}}" />
+          <image wx:if="{{item.isUpload}}" class="head-img" src="{{item.userIcon}}" />
+          <image wx:else class="head-img" src="{{backend_url}}{{item.userIcon}}" />
           <view class="poster-name-box">
             <text class="poster-name">{{item.userName}}</text>
             <text class="post-time">19:30</text>
@@ -134,13 +135,14 @@
           <text class="match-depic">{{item.questionDetail}}</text>
           <view class="image-wrap">
             <view class="images-box" wx:for="{{item.userShots}}" wx:key="index">
-              <image class="match-image"  src="{{backend_url}}{{item.shotUrl}}" />
+              <image wx:if="{{item.isUpload}}" class="match-image"  src="{{item.shotUrl}}" />
+              <image wx:else class="match-image"  src="{{backend_url}}{{item.shotUrl}}" />
             </view>
           </view>
         </view>
 
         <!-- 达人解答 -->
-        <view class="master-unswer-wrap" wx:if="{{isUnswered}}">
+        <view class="master-unswer-wrap" wx:if="{{item.isUnswered}}">
           <view class="master-box">
             <image class="master-head" src="{{backend_url}}{{item.userMessage.masterIcon}}" />
             <view class="master-message-box">
@@ -149,12 +151,16 @@
             </view>
           </view>
         </view>
+        <view class="answer-wrap" wx:else>
+          <image class="answer-img" src="{{backend_url}}static/icons/answer_font.png" />
+          <view class="I-answer">我来回答!</view>
+        </view>
         <!-- 点赞 评论 浏览次数    static/userBodyShot/shot1.png -->
         <view class="like-comment-wrap">
           <text class="view-count">浏览{{item.browseNum}}次</text> 
           <view class="like-comment">
-            <image class="like" src="{{backend_url}}static/icons/like.png"/>
-            <image class="comment" src="{{backend_url}}static/icons/comment.png" />
+            <image class="like" src="{{backend_url}}static/icons/like1.png"/>
+            <image class="comment" src="{{backend_url}}static/icons/comment1.png" />
           </view>
         </view>
       </navigator>

@@ -15,21 +15,33 @@ Page({
         printImgUrl_List: [],
         singleImgUrl_List: [],
         printImgUrls: [],
-        singleImgUrls: []
+        singleImgUrls: [],
+        userInfo: []
     },
     onLoad: function(options) {
-
+        var that = this;
+        wx.getUserInfo({
+            success: function(res) {
+                var userInfo = res.userInfo
+                var nickName = userInfo.nickName
+                var avatarUrl = userInfo.avatarUrl
+                var gender = userInfo.gender // 性别：0：未知、1：男、2：女
+                var province = userInfo.province
+                var city = userInfo.city
+                var country = userInfo.country
+                that.setData({
+                    userInfo: userInfo
+                })
+            }
+        })
     },
     chooseSingleImages: function(e) {
         console.log(e)
     },
     choosePrintImages: function(e) {
         var that = this;
-        console.log(e.currentTarget.dataset.type);
+        console.log(e.currentTarget.dataset);
         var type = e.currentTarget.dataset.type;
-        this.setData({
-            uploadType: e.currentTarget.dataset.uploadtype
-        });
         wx.showActionSheet({
             itemList: ['从相册中选择', '拍照'],
             itemColor: "#f7982a",
@@ -37,10 +49,9 @@ Page({
                 console.log('choosePrintImages--res:', res)
                 if (!res.cancel) {
                     if (res.tapIndex == 0) {
-                        console.log(e.currentTarget.dataset.uploadtype);
-                        that.chooseWxImage('album', e.currentTarget.dataset.type)
+                        that.chooseWxImage('album', type)
                     } else if (res.tapIndex == 1) {
-                        that.chooseWxImage('camera', e.currentTarget.dataset.type)
+                        that.chooseWxImage('camera', type)
                     }
                 }
             }
@@ -85,7 +96,7 @@ Page({
         })
     },
     // 上传照片函数
-    postMatchPrint: function() {
+    postMatchPrint: function(printId, compriseImageId) {
         var that = this;
         var imgPath = that.data.imageUpload;
         var singleImages = that.data.singleImages;
@@ -96,16 +107,15 @@ Page({
             wx.uploadFile({
                 filePath: path,
                 name: 'printImages',
-                //url: 'http://192.168.1.102:8087/tryon/userImage/shot',
-                //url: 'http://192.168.1.102:8087/match/recommend/test',
                 url: "http://192.168.1.116:8087/match/post/uploadPrintImages",
                 header: { "Content-Type": "multipart/form-data" },
                 formData: {
-                    fileName: 'printImg_' + i
+                    fileName: 'printImg_',
+                    printId: printId
                 },
                 success: (res) => {
                     var data = res.data;
-                    console.log('uploadPrintImagesResData:', data)
+                    console.log('uploadPrintImagesResData:', data);
                 }
             })
         }
@@ -115,15 +125,16 @@ Page({
             wx.uploadFile({
                 filePath: path,
                 name: 'singleImages',
-                //url: 'http://192.168.1.102:8087/tryon/userImage/shot',
-                //url: 'http://192.168.1.102:8087/match/recommend/test',
                 url: "http://192.168.1.116:8087/match/post/uploadSingleImages",
                 header: { "Content-Type": "multipart/form-data" },
                 formData: {
-                    fileName: 'singleImage_' + i
+                    fileName: 'singleImage_' + i,
+                    printId: printId,
+                    compriseImageId: compriseImageId
                 },
                 success: (res) => {
-                    var data = JSON.parse(res.data);
+                    //var data = JSON.parse();
+                    var data = res.data;
                     var resPath = that.data.singleImgUrl_List;
                     console.log('upload_single_images_res_data:', data)
                 }
@@ -135,35 +146,32 @@ Page({
             showTagInputView: !this.data.showTagInputView
         })
     },
-    input_confirm: function(e) {
-
-    },
     // 点击发布将搭配方案上传到数据库中
     formSubmit: function(e) {
         var that = this;
-        var data = e.detail.value;
-        var title = data.title; // 标题
-        var mainText = data.mainText; // 内容
+        var title = this.data.title; // 标题
+        var mainText = this.data.mainText; // 内容
         this.setData({
             title: title,
             mainText: mainText
         })
         console.log('form数据为：', e.detail.value)
-            // 上传图片
-        this.postMatchPrint();
-        // 上传图片完成后，上传数据到数据库
         var printImages = that.data.printImgUrl_List; // 方案图片
         console.log("printImagessssss:", printImages[0]);
         var singleClothes = this.data.singleImgUrl_List; // 单间衣服图片
         var price = this.data.price; // 价格
         var tags = this.data.tags; // 标签
+        var mainText = this.data.mainText;
+        var coverUrl = this.data.imageUpload[0];
+        console.log('coverUrl', coverUrl)
         var printData = {
-            categoryId: 1,
+            mainText: mainText,
             name: title,
             minPrice: price,
-            pic: printImages[0],
-            singleClothes: singleClothes,
-            tags: tags
+            coverUrl: coverUrl,
+            tags: tags,
+            authorName: that.data.userInfo.nickName,
+            avatarUrl: that.data.userInfo.avatarUrl
         }
         wx.request({
             url: this.data.backend_url + 'match/post/savePrintData',
@@ -172,13 +180,14 @@ Page({
                 printData: printData
             },
             success: function(res) {
-                console.log(res.data)
-                that.setData({
-                    clothes: res.data.data
-                })
+                console.log(res.data);
+                var printId = res.data.printId;
+                var compriseImageId = res.data.compriseImageId;
+                that.postMatchPrint(printId, compriseImageId)
             }
         })
     },
+    // 获取输入的标签内容
     tagsSubmit: function(e) {
         var that = this;
         console.log(that.data.tags);
@@ -198,7 +207,7 @@ Page({
         console.log('form发生了reset事件')
     },
     plusPrince: function() {
-        if (this.data.peice > 0) {
+        if (this.data.price > 0) {
             this.setData({
                 price: this.data.price - 1
             })
@@ -208,6 +217,21 @@ Page({
         this.setData({
             price: this.data.price + 1
         })
+    },
+    getTitle: function(e) {
+        console.log(e.detail.value)
+        this.setData({
+            title: e.detail.value
+        })
+    },
+    getMainText: function(e) {
+        console.log(e.detail.value)
+        this.setData({
+            mainText: e.detail.value
+        })
+    },
+    input_confirm: function(e) {
+        console.log(e)
     },
     onReady: function() {
         // 页面渲染完成

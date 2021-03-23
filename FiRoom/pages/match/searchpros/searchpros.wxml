@@ -11,9 +11,9 @@
 <view class="page">
   <view class="page-bottom">
         <scroll-view class="page-content" >
-            <block  wx:for="{{categoryList}}">
+            <block  wx:for="{{categoryList}}" wx:key="index">
               <view  class="wc" bindtap="" >
-                <navigator hover-class="navigator-hover">{{item.categoryName}}</navigator>
+                <navigator hover-class="navigator-hover" url="../searchpros/searchpros?style={{styleName}}&id={{item.categoryId}}">{{item.categoryName}}</navigator>
               </view>
             </block>
         </scroll-view>
@@ -25,11 +25,6 @@
       <view class="index-search">
 
         <image class="category_im" bindtap="tap_ch" src="../../../assets/images/btn.png"></image>
-        <!--图片搜索结果图-->
-        <view wx:if="{{isShow}}" class="camera-image" bindtap="deleteImage">
-          <image class="search-image" src="{{chaImgSrc}}"></image>
-          <image class="search-cha" src="{{weixinCtx}}cha.png"></image>
-        </view>
         <input class="search-ipt" type="text" value="{{styleName}}" placeholder="搜索定制链供应商城商品" bindinput="styleName" />
         <view class="search-btn" bindtap="searchStyle">搜索</view>
 
@@ -38,7 +33,6 @@
 
         <!--图片上传-->
         <view class="index-camera">
-          <button class="camera-file" bindtap="chooseImageTap"></button>
           <image class="camera-icon" src="../../../assets/icons/camera.png"></image>
         </view>
       </view>
@@ -47,7 +41,7 @@
     <!--产品区域-->
     <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" class="list" bindscrolltolower="{{hasMore ? 'bindDownLoad' : ''}}" bindscroll="scroll">
       <view class="procon">
-        <navigator wx:for="{{list}}" class="procon-imgmes" url="prodetail/prodetail?styleId={{item.id}}">
+        <navigator wx:for="{{list}}" class="procon-imgmes" url="prodetail/prodetail?styleId={{item.id}}" wx:key="index">
           <image class="imgmes-img" src="{{item.pic}}"></image>
           <text class="imgmes-mes1">{{item.name}}</text>
           <view class="imgmes-mes2">

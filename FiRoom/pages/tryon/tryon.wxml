@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class="image_on">
-    <image id="image-on" wx:if="{{isShow}}" src="{{chaImgSrc}}"/>
+    <image id="image-on" wx:if="{{isShow}}" src="{{backend_url}}{{chaImgSrc}}"/>
     <image id="image-on" wx:else src="{{backend_url}}{{resImg}}" mode="aspectFill" />
   </view>
   <view class="bottom_area">

@@ -16,6 +16,7 @@ Page({
     onLoad: function(options) {
         var that = this;
         var userId = options.userId;
+        console.log(options.userId)
         wx.request({
             url: this.data.backend_url + 'matchPro/problem/stateDetail',
             data: {

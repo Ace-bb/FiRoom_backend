@@ -3,6 +3,8 @@ from django.db import models
 
 # Create your models here.
 class MatchProblem(models.Model):
+    # 问题编号
+    questionId = models.IntegerField(default=0)
     # 用户id
     userID = models.IntegerField()
     # 用户名
@@ -23,6 +25,8 @@ class MatchProblem(models.Model):
     browseNum = models.IntegerField()
     # 点赞数量
     likeNum = models.IntegerField()
+    # 是否上传
+    isUpload = models.BooleanField(default=False)
 
 
 # 用户上传个人照片组ID

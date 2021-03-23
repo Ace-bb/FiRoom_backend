@@ -1,5 +1,5 @@
 .container{
-  background-color: rgba(148, 148, 144, 0.562);
+  background-color: rgba(163, 163, 161, 0.267);
   width: 100%;
   height: 100vh;
   padding: 6rpx;
@@ -17,7 +17,7 @@
           display: flex;
           width: 90%;
           height: 100%;
-          box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.6);
+          box-shadow: 4rpx 4rpx 4rpx 4rpx rgba(58, 56, 56, 0.247);
           margin-left: 24rpx;
           margin-right: 24rpx;
       }
@@ -40,8 +40,8 @@
         width: 32%;
         font-size: 32rpx;
         height: 64rpx;
-        background-color: rgb(232, 240, 240);
-        box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(58, 56, 56, 0.4);
+        background-color: rgba(240, 239, 232, 0.842);
+        box-shadow: 4rpx 4rpx 4rpx 4rpx rgba(58, 56, 56, 0.4);
         border-radius: 24rpx;
         margin-left: 16rpx;
 
@@ -68,24 +68,23 @@
   .right_area{
       position: fixed;
       right: 0;
-      width: 160rpx;
+      width: 200rpx;
       height: 85vh;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
       white-space: nowrap;
       box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(105, 99, 99, 0.205);
-      
       .title{
           width: 100%;
           height: 60rpx;
           display: flex;
           align-items: center;
           justify-content: center;
-          border-bottom: 1rpx solid blue;
+          border-bottom: 1rpx solid rgba(53, 46, 45, 0.678);
           padding: 10rpx;
           box-sizing: border-box;
-          background-color: rgb(245, 242, 238);
+          background-color: rgba(255, 255, 255, 0.979);
           border-radius: 6rpx;
       }
       .checked_clothes{
@@ -96,17 +95,17 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          background-color: rgb(245, 242, 238);
+          background-color: rgb(255, 255, 255);
           border-radius: 6rpx;
           .scroll-view-item{
             width: 100%;
-            height: 120rpx;
+            height: 160rpx;
             margin-top: 16rpx;
             border-bottom: 2rpx solid rgba(0, 0, 0, 0.226);
           }
           .c_cloth{
             width: 100%;
-            height: 100rpx;
+            height: 140rpx;
           }
       }
       .right-but{
@@ -117,8 +116,10 @@
           justify-content: center;
           margin-top: 6rpx;
           margin-right: 0rpx;
-          background-color: rgb(245, 242, 238);
+          background-color: rgb(255, 255, 255);
           padding: 6rpx;
+          position: fixed;
+          bottom: 0;
           .right-but-img{
               height: 100%;
           }
@@ -136,7 +137,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 6rpx;
-    background-color: rgb(245, 242, 238);
+    background-color: rgb(255, 255, 255);
     padding: 6rpx;
     .right-but{
         height: 100%;
@@ -151,10 +152,11 @@
   .left_area{
     position: fixed;
     left: 0;
-    width: 160rpx;
+    width: 200rpx;
     height: 85vh;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     margin-right: 24rpx;
     white-space: nowrap;
     box-shadow: 6rpx 6rpx 6rpx 6rpx rgba(105, 99, 99, 0.205);
@@ -164,10 +166,10 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-bottom: 1rpx solid blue;
+        border-bottom: 1rpx solid rgba(53, 46, 45, 0.678);
         padding: 10rpx;
         box-sizing: border-box;
-        background-color: rgb(245, 242, 238);
+        background-color: rgb(255, 255, 255);
         border-radius: 6rpx;
     }
     .checked_clothes{
@@ -178,7 +180,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: rgb(245, 242, 238);
+        background-color: rgb(255, 255, 255);
         border-radius: 6rpx;
         .scroll-view-item{
           width: 100%;
@@ -198,8 +200,10 @@
         align-items: center;
         justify-content: center;
         margin-top: 6rpx;
-        background-color: rgb(245, 242, 238);
+        background-color: rgb(255, 255, 255);
         padding: 6rpx;
+        position: fixed;
+        bottom: 0;
         .left-but-img{
             height: 100%;
         }

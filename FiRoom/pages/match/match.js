@@ -36,7 +36,10 @@ Page({
         matchOrAsk: false,
         questions: [],
         masters: [],
-        isUnswered: false
+        isUnswered: false,
+        goodsPage: 1,
+        masterPage: 1,
+        questionPage: 1
     },
 
     tabClick: function(e) {
@@ -134,24 +137,25 @@ Page({
                     categories: categories,
                     activeCategoryId: 0
                 });
-                that.getGoodsList(0);
+                that.getGoodsList(1);
+                that.getMastersList(1);
+                that.getQuestionList(1);
             }
         })
         that.getCoupons();
         that.getNotice();
     },
     styleName: function(e) { // -
+        console.log(e.detail.value)
         this.setData({
             styleName: e.detail.value
         })
     },
     searchStyle: function(e) { // -
         var that = this
-        var style = that.data.styleName,
-            image = that.data.imageUrl,
-            chaImgSrc = that.data.chaImgSrc;
+        var style = that.data.styleName;
         wx.navigateTo({
-                url: 'searchpros/searchpros?style=' + style + '&imageUrl=' + image + '&chaImgSrc=' + chaImgSrc
+                url: 'searchpros/searchpros?style=' + style
             })
             //保存搜索记录
         if (style != null && style != '') {
@@ -205,23 +209,16 @@ Page({
             }
         })
     },
-    deleteImage: function() { // -
-        this.setData({
-            isShow: false,
-            imageUrl: '',
-            chaImgSrc: ''
-        })
-    },
-    getGoodsList: function(categoryId) {
-        if (categoryId == 0) {
-            categoryId = "";
+    getGoodsList: function(pageNum) {
+        if (pageNum == 0) {
+            pageNum = 1;
         }
-        console.log('categoryId')
+        console.log('pageNum:', pageNum)
         var that = this;
         wx.request({
             url: this.data.backend_url + 'match/recommend/blueprint',
             data: {
-                categoryId: categoryId
+                pageNum: pageNum
             },
             success: function(res) {
                 console.log('blueprint:', res.data);
@@ -244,10 +241,15 @@ Page({
                 });
             }
         })
+
+
+    },
+    getMastersList: function(pageNumber) {
+        var that = this;
         wx.request({
             url: this.data.backend_url + 'match/recommend/masters',
             data: {
-                categoryId: categoryId
+                pageNum: pageNumber
             },
             success: function(res) {
                 console.log('masters:', res.data.data);
@@ -266,16 +268,20 @@ Page({
                 });
             }
         })
+    },
+    getQuestionList: function(pageNum) {
+        var that = this;
         wx.request({
             url: this.data.backend_url + 'matchPro/problem/state',
             data: {
-                categoryId: categoryId
+                pageNum: pageNum
             },
             success: function(res) {
                 console.log('questions:', res.data.data);
                 that.setData({
                     questions: [],
-                    loadingMoreHidden: true
+                    loadingMoreHidden: true,
+                    userId: 1
                 });
                 if (res.data.code != 0 || res.data.data.length == 0) {
                     that.setData({
@@ -288,6 +294,30 @@ Page({
                 });
             }
         })
+    },
+    loadMoreItems: function(e) {
+        console.log(e.currentTarget.dataset.type)
+        var type = e.currentTarget.dataset.type
+
+        if (type == 'dresserPrint') {
+            var goodsPage = this.data.goodsPage + 1
+            this.setData({
+                goodsPage: goodsPage
+            })
+            this.getGoodsList(goodsPage)
+        } else if (type == 'masterPrint') {
+            var masterPage = this.data.masterPage + 1
+            this.setData({
+                masterPage: masterPage
+            })
+            this.getMastersList(masterPage)
+        } else if (type == 'question') {
+            var questionPage = this.data.questionPage + 1
+            this.setData({
+                questionPage: questionPage
+            })
+            this.getQuestionList(questionPage)
+        }
     },
     getCoupons: function() {
         var that = this;

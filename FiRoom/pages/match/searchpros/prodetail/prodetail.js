@@ -5,7 +5,7 @@ Page({
         var that = this
         return {
             title: '找货就上定制链商城',
-            path: '/pages/index/searchpros/prodetail/prodetail?styleId=' + that.data.styleId
+            path: '/pages/index/searchpros/prodetail/prodetail?printId=' + that.data.printId
         }
     },
     data: {
@@ -36,12 +36,12 @@ Page({
     },
     onLoad: function(option) {
         var that = this
-        var styleId = option.styleId
+        var printId = option.printId
         var current = option.current
 
-        console.log('styleId', styleId)
+        console.log('printId', printId)
         console.log('current:', current)
-        util.requestSupply(current, styleId,
+        util.requestSupply(current, printId,
             function(res) {
                 console.log('res', res)
                 var result = res.data;
@@ -62,7 +62,7 @@ Page({
             url: this.data.backend_url + 'match/recommend/DetailImages',
             method: 'GET',
             data: {
-                userId: styleId,
+                userId: printId,
                 type: current
             },
             header: {

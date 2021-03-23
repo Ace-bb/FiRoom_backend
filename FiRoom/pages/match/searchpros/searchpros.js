@@ -4,45 +4,39 @@ var app = getApp()
 
 //获取款式信息列表
 var GetList = function(that) {
+    console.log('getList:', that)
     page = 1
     that.setData({
         hidden: false,
         scrollTop: 0
     });
     var style = that.data.styleName,
-        image = that.data.imageUrl,
-        params, method = that.data.method,
-        productId = that.data.productId;
+        method = that.data.method;
 
-    if (productId != null) {
-        params = "?id=" + productId + "&pageNumber=" + page;
-    } else {
-        params = "?style=" + style + "&picture=" + image + "&pageNumber=" + page;
-    }
-    util.requestSupply(method, params,
-        function(res) {
-            console.log('res:',res);
-            var reqList = res.data;
-            if (reqList != null && reqList.length > 0) {
-                that.setData({
-                    list: reqList,
-                    emptyShow: false,
-                });
-                page = 2;
-            } else {
-                that.setData({
-                    list: res.data,
-                    scrollTop: 0,
-                    emptyShow: false
-                });
-            }
-            that.setData({
-                hidden: true
-            });
+    wx.request({
+        url: that.data.backend_url + 'match/search/searchMatch', //method为方法名,params为参数
+        method: "GET",
+        data: {
+            method: method,
+            style: style,
+            pageNumber: page
         },
-        function(res) {
+        header: {
+            'content-type': 'multipart/x-www-form-urlencoded;charset=UTF-8'
+        },
+        success: function(res) {
             console.log(res);
-        });
+            if (res.statusCode == 200 && res.data.code == "0") {
+                typeof success == "function" && success(res.data);
+            } else {
+                typeof fail == "function" && fail(res.data.message);
+            }
+        },
+        fail: function(res) {
+            console.log(res);
+            typeof fail == "function" && fail(res);
+        }
+    })
 }
 
 //上拉获取更多款式信息
@@ -90,6 +84,7 @@ Page({
         }
     },
     data: {
+        backend_url: util.backend_url,
         ctx: util.ctx,
         weixinCtx: util.weixinCtx,
         isShow: false,
@@ -103,61 +98,53 @@ Page({
         scrollTop: 0,
         scrollHeight: 0,
         list: [],
-        open : false,
+        open: false,
         mark: 0,
         newmark: 0,
-        istoright:true,
-        categoryList:[{
-            categoryId:1,
-            categoryName:"搭配达人"
-        },{
-            categoryId:2,
-            categoryName:"穿搭大师"
-        },{
-            categoryId:3,
-            categoryName:"日系穿搭"
-        },{
-            categoryId:4,
-            categoryName:"欧美范儿"
-        },{
-            categoryId:5,
-            categoryName:"潮流复古"
-        },{
-            categoryId:6,
-            categoryName:"休闲时尚"
+        istoright: true,
+        categoryList: [{
+            categoryId: 1,
+            categoryName: "搭配达人"
+        }, {
+            categoryId: 2,
+            categoryName: "穿搭大师"
+        }, {
+            categoryId: 3,
+            categoryName: "日系穿搭"
+        }, {
+            categoryId: 4,
+            categoryName: "欧美范儿"
+        }, {
+            categoryId: 5,
+            categoryName: "潮流复古"
+        }, {
+            categoryId: 6,
+            categoryName: "休闲时尚"
         }]
     },
 
     // 获取页面传递的参数，option中
     onLoad: function(option) {
         var that = this;
+        console.log('option:', option)
         wx.getSystemInfo({
             success: function(res) {
-                console.log(res)
+                console.log('getSystemInfo:', res)
                 that.setData({
                     scrollHeight: res.windowHeight
                 });
             }
         });
-        console.log(option)
         if (option.id != undefined) { //从产品分类点击
             that.setData({
                 styleName: option.style,
-                method: 'getSupplierProductDetail',
+                method: 'getProductDetail',
                 productId: option.id
             })
         } else { //点击历史记录和直接搜索
-            var chaImgSrc = option.chaImgSrc
-            if (option.chaImgSrc != null && option.chaImgSrc != "") {
-                that.setData({
-                    chaImgSrc: chaImgSrc,
-                    imageUrl: option.imageUrl,
-                    isShow: true
-                })
-            }
             that.setData({
                 styleName: option.style,
-                method: 'searchStyle'
+                method: 'searchPrint'
             })
         }
 
@@ -243,131 +230,56 @@ Page({
                 console.log(res)
             }
     },
-    // 选择照片
-    chooseImageTap: function() {
-        var that = this;
-        wx.showActionSheet({
-            itemList: ['从相册中选择', '拍照'],
-            itemColor: "#f7982a",
-            success: function(res) {
-                if (!res.cancel) {
-                    if (res.tapIndex == 0) {
-                        that.chooseWxImage('album')
-                    } else if (res.tapIndex == 1) {
-                        that.chooseWxImage('camera')
-                    }
-                }
-            }
-        })
+    tap_ch: function(e) {
+        if (this.data.open) {
+            this.setData({
+                open: false
+            });
+        } else {
+            this.setData({
+                open: true
+            });
+        }
     },
+    tap_start: function(e) {
+        // touchstart事件
+        this.data.mark = this.data.newmark = e.touches[0].pageX;
+    },
+    tap_drag: function(e) {
+        // touchmove事件
 
-    chooseWxImage: function(type) {
-        var that = this;
-        wx.chooseImage({
-            count: 1,
-            sizeType: ['original'], // 可以指定是原图还是压缩图，默认二者都有  
-            sourceType: [type], // 可以指定来源是相册还是相机，默认二者都有  
-            success: function(res) {
-                var picPath = res.tempFilePaths[0];
-                // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片  
-                that.setData({
-                        chaImgSrc: picPath,
-                        isShow: true
-                    })
-                    //图片上传到定制链服务器进行款式搜索
-                util.uploadFile(picPath,
-                    function(path) { //path为定制链图片链接
-                        page = 1;
-                        that.setData({
-                            list: [],
-                            method: 'searchStyle',
-                            imageUrl: path,
-                            hidden: false
-                        })
-                        var style = that.data.styleName
-                        util.requestSupply("searchStyle", "?style=" + style + "&picture=" + path + "&pageNumber=" + page, function(res) {
-                            var req = res.pageResults.list;
-                            if (req != null && req.length > 0) {
-                                that.setData({
-                                    list: req,
-                                    hidden: true,
-                                    hasMore: false,
-                                    emptyShow: false
-                                });
-                            } else {
-                                that.setData({
-                                    list: [],
-                                    hidden: true,
-                                    hasMore: false,
-                                    emptyShow: true
-                                });
-                            }
-                        })
-                    },
-                    function(message) {
-                        console.log(message);
-                    })
-            }
-        })
-    },
+        /*
+         * 手指从左向右移动
+         * @newmark是指移动的最新点的x轴坐标 ， @mark是指原点x轴坐标
+         */
+        this.data.newmark = e.touches[0].pageX;
+        if (this.data.mark < this.data.newmark) {
+            this.istoright = true;
+        }
+        /*
+         * 手指从右向左移动
+         * @newmark是指移动的最新点的x轴坐标 ， @mark是指原点x轴坐标
+         */
+        if (this.data.mark > this.data.newmark) {
+            this.istoright = false;
 
-    deleteImage: function() {
-        this.setData({
-            isShow: false,
-            imageUrl: '',
-            chaImgSrc: ''
-        })
+        }
+        this.data.mark = this.data.newmark;
+
     },
-    tap_ch: function(e){
-      if(this.data.open){
-        this.setData({
-          open : false
-        });
-      }else{
-        this.setData({
-          open : true
-        });
-      }
-    },
-    tap_start:function(e){
-      // touchstart事件
-      this.data.mark = this.data.newmark = e.touches[0].pageX;
-    },
-    tap_drag: function(e){
-      // touchmove事件
-   
-      /*
-       * 手指从左向右移动
-       * @newmark是指移动的最新点的x轴坐标 ， @mark是指原点x轴坐标
-       */
-      this.data.newmark = e.touches[0].pageX;
-      if(this.data.mark < this.data.newmark){
-        this.istoright = true;
-      }
-      /*
-       * 手指从右向左移动
-       * @newmark是指移动的最新点的x轴坐标 ， @mark是指原点x轴坐标
-       */
-      if(this.data.mark > this.data.newmark){
-        this.istoright = false;
-        
-      }
-      this.data.mark = this.data.newmark;
-  
-    },
-    tap_end: function(e){
-      // touchend事件
-      this.data.mark = 0;
-      this.data.newmark = 0;
-      if(this.istoright){
-        this.setData({
-          open : true
-        });
-      }else{
-        this.setData({
-          open : false
-        });
-      }
+    tap_end: function(e) {
+        // touchend事件
+        this.data.mark = 0;
+        this.data.newmark = 0;
+        if (this.istoright) {
+            this.setData({
+                open: true
+            });
+        } else {
+            this.setData({
+                open: false
+            });
+        }
     }
 
 })

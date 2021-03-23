@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Category, Swiper, Notice, BluePrint, MatchDetail, Comment, CompriseImages, detailImages, Masters, MasterPrint,masterDetailImages, masterPrintDetail
+from .models import Category, Swiper, Notice, BluePrint, CompriseImages, MatchDetail, Comment, detailImages, Masters, MasterPrint,masterDetailImages, masterPrintDetail
 
 # Register your models here.
 admin.site.register(Category)

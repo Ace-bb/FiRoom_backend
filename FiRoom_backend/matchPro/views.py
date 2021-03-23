@@ -8,11 +8,11 @@ import os
 
 def listMatchProblemState(request):
     matchProblem_List = MatchProblem.objects.values()
-    id = request.GET.get('masterId', None)
+    id = request.GET.get('userId', None)
     print(id)
 
     if id:
-        matchProblem_List = matchProblem_List.filter(masterId=id)
+        matchProblem_List = matchProblem_List.filter(userId=id)
     matchProblem_List = list(matchProblem_List)
     # 获取用户上传的照片
     userShotId = matchProblem_List[0]['userShotId']
@@ -39,7 +39,7 @@ def listStateDetail(request):
     print(id)
 
     if id:
-        MatchProblem_List = MatchProblem_List.filter(userID=id)
+        MatchProblem_List = MatchProblem_List.filter(userID=int(id))
     MatchProblem_List = list(MatchProblem_List)
     # 获取用户上传的照片
     userShotId = MatchProblem_List[0]['userShotId']
@@ -74,6 +74,8 @@ def uploadShots(request):
     print(image)
     print('uploadClothes')
     type = request.POST.get('fileName')
+    questionId = request.POST.get('questionId')
+    userShotId = request.POST.get('userShotId')
     print(type)
     basedir = 'D:\\ProgramSoft\\Git\\Virtual-try-on\\FiRoom_backend\\static\\userBodyShot\\user2\\'
     success = False
@@ -84,7 +86,7 @@ def uploadShots(request):
             f.close()
     print(success)
     imgUrl = 'static/userBodyShot/user2/' + type + '.jpg'
-    record = UserShot.objects.create(userShotId=1001 + len(userShots), shotUrl=imgUrl)
+    record = UserShot.objects.create(userShotId=userShotId, shotUrl=imgUrl)
     return JsonResponse({'res': 0, 'msg': 'success'})
 
 
@@ -92,6 +94,8 @@ def saveQuestionData(request):
     problems = MatchProblem.objects.values()
     userShots = UserShot.objects.values()
     problems = list(problems)
+    questionId = len(problems) + 1
+    userShotId = 1001 + len(problems)
     userShots = list(userShots)
     print(problems)
     reward = request.GET.get('reward')
@@ -99,9 +103,9 @@ def saveQuestionData(request):
     mainText = request.GET.get('mainText')
     avatarUrl = request.GET.get('avatarUrl')
     nickName = request.GET.get('nickName')
-    record = MatchProblem.objects.create(userID=len(problems) + 1, userName=nickName,
+    record = MatchProblem.objects.create(questionId=questionId, userID=questionId, userName=nickName,
                                          userIcon=avatarUrl,
-                                         questionDetail=mainText, userShotId=1001 + len(userShots),
+                                         questionDetail=mainText, userShotId=userShotId,
                                          userOfferMoney=reward,
-                                         answerMessageId=1, browseNum=0, likeNum=0)
-    return JsonResponse({'res': 0, 'msg': 'success'})
+                                         answerMessageId=1, browseNum=0, likeNum=0, isUnswered=False)
+    return JsonResponse({'res': 0, 'questionId': questionId, 'userShotId': userShotId, 'msg': 'success'})

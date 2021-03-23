@@ -1,30 +1,86 @@
 <view class="container">
-  <!-- 左右目录列表 -->
-  <view class="top-category-wrap">
-    <view class="calc-view-wrap">
-        <view class="item-box" wx:for="{{valueList}}">
-          <view class="title">{{item.title}}</view>
-          <text class="value">{{item.value}}</text>
+  <!-- 顶部目录列表 -->
+  <view class="category-container">
+        <view class="category-navbar" >
+            <view class="category-box" wx:for="{{categoryList}}" wx:key="id">
+                <view id="{{item.id}}" class="category-navbar-item {{activeCategoryId == item.id ? 'category-item-on' : ''}}" bindtap="tabClick">
+                    {{item.name}}
+                </view>
+            </view>
         </view>
-      </view>
   </view>
   <!-- 右侧容器 -->
-  <view class="main-container-wrap">
-    <view class="main-container">
-      <view class="category-wrap">
-        <view class="category" wx:for="{{categoryList}}">{{item.name}}</view>
-      </view>
-      <view class="closet-show-wrap">
-        <view class="cloth-show-box" wx:for="{{books}}">
-          <checkbox class="check-cloth" ></checkbox>
-          <image class="cloth-img" src="{{item.coverImg}}"/>
+  <scroll-view class="main-container" scroll-y="true" bindscrolltoupper="upper" 
+    bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" 
+    scroll-top="{{scrollTop}}">
+    <checkbox-group bindchange="checkboxChange">
+      <view class="cloth-show-box" wx:for="{{clothes}}" wx:key="index">
+          <checkbox class="check-cloth" value="{{index}}" checked="{{item.checked}}"></checkbox>
+          <image class="cloth-img" src="{{backend_url}}{{item.clothCover}}" mode="aspectFill"/>
           <view class="cloth-message-box">
-            <text class="cloth-title">{{item.title}}</text>
-            <text class="tag-mes">{{item.average}}</text>
-            <text class="cloth-price">价格:￥{{item.bookId}}</text>
+            <text class="cloth-title">{{item.clothName}}</text>
+            <text class="tag-mes">{{item.matchStyle}}</text>
+            <view class="price-wrap">
+              <text class="price-title">价格:￥</text>
+              <text class="cloth-price">{{item.clothPrice}}</text>
+            </view>
+            
           </view>
-        </view>
       </view>
+    </checkbox-group>
+      
+  </scroll-view>
+  <view class="bottom-category-wrap">
+    <checkbox-group bindchange="checkAll">
+      <checkbox class="check" />
+    </checkbox-group>
+    <view class="check-all">全选</view>
+    <view class="calc-view-wrap">
+      <view class="total-price-wrap">
+        <view class="total-price-title">合计:￥</view>
+        <view class="total-price">{{totalPrice}}</view>
+      </view>
+      <view class="total-num-wrap">
+        <view >总数量:</view>
+        <view class="total-num">{{totalNum}}</view>
+      </view>
+        
+    </view>
+    <view class="add-tryon-wrap">
+      <view class="add-tryon" bindtap="addToTryonBasket">加入试穿</view>
+      <view class="add-clothes" bindtap="addClothToCloset">添加衣服</view>
     </view>
   </view>
+</view>
+
+<view class="add-container" wx:if="{{showAddContainer}}">
+  <form class="add-cloth-container"  bindsubmit="formSubmit" bindreset="formReset">
+  <view class="cloth-wrap name-container">
+    <image class="icon" src="{{backend_url}}static/icons/name.png" />
+    <!-- <view class="name">名称</view> -->
+    <input name="clothName" class="input-name input-type" placeholder="请输入衣服名称" />
+  </view>
+  
+  <button class="upload-cloth-img" bindtap="chooseClothImage">{{uploadImageTitle}}</button>
+  <view class="cloth-wrap price-container">
+    <image class="icon" src="{{backend_url}}static/icons/cloth_price.png" />
+    <!-- <view class="name">名称</view> -->
+    <input name="clothPrice" class="input-price input-type" placeholder="请输入衣服价格" />
+  </view>
+  <view class="cloth-wrap style-container">
+    <image class="icon" src="{{backend_url}}static/icons/cloth_style.png" />
+    <!-- <view class="name">名称</view> -->
+    <input name="clothStyle" class="input-style input-type" placeholder="请输入衣服风格" />
+  </view>
+  
+  <checkbox-group class="category-group" bindchange="categoryboxChange">
+    <label class="checkbox" wx:for="{{category_check}}" wx:key="index">
+      <checkbox value="{{item.value}}" checked="{{item.checked}}"/>{{item.value}}
+    </label>
+  </checkbox-group>
+  <view class="btn-area">
+    <button bindtap="cancelForm" type="warn">取消</button>
+    <button form-type="submit" type="primary">添加</button>
+  </view>
+</form>
 </view>

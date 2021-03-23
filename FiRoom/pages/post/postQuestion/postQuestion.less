@@ -45,12 +45,17 @@ Page{
             }
         }
         .post-mainbody-wrap {
+            width: 100%;
             height: 120px;
             padding: 12 rpx;
+            box-sizing: border-box;
             background-color: white;
+            border-bottom: 1rpx solid rgba(49, 49, 49, 0.219);
             .post-mainbody {
+                width: 100%;
                 height: 150px;
                 padding: 6px;
+                box-sizing: border-box;
                 font-family: monospace;
                 white-space: pre-wrap;
                 font: 13.3333px Arial;
@@ -60,67 +65,6 @@ Page{
                 border-color: rgba(162, 167, 167, 0.521);
             }
             
-        }
-        .simgle-cloth-wrap {
-            width: 100%;
-            height: 80rpx;
-            padding: 6rpx;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            background-color: white;
-            .simgle-cloth{
-                width: 48rpx;
-                height: 48rpx;
-            }
-            .cloth-name-title {
-                margin-left: 12rpx;
-                width: 200rpx;
-                font-size: 32rpx;
-            }
-            .post-image-wrap{
-                height: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: flex-end;
-                .cloth-image{
-                    margin-left: 12rpx;
-                    height: 64rpx;
-                    .img{
-                        width: 64rpx;
-                        height: 64rpx;
-                    }
-                    .tag{
-                        height: 32rpx;
-                        padding: 12rpx;
-                        margin-left: 12rpx;
-                        font-size: 28rpx;
-                        border-radius: 24rpx;
-                        background-color: rgba(216, 112, 147, 0.26);
-                    }
-                    .plus-price{
-                        width: 48rpx;
-                        height: 48rpx;
-                        margin-right: 24rpx;
-                    }
-                    .price{
-                        height: 32rpx;
-                        margin-right: 24rpx;
-                    }
-                    .add-price{
-                        width: 48rpx;
-                        height: 48rpx;
-                        margin-right: 48rpx;
-                    }
-                }
-            }
-            .jiantou{
-                margin-left: 12rpx;
-                width: 48rpx;
-                height: 48rpx;
-            }
-
         }
         .post-image-wrap {
             width: 100%;
@@ -137,6 +81,7 @@ Page{
                 padding: 2rpx;
                 border-radius: 12rpx;
                 box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(32, 31, 31, 0.4);
+                margin-top: 24rpx;
                 .img {
                     width: 100%;
                     height: 100%;
@@ -155,6 +100,7 @@ Page{
                 margin-left: 12rpx;
                 border-radius: 12rpx;
                 box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(32, 31, 31, 0.4);
+                margin-top: 24rpx;
                 
                 .img-photo {
                     width: 40%;

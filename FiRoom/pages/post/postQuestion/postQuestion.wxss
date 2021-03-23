@@ -47,13 +47,18 @@ Page .container .post-title-wrap .post-title {
   display: flex;
 }
 Page .container .post-mainbody-wrap {
+  width: 100%;
   height: 120px;
   padding: 12 rpx;
+  box-sizing: border-box;
   background-color: white;
+  border-bottom: 1rpx solid rgba(49, 49, 49, 0.219);
 }
 Page .container .post-mainbody-wrap .post-mainbody {
+  width: 100%;
   height: 150px;
   padding: 6px;
+  box-sizing: border-box;
   font-family: monospace;
   white-space: pre-wrap;
   font: 13.3333px Arial;
@@ -61,66 +66,6 @@ Page .container .post-mainbody-wrap .post-mainbody {
   border-style: none;
   border-top-style: solid;
   border-color: rgba(162, 167, 167, 0.521);
-}
-Page .container .simgle-cloth-wrap {
-  width: 100%;
-  height: 80rpx;
-  padding: 6rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  background-color: white;
-}
-Page .container .simgle-cloth-wrap .simgle-cloth {
-  width: 48rpx;
-  height: 48rpx;
-}
-Page .container .simgle-cloth-wrap .cloth-name-title {
-  margin-left: 12rpx;
-  width: 200rpx;
-  font-size: 32rpx;
-}
-Page .container .simgle-cloth-wrap .post-image-wrap {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-Page .container .simgle-cloth-wrap .post-image-wrap .cloth-image {
-  margin-left: 12rpx;
-  height: 64rpx;
-}
-Page .container .simgle-cloth-wrap .post-image-wrap .cloth-image .img {
-  width: 64rpx;
-  height: 64rpx;
-}
-Page .container .simgle-cloth-wrap .post-image-wrap .cloth-image .tag {
-  height: 32rpx;
-  padding: 12rpx;
-  margin-left: 12rpx;
-  font-size: 28rpx;
-  border-radius: 24rpx;
-  background-color: rgba(216, 112, 147, 0.26);
-}
-Page .container .simgle-cloth-wrap .post-image-wrap .cloth-image .plus-price {
-  width: 48rpx;
-  height: 48rpx;
-  margin-right: 24rpx;
-}
-Page .container .simgle-cloth-wrap .post-image-wrap .cloth-image .price {
-  height: 32rpx;
-  margin-right: 24rpx;
-}
-Page .container .simgle-cloth-wrap .post-image-wrap .cloth-image .add-price {
-  width: 48rpx;
-  height: 48rpx;
-  margin-right: 48rpx;
-}
-Page .container .simgle-cloth-wrap .jiantou {
-  margin-left: 12rpx;
-  width: 48rpx;
-  height: 48rpx;
 }
 Page .container .post-image-wrap {
   width: 100%;
@@ -138,6 +83,7 @@ Page .container .post-image-wrap .image-upload {
   padding: 2rpx;
   border-radius: 12rpx;
   box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(32, 31, 31, 0.4);
+  margin-top: 24rpx;
 }
 Page .container .post-image-wrap .image-upload .img {
   width: 100%;
@@ -156,6 +102,7 @@ Page .container .post-image-wrap .image-upload-but {
   margin-left: 12rpx;
   border-radius: 12rpx;
   box-shadow: 2rpx 2rpx 2rpx 2rpx rgba(32, 31, 31, 0.4);
+  margin-top: 24rpx;
 }
 Page .container .post-image-wrap .image-upload-but .img-photo {
   width: 40%;
